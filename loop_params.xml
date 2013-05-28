@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	 
+	<pageheight>297mm</pageheight>
+	<pagewidth>210mm</pagewidth>
+	 <!--
+	<pageheight>210mm</pageheight>
+	<pagewidth>148.5mm</pagewidth>
+	-->
+</config>    
