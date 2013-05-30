@@ -159,7 +159,7 @@ function xslt_transform_link($input) {
 			$filetitle=Title::newFromText( $target_uri, NS_FILE );
 			$file = wfLocalFile($filetitle);
 			if (is_object($file)) {
-			$imagepath=$file->getPath();
+			$imagepath=$file->getLocalRefPath();
 			} else {
 			$imagepath='';
 			}
@@ -240,7 +240,7 @@ function xslt_figure_width($input) {
 			$target_uri=$target_array[1];
 			$filetitle=Title::newFromText( $target_uri, NS_FILE );
 			$file = wfLocalFile($filetitle);
-			$imagepath=$file->getPath();
+			$imagepath=$file->getLocalRefPath();
 				
 			$imagewidth='150';
 			if (array_key_exists('part', $childs)) {
@@ -333,7 +333,7 @@ function xslt_imagepath($input) {
 			}
 			*/
 			if (is_object($file)) {
-			$imagepath=$file->getPath();
+			$imagepath=$file->getLocalRefPath();
 			} else {
 			$imagepath='';
 			}
@@ -363,7 +363,7 @@ function targetPath($input) {
 
 				$filetitle=Title::newFromText( $target_uri, NS_FILE );
 				$file = wfLocalFile($filetitle);
-				$fullpath=$file->getPath();
+				$fullpath=$file->getLocalRefPath();
 
 				//$return_xml='<fo:block><fo:external-graphic scaling="uniform" content-width="140mm" content-height="scale-to-fit" src="'.$fullpath.'"></fo:external-graphic></fo:block>';
 
@@ -483,6 +483,12 @@ class SpecialLoopPrintversion extends SpecialPage {
 
 		$loop_xml=$this->get_loop_xml($tmpname);
 
+		if ($_SERVER["SERVER_NAME"] == 'devloop.oncampus.de') {
+			$xmlwikiFile = $IP."/tmp/".$tmpname."_wiki.xml";
+			$fh = fopen($xmlwikiFile, 'w') or die("can't open xml file");
+			fwrite($fh, $loop_xml);
+			fclose($fh);			
+		}
 		#var_dump($loop_xml);
 		#exit;
 		
@@ -512,7 +518,7 @@ class SpecialLoopPrintversion extends SpecialPage {
 		#var_dump($xmlfo);
 		#exit;
 		
-		if ($_SERVER["SERVER_NAME"] == 'mdev.oncampus.de') {
+		if ($_SERVER["SERVER_NAME"] == 'devloop.oncampus.de') {
 		$xmlFile = $IP."/tmp/".$tmpname.".xml";
 		$pdfFile = $IP."/tmp/".$tmpname.".pdf";
 		$qrFile = $IP."/tmp/".$tmpname."_qr.png";
@@ -543,7 +549,7 @@ class SpecialLoopPrintversion extends SpecialPage {
 		header("Content-Disposition: attachment; filename=\"".$pdfFileName."\"");
 		echo $content;
 
-    if ($_SERVER["SERVER_NAME"] != 'mdev.oncampus.de') {
+    if ($_SERVER["SERVER_NAME"] != 'devloop.oncampus.de') {
 		unlink($xmlFile);
 		unlink($pdfFile);
 		unlink($qrFile);
