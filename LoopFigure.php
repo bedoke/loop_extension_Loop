@@ -205,7 +205,7 @@ class LoopFigure {
 				$return.='<div class="mediabox_typeicon"><div class="mediabox_typeicon_image"></div></div>';
 				$return.='<div class="mediabox_footertext">';
 				if ($this->title!='') {$return.='<span class="mediabox_title">'.$this->title.'</span><br/>';}
-				if ($this->description!='') {$return.='<span class="mediabox_description">'.$this->description.'</span><br/>';}
+				if ($this->description!='') {$return.='<span class="mediabox_description">'.$wgParser->recursiveTagParse($this->description).'</span><br/>';}
 				if (($this->show_copyright==true)&&($this->copyright!='')){$return.='<span class="mediabox_copyright">'.$this->copyright.'</span>';}
 				$return.='</div>';
 				$return.='<div class="clearer"></div>';
