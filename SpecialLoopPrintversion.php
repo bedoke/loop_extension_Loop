@@ -642,7 +642,7 @@ class SpecialLoopPrintversion extends SpecialPage {
 		$xmlresult.="<articles ";
 		$xmlresult.='title="'.$this->get_structure_title().'" ';
 		$xmlresult.='url="'.$wgServer.'" ';
-		$xmlresult.='date="'.date('d.m.Y').'" ';
+		$xmlresult.='date="'.date('d.m.Y H:i').'" ';
 		$xmlresult.='lang="'.$lang.'" ';
 		$xmlresult.='qrimage="'.$qrFile.'" ';
 		$xmlresult.=">" ;
