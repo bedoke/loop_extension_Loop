@@ -85,6 +85,9 @@ $wgAutoloadClasses['SpecialLoopPrintversion'] = $dir . 'SpecialLoopPrintversion.
 $wgSpecialPages['LoopPrintversion'] = 'SpecialLoopPrintversion';
 
 $wgAutoloadClasses['LoopParagraph'] = $dir . 'LoopParagraph.php';
+$wgAutoloadClasses['LoopSidenote'] = $dir . 'LoopSidenote.php';
+
+
 
 $wgSpecialPages['LoopFigures'] = 'SpecialLoopFigures';
 $wgSpecialPageGroups['LoopFigures'] = 'media';
@@ -137,9 +140,16 @@ function loopInit( Parser &$parser ) {
 	$parser->setFunctionHook('header', 'fnLoopHeaderRender');
 
 	$parser->setHook( 'loop_paragraph', 'fnRenderLoopParagraph' );
+	$parser->setHook( 'loop_sidenote', 'fnRenderLoopSidenote' );
 
 	return true;
 }
+
+function fnRenderLoopSidenote($input, array $args, Parser $parser, PPFrame $frame) {
+	$sidenote = new LoopSidenote($input,$args);
+	return $sidenote->render();
+}
+
 
 function fnRenderLoopParagraph($input, array $args, Parser $parser, PPFrame $frame) {
 	$paragraph = new LoopParagraph($input,$args);
