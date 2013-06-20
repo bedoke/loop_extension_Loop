@@ -854,7 +854,7 @@ function wfLoopStructureBreadcrumb($item, $max_length=65) {
 	$item_len=floor(($max_length-($i*3))/$i);
 	foreach ($bc as $b) {
 		if (strlen($b[0])>$item_len) {
-			$t=substr($b[0],0,($item_len-2)).'..';
+			$t=mb_substr($b[0],0,($item_len-2)).'..';
 		} else {
 			$t=$b[0];
 		}
