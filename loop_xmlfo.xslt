@@ -13,6 +13,8 @@
 	<xsl:import href="loop_params.xsl"></xsl:import>
 	<xsl:import href="loop_terms.xsl"></xsl:import>
 
+	<xsl:preserve-space elements="extension source" />
+
 	<xsl:output method="xml" version="1.0" encoding="UTF-8"
 		indent="yes"></xsl:output>
 
@@ -360,7 +362,7 @@
 				<fo:basic-link >
 					<xsl:attribute name="internal-destination"><xsl:value-of select="generate-id()"></xsl:value-of></xsl:attribute>
 					<fo:block>
-						<fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="8mm" src="/opt/www/devloop.oncampus.de/mediawiki-1.18.1/skins/loop/images/media/type_table.png"></fo:external-graphic>
+						<fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="8mm" src="/opt/www/loop.oncampus.de/mediawiki/skins/loop/images/media/type_table.png"></fo:external-graphic>
 					</fo:block>
 				</fo:basic-link>
 				</fo:block>
@@ -439,7 +441,7 @@
 				<fo:basic-link >
 					<xsl:attribute name="internal-destination"><xsl:value-of select="generate-id()"></xsl:value-of></xsl:attribute>
 					<fo:block>
-						<fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="8mm" src="/opt/www/devloop.oncampus.de/mediawiki-1.18.1/skins/loop/images/media/type_video.png"></fo:external-graphic>
+						<fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="8mm" src="/opt/www/loop.oncampus.de/mediawiki/skins/loop/images/media/type_video.png"></fo:external-graphic>
 					</fo:block>
 				</fo:basic-link>
 				</fo:block>
@@ -516,7 +518,7 @@
 				<fo:basic-link >
 					<xsl:attribute name="internal-destination"><xsl:value-of select="generate-id()"></xsl:value-of></xsl:attribute>
 					<fo:block>
-						<fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="8mm" src="/opt/www/devloop.oncampus.de/mediawiki-1.18.1/skins/loop/images/media/type_task.png"></fo:external-graphic>
+						<fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="8mm" src="/opt/www/loop.oncampus.de/mediawiki/skins/loop/images/media/type_task.png"></fo:external-graphic>
 					</fo:block>
 				</fo:basic-link>
 				</fo:block>
@@ -582,7 +584,7 @@
 			</fo:external-graphic>
 		</fo:block>
 		<fo:block>
-			<!--  <fo:external-graphic scaling="uniform" content-height="50mm" content-width="100mm" src="/opt/www/devloop.oncampus.de/mediawiki-1.18.1/extensions/Loop/tmp/marknew.png"></fo:external-graphic> -->
+			<!--  <fo:external-graphic scaling="uniform" content-height="50mm" content-width="100mm" src="/opt/www/loop.oncampus.de/mediawiki/extensions/Loop/tmp/marknew.png"></fo:external-graphic> -->
 			
 			
 			
@@ -1014,7 +1016,7 @@
 								<fo:table-cell width="12mm" text-align="center">
 									<fo:block>
 										<fo:external-graphic scaling="uniform" content-width="12mm" content-height="scale-to-fit"> 
-										<xsl:attribute name="src">/opt/www/devloop.oncampus.de/mediawiki-1.18.1/skins/loop/images/area/<xsl:value-of select="@type"></xsl:value-of>.png</xsl:attribute>
+										<xsl:attribute name="src">/opt/www/loop.oncampus.de/mediawiki/skins/loop/images/area/<xsl:value-of select="@type"></xsl:value-of>.png</xsl:attribute>
 										</fo:external-graphic>
 									</fo:block>
 									<fo:block keep-with-previous.within-page="always" keep-together="auto">
@@ -1056,7 +1058,7 @@
 						<fo:table-row>
 							<fo:table-cell  number-columns-spanned="1" width="10mm">
 								<fo:block>
-									<fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="8mm" src="/opt/www/devloop.oncampus.de/mediawiki-1.18.1/skins/loop/images/media/type_image.png"></fo:external-graphic>
+									<fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="8mm" src="/opt/www/loop.oncampus.de/mediawiki/skins/loop/images/media/type_image.png"></fo:external-graphic>
 								</fo:block>
 							</fo:table-cell>
 							<fo:table-cell  number-columns-spanned="1">
@@ -1087,7 +1089,7 @@
 						<fo:table-row>
 							<fo:table-cell  number-columns-spanned="1" width="10mm">
 								<fo:block>
-									<fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="8mm" src="/opt/www/devloop.oncampus.de/mediawiki-1.18.1/skins/loop/images/media/type_table.png"></fo:external-graphic>
+									<fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="8mm" src="/opt/www/loop.oncampus.de/mediawiki/skins/loop/images/media/type_table.png"></fo:external-graphic>
 								</fo:block>
 							</fo:table-cell>
 							<fo:table-cell  number-columns-spanned="1">
@@ -1111,7 +1113,7 @@
 						<fo:table-row>
 							<fo:table-cell  number-columns-spanned="1" width="10mm">
 								<fo:block>
-									<fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="8mm" src="/opt/www/devloop.oncampus.de/mediawiki-1.18.1/skins/loop/images/media/type_video.png"></fo:external-graphic>
+									<fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="8mm" src="/opt/www/loop.oncampus.de/mediawiki/skins/loop/images/media/type_video.png"></fo:external-graphic>
 								</fo:block>
 							</fo:table-cell>
 							<fo:table-cell  number-columns-spanned="1">
@@ -1134,11 +1136,43 @@
 				</fo:table>				
 				<!-- <xsl:apply-templates></xsl:apply-templates> -->
 			</xsl:when>		
+			<xsl:when test="@extension_name='loop_listing'">
+				<fo:table table-layout="fixed" border-collapse="separate" width="150mm">
+					<fo:table-body>
+						<fo:table-row>
+							<fo:table-cell  number-columns-spanned="1" width="10mm">
+								<fo:block>
+									<fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="8mm" src="/opt/www/loop.oncampus.de/mediawiki/skins/loop/images/media/type_listing.png"></fo:external-graphic>
+								</fo:block>
+							</fo:table-cell>
+							<fo:table-cell  number-columns-spanned="1">
+								<xsl:attribute name="width">140mm</xsl:attribute>
+								<fo:block>
+									<xsl:apply-templates></xsl:apply-templates>								
+									<xsl:if test="@title">
+										<fo:block line-height="12.5pt" font-weight="bold" font-size="9.5pt"><xsl:value-of select="@title"></xsl:value-of></fo:block>
+									</xsl:if>
+									<xsl:if test="@description">
+										<fo:block line-height="12.5pt" font-size="9.5pt"><xsl:value-of select="@description"></xsl:value-of></fo:block>
+									</xsl:if>
+								</fo:block>
+							</fo:table-cell>
+						</fo:table-row>
+					</fo:table-body>
+				</fo:table>				
+				<!-- <xsl:apply-templates></xsl:apply-templates> -->
+			</xsl:when>		
+			<xsl:when test="@extension_name='source'">
+				<fo:block font-family="monospace" wrap-option="wrap" linefeed-treatment="preserve" white-space-collapse="false" white-space-treatment="preserve">
+					<!-- <xsl:apply-templates></xsl:apply-templates> -->
+					<xsl:value-of select="."></xsl:value-of>
+				</fo:block>
+			</xsl:when>						
 			<xsl:when test="@extension_name='math'">
 				<fo:block>
 				
-				<!-- <fo:external-graphic scaling="uniform" content-height="50mm" content-width="100mm" src="/opt/www/devloop.oncampus.de/mediawiki-1.18.1/images/devloop/math/3/3/1/3311e580c1210b14ba019015d8c69429.png"></fo:external-graphic> -->
-				<!-- /opt/www/devloop.oncampus.de/mediawiki-1.18.1/extensions/Loop/tmp/mathetest.png  -->
+				<!-- <fo:external-graphic scaling="uniform" content-height="50mm" content-width="100mm" src="/opt/www/loop.oncampus.de/mediawiki/images/devloop/math/3/3/1/3311e580c1210b14ba019015d8c69429.png"></fo:external-graphic> -->
+				<!-- /opt/www/loop.oncampus.de/mediawiki/extensions/Loop/tmp/mathetest.png  -->
 				<fo:external-graphic scaling="uniform" content-width="60%">
 					<xsl:attribute name="src">
 					<xsl:value-of select="php:function('xslt_transform_math', .)"></xsl:value-of>
@@ -1211,7 +1245,7 @@
 								<xsl:attribute name="external-destination">http://www.youtube.com/embed/<xsl:value-of select="@videoid"></xsl:value-of></xsl:attribute>
 								<fo:inline text-decoration="underline">http://www.youtube.com/embed/<xsl:value-of select="@videoid"></xsl:value-of></fo:inline>
 								<xsl:text> </xsl:text>
-								<fo:inline ><fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="2mm" src="/opt/www/devloop.oncampus.de/mediawiki-1.18.1/skins/loop/images/print/www_link.png"></fo:external-graphic></fo:inline>
+								<fo:inline ><fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="2mm" src="/opt/www/loop.oncampus.de/mediawiki/skins/loop/images/print/www_link.png"></fo:external-graphic></fo:inline>
 							</fo:basic-link>
 						</xsl:when>
 						<xsl:otherwise>
@@ -1707,7 +1741,7 @@
 			<xsl:attribute name="external-destination"><xsl:value-of select="@href"></xsl:value-of></xsl:attribute>
 			<fo:inline text-decoration="underline"><xsl:value-of select="."></xsl:value-of></fo:inline>
 			<xsl:text> </xsl:text>
-			<fo:inline ><fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="2mm" src="/opt/www/devloop.oncampus.de/mediawiki-1.18.1/skins/loop/images/print/www_link.png"></fo:external-graphic></fo:inline>
+			<fo:inline ><fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="2mm" src="/opt/www/loop.oncampus.de/mediawiki/skins/loop/images/print/www_link.png"></fo:external-graphic></fo:inline>
 		</fo:basic-link>
 	</xsl:template>	
 
@@ -1735,7 +1769,7 @@
 			<xsl:attribute name="internal-destination">bibliography</xsl:attribute>
 			<fo:inline text-decoration="underline" font-style="italic"><xsl:value-of select="translate($citetext,'+',' ')"></xsl:value-of></fo:inline>
 			<xsl:text> </xsl:text>		
-			<fo:inline><fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="3mm" src="/opt/www/devloop.oncampus.de/mediawiki-1.18.1/skins/loop/images/print/literature.png"></fo:external-graphic></fo:inline>
+			<fo:inline><fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="3mm" src="/opt/www/loop.oncampus.de/mediawiki/skins/loop/images/print/literature.png"></fo:external-graphic></fo:inline>
 		</fo:basic-link>
 	</xsl:template>	
 	
@@ -1793,7 +1827,7 @@
 			<xsl:attribute name="external-destination"><xsl:value-of select="@href"></xsl:value-of></xsl:attribute>
 			<fo:inline text-decoration="underline"><xsl:value-of select="."></xsl:value-of></fo:inline>
 			<xsl:text> </xsl:text>
-			<fo:inline ><fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="2mm" src="/opt/www/devloop.oncampus.de/mediawiki-1.18.1/skins/loop/images/print/www_link.png"></fo:external-graphic></fo:inline>
+			<fo:inline ><fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="2mm" src="/opt/www/loop.oncampus.de/mediawiki/skins/loop/images/print/www_link.png"></fo:external-graphic></fo:inline>
 			 
 			<xsl:text> (</xsl:text>
 			<xsl:value-of select="@href"></xsl:value-of>
