@@ -62,10 +62,15 @@ class LoopStructure {
 			if ($topic_found) {
 				$item_text = $matches[4][0];
 				$title = Title::newFromText($item_text);
-				$page_url = $title->escapeLocalURL();
+				if ($title) {
+					$page_url = $title->escapeLocalURL();
+				} else {
+					$page_url = '';
+				}
 				$url_position = $matches[2][1];
 				$url_length = strlen($matches[2][0]);
 				$toc = substr_replace($toc, $page_url, $url_position, $url_length);
+				
 			}
 		} while ($topic_found);
 
