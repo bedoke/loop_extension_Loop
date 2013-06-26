@@ -44,37 +44,7 @@ class LoopTask {
 		$parseroutput = $parser->parse( $input, $title, $parserOptions);
 		$output=$parseroutput->mText;
 		
-		//wfDebug( __METHOD__ . ': taskoutput : '.print_r($output,true));
-		
-		//$output = $wgParser->recursiveTagParse($input);
 
-		$pattern='@src="(.*?)"@';
-		$file_found=preg_match($pattern,$output,$matches);
-		if($file_found) {
-			$this->file=basename($matches[1]);
-			$img = wfFindFile($this->file);
-			$meta=$img->formatMetadata();
-
-
-			foreach ($meta["visible"] as $meta_item) {
-				if ($meta_item["id"]=="exif-imagedescription") {
-					$this->description=$meta_item["value"];
-				}
-			}
-			foreach ($meta["collapsed"] as $meta_item) {
-				if ($meta_item["id"]=="exif-headline") {
-					$this->title=$meta_item["value"];
-				}
-				if ($meta_item["id"]=="exif-copyrighted") {
-					$this->copyright.=$meta_item["value"].' ';
-				}
-				if ($meta_item["id"]=="exif-webstatement") {
-					$this->copyright.=$meta_item["value"];
-				}
-			}
-		} else {
-			$this->file=false;
-		}
 		if (array_key_exists('title', $args)) {
 			if ($args["title"]!='') {
 				$this->title=$args["title"];
