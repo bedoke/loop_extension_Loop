@@ -209,6 +209,14 @@ function xslt_transform_link($input) {
 					$mm=round(0.214*intval($px),0);
 					$imagewidth=$mm.'mm';
 				}
+			} else {
+			    $size=getimagesize($imagepath);
+				$width=0.214*intval($size[0]);
+				if ($width>150) {
+					$imagewidth='150mm';
+				} else {
+					$imagewidth=round($width,0).'mm';
+				}				
 			}
 				
 			//$input_value=print_r($childs,true);
@@ -287,8 +295,15 @@ function xslt_figure_width($input) {
 					$mm=round(0.214*intval($px),0);
 					$imagewidth=$mm;
 				}
-			}
-				
+			} else {
+			    $size=getimagesize($imagepath);
+				$width=0.214*intval($size[0]);
+				if ($width>150) {
+					$imagewidth='150';
+				} else {
+					$imagewidth=round($width,0);
+				}				
+			}				
 			//$input_value=print_r($childs,true);
 			$return =  $imagewidth;
 				
