@@ -48,7 +48,13 @@ $wgLoopTaskDefaultRenderOption = 'icon';
 $wgResourceModules['ext.Loop'] = array(
 	'localBasePath' => dirname(__FILE__),
 	'remoteExtPath' => 'Loop',
-	'scripts' => array('libs/jstree/jquery.jstree.js','loop.js')
+	'scripts' => array('libs/jstree/jquery.jstree.js','loop.js'),
+  'messages' => array(
+	'loop-show-left-sidebar',
+	'loop-hide-left-sidebar',
+	'loop-show-right-sidebar',
+	'loop-hide-right-sidebar'
+  )	
 );
 
 

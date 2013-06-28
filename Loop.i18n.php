@@ -97,7 +97,11 @@ $messages['de'] = array(
 	'loopausgabeformate' => 'Ausgabeformate',
 	'loop_no_text2speech_notice'=>'In diesem LOOP ist die Text2Speech-Funktion nicht freigeschaltet.',
 	'loopaudio' => 'Audioversion',
-	'loopchapteraudio' => 'Audioversion Kapitel'
+	'loopchapteraudio' => 'Audioversion Kapitel',
+	'loop-show-left-sidebar' => 'linke Randleiste anzeigen',
+	'loop-hide-left-sidebar' => 'linke Randleiste verbergen',
+	'loop-show-right-sidebar' => 'rechte Randleiste anzeigen',
+	'loop-hide-right-sidebar' => 'rechte Randleiste verbergen'
 );
 
 $messages['en'] = array(
@@ -142,7 +146,7 @@ $messages['en'] = array(
 	'looppageinfo' => 'Pageinfo',
     'directories' => 'Directories',
     'loopprintversion' => 'Print version',
-    		'bibliographypage' => 'Bibliography',
+    'bibliographypage' => 'Bibliography',
 	'abbreviationpage' => 'Abbreviations',
 	'loopimprint' => 'Imprint',
 	'loopaboutloop' => 'About LOOP',
@@ -150,7 +154,11 @@ $messages['en'] = array(
 	'loopausgabeformate' => 'Output formats',
 	'loop_no_text2speech_notice'=>'The Text2Speech function is not available in this LOOP.',
 	'loopaudio' => 'Audioversion',
-	'loopchapteraudio' => 'Audioversion Chapter'
+	'loopchapteraudio' => 'Audioversion Chapter',
+	'loop-show-left-sidebar' => 'show left sidebar',
+	'loop-hide-left-sidebar' => 'hide left sidebar',
+	'loop-show-right-sidebar' => 'show right sidebar',
+	'loop-hide-right-sidebar' => 'hide right sidebar'
 );
 
 $messages['fr'] = array(
