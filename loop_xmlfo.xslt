@@ -1256,12 +1256,15 @@
 					</xsl:choose>
 				</fo:block>
 				<fo:block></fo:block>								
-			</xsl:when>				
+			</xsl:when>			
+			<xsl:when test="@extension_name='graphviz'">
+				<fo:block>
+					<xsl:apply-templates select="php:function('xslt_transform_graphviz', .)"></xsl:apply-templates>
+				</fo:block>
+			</xsl:when>					
 		</xsl:choose>
 
 	</xsl:template>	
-	
-
 
 <xsl:template match="table">
    <fo:table table-layout="fixed" border-style="solid" border-width="0.5pt" border-color="black" border-collapse="collapse" padding="0.6pt" space-after="12.5pt">

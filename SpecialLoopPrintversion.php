@@ -117,6 +117,42 @@ function xslt_transform_math($input) {
 	return $return;
 }
 
+function xslt_transform_graphviz($input) {
+	global $IP, $wgParser, $wgParserConf, $wgUser,$wgServer,$wgUploadPath, $wgUploadDirectory, $wgScriptPath;
+	$input_object=$input[0];
+	$graphvizcontent=$input_object->textContent;
+	$torender='<graphviz border="frame" format="png">'.$graphvizcontent.'</graphviz>';
+
+	$parser = new Parser( $wgParserConf );
+	$parserOptions = ParserOptions::newFromUser( $wgUser );
+	$parser->Options($parserOptions);
+	$title = Title::newFromText("graphviz");
+	$output = $parser->parse($torender, $title, $parserOptions);
+	$html_text = $output->getText();
+
+ 	$array = array();
+    preg_match( '/(?<=src=")([^"]*)(?=")/i', $html_text, $array ) ;
+    $imgsrc = str_replace($wgScriptPath, '', $IP).$array[1]  ;
+
+
+    $size=getimagesize($imgsrc);
+	$width=0.214*intval($size[0]);
+	if ($width>150) {
+		$imagewidth='150mm';
+	} else {
+		$imagewidth=round($width,0).'mm';
+	}
+	
+
+	$return_xml =  '<php_link_image imagepath="'.$imgsrc.'" imagewidth="'.$imagewidth.'"></php_link_image>' ;
+	$return_doc = new DOMDocument;
+	$return_doc->loadXml($return_xml);
+
+	$return = $return_doc;
+	return $return;
+}
+
+
 
 function xslt_transform_link($input) {
 	$return='';
