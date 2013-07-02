@@ -34,7 +34,7 @@ class LoopTask {
 		$this->args=$args;
 
 		//wfDebug( __METHOD__ . ': task : '.print_r($this,true));
-		
+		/*
 		$parser = new Parser( $wgParserConf );
 		$parserOptions = ParserOptions::newFromUser( $wgUser );
 		$parser->Options($parserOptions);
@@ -43,7 +43,7 @@ class LoopTask {
 		
 		$parseroutput = $parser->parse( $input, $title, $parserOptions);
 		$output=$parseroutput->mText;
-		
+		*/
 
 		if (array_key_exists('title', $args)) {
 			if ($args["title"]!='') {
