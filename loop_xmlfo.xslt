@@ -6,7 +6,7 @@
 	xmlns:xlink="http://www.w3.org/1999/xlink"
 	xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:func="http://exslt.org/functions"
 	xmlns:php="http://php.net/xsl"
-	extension-element-prefixes="func php" xmlns:functx="http://www.functx.com">
+	extension-element-prefixes="func php" xmlns:functx="http://www.functx.com" exclude-result-prefixes="xhtml">
 
 	<!-- <xsl:namespace-alias stylesheet-prefix="php" result-prefix="xsl" /> -->
 
@@ -939,7 +939,7 @@
 	
 	<xsl:template match="paragraph">
 		<xsl:if test="not(starts-with(.,'#index:'))">
-			<fo:block>
+			<fo:block margin-top="7pt">
 				<xsl:call-template name="font_normal"></xsl:call-template>
 				<xsl:apply-templates></xsl:apply-templates>
 			</fo:block>
@@ -950,7 +950,10 @@
 	<xsl:template match="br">
 		<fo:block></fo:block>
 	</xsl:template>
-		
+
+	<xsl:template match="xhtml:br">
+		<fo:block></fo:block>
+	</xsl:template>		
 
 	<xsl:template match="sub">
 		<fo:inline vertical-align="sub" font-size="0.8em"><xsl:apply-templates></xsl:apply-templates></fo:inline>
