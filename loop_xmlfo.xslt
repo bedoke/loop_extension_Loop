@@ -303,13 +303,9 @@
 					<xsl:when test="extension[@extension_name='loop_figure_title']">
 						<xsl:apply-templates select="extension[@extension_name='loop_figure_title']" mode="infigure"></xsl:apply-templates>
 					</xsl:when>
-					<xsl:otherwise>
-						<xsl:if test="@title">
-							<xsl:value-of select="@title"></xsl:value-of>
-						</xsl:if>
-					</xsl:otherwise>
-				</xsl:choose>	
-				<xsl:choose>
+					<xsl:when test="@title">
+						<xsl:value-of select="@title"></xsl:value-of>
+					</xsl:when>
 					<xsl:when test="extension[@extension_name='loop_figure_description']">
 						<xsl:apply-templates select="extension[@extension_name='loop_figure_description']" mode="infigure"></xsl:apply-templates>
 					</xsl:when>
@@ -961,6 +957,14 @@
 	</xsl:template>	
 	
 	<xsl:template match="sup">
+		<fo:inline vertical-align="super" font-size="0.8em"><xsl:apply-templates></xsl:apply-templates></fo:inline>
+	</xsl:template>	
+
+	<xsl:template match="xhtml:sub">
+		<fo:inline vertical-align="sub" font-size="0.8em"><xsl:apply-templates></xsl:apply-templates></fo:inline>
+	</xsl:template>	
+	
+	<xsl:template match="xhtml:sup">
 		<fo:inline vertical-align="super" font-size="0.8em"><xsl:apply-templates></xsl:apply-templates></fo:inline>
 	</xsl:template>	
 	
