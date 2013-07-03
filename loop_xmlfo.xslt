@@ -927,7 +927,7 @@
 							<xsl:call-template name="font_subsubhead"></xsl:call-template>
 						</xsl:when>
 						<xsl:otherwise>
-							<xsl:call-template name="font_normal"></xsl:call-template>
+							<xsl:call-template name="font_subsubhead"></xsl:call-template>
 						</xsl:otherwise>
 					</xsl:choose>
 					<xsl:value-of select="."></xsl:value-of>
@@ -1467,19 +1467,19 @@
 		<xsl:attribute name="font-size">11.5pt</xsl:attribute>
 		<xsl:attribute name="font-weight">bold</xsl:attribute>
 		<xsl:attribute name="line-height">18.5pt</xsl:attribute>
+		<xsl:attribute name="margin-top">7pt</xsl:attribute>
 	</xsl:template>
 	<xsl:template name="font_subhead">
 		<xsl:attribute name="font-size">13.5pt</xsl:attribute>
 		<xsl:attribute name="font-weight">bold</xsl:attribute>
 		<xsl:attribute name="line-height">15.5.pt</xsl:attribute>
-		<xsl:attribute name="margin-top">11pt</xsl:attribute>
+		<xsl:attribute name="margin-top">7pt</xsl:attribute>
 	</xsl:template>
 	<xsl:template name="font_head">
 		<xsl:attribute name="font-size">14.5pt</xsl:attribute>
 		<xsl:attribute name="font-weight">bold</xsl:attribute>
 		<xsl:attribute name="line-height">16.5pt</xsl:attribute>
 		<xsl:attribute name="margin-top">7pt</xsl:attribute>
-		<xsl:attribute name="margin-bottom">7pt</xsl:attribute>
 	</xsl:template>
 
 	<!-- Gibt den Namen der letzten Page-Sequence im Dokument zurück -->
