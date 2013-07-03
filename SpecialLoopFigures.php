@@ -175,9 +175,9 @@ class SpecialLoopFigures extends SpecialPage {
 				$return.='<tr>';
 				$return.='<td class="loop_figure_index_thumb">';
 				if ($figure->file) {
-					wfDebug( __METHOD__ . ': figure file : '.print_r($figure->file,true)."\n");
+					// wfDebug( __METHOD__ . ': figure file : '.print_r($figure->file,true)."\n");
 					$file = wfLocalFile($figure->file);
-					wfDebug( __METHOD__ . ': file : '.print_r($file,true)."\n");
+					// wfDebug( __METHOD__ . ': file : '.print_r($file,true)."\n");
 					$thumb = $file->transform( array( 'width' => 100, 'height' => 100 ) );
 					$return.= $thumb->toHtml( array( 'desc-link' => true ) );
 				}	else {
@@ -185,8 +185,14 @@ class SpecialLoopFigures extends SpecialPage {
 				}
 				$return.='</td>';
 				$return.='<td>';
-				$return.='<div class="loop_figure_index_title">'.$figure->title.'</div>';
-				$return.='<div class="loop_figure_index_description">'.$figure->description.'</div>';
+				$parserOptions = ParserOptions::newFromUser( $wgUser );
+				$parsertitle = Title::newFromText('figure');
+				$parseroutput = $parser->parse($figure->title,$parsertitle,$parserOptions);
+				$output_title=$parseroutput->mText;
+				$parseroutput = $parser->parse($figure->description,$parsertitle,$parserOptions);
+				$output_description=$parseroutput->mText;				
+				$return.='<div class="loop_figure_index_title">'.$output_title.'</div>';
+				$return.='<div class="loop_figure_index_description">'.$output_description.'</div>';
 				$return.='<div class="loop_figure_index_link"><a href="'.$figure->pageURL;
 				if ($figure->title) {
 					$return.='#'.htmlentities(str_replace( ' ', '_', trim($figure->title) ),ENT_QUOTES, "UTF-8");

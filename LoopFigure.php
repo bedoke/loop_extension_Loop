@@ -32,17 +32,47 @@ class LoopFigure {
 
 
 
-		//var_dump($title);
-		//exit;
-
-
-		$this->input=$input;
-		$this->args=$args;
 
 		$parser = new Parser( $wgParserConf );
 		$parserOptions = ParserOptions::newFromUser( $wgUser );
 		$parser->Options($parserOptions);
 
+		//var_dump($title);
+		//exit;
+
+		$matches=array();
+		$pattern = '@(?<=<loop_figure_title>)(.*?)(?=<\/loop_figure_title>)@isu';
+		if (preg_match($pattern, $input, $matches)==1) {
+				# $this->title = $wgParser->recursiveTagParse($matches[1]);
+				$this->title = $matches[1];
+		}
+
+		$matches=array();
+		$pattern = '@(?<=<loop_figure_description>)(.*?)(?=<\/loop_figure_description>)@isu';
+		if (preg_match($pattern, $input, $matches)==1) {
+				# $this->description = $wgParser->recursiveTagParse($matches[1]);
+				$this->description = $matches[1];
+		}
+		
+
+
+
+
+
+		$pattern = "/(\r\n|\r|\n)/";
+		$replacement = PHP_EOL;
+		$string = preg_replace($pattern, $replacement, $input);
+			
+		$pattern = '@(<loop_figure_title>)(.*?)(<\/loop_figure_title>)@isu';
+		$replace = '';
+		$input = preg_replace($pattern, $replace, $input);
+
+		$pattern = '@(<loop_figure_description>)(.*?)(<\/loop_figure_description>)@isu';
+		$replace = '';
+		$input = preg_replace($pattern, $replace, $input);
+
+		$this->input=$input;
+		$this->args=$args;
 
 
 		$parseroutput = $parser->parse( $input, $title, $parserOptions);
@@ -122,16 +152,20 @@ class LoopFigure {
 		} else {
 			$this->file=false;
 		}
-		if (array_key_exists('title', $args)) {
-			if ($args["title"]!='') {
-				$this->title=$args["title"];
-			} else {
-				$this->title='';
+
+		if ($this->title == '') {
+			if (array_key_exists('title', $args)) {
+				if ($args["title"]!='') {
+					$this->title=$args["title"];
+				} else {
+					$this->title='';
+				}
 			}
 		}
-
-		if (array_key_exists('description', $args)) {
-			$this->description=$args["description"];
+		if ($this->description == '') {
+			if (array_key_exists('description', $args)) {
+				$this->description=$args["description"];
+			}
 		}
 		if (array_key_exists('copyright', $args)) {
 			$this->copyright=$args["copyright"];
@@ -204,7 +238,7 @@ class LoopFigure {
 				//$return.='<div class="mediabox_typeicon"><img src="'.$wgStylePath .'/loop/images/media/type_image.png"></div>';
 				$return.='<div class="mediabox_typeicon"><div class="mediabox_typeicon_image"></div></div>';
 				$return.='<div class="mediabox_footertext">';
-				if ($this->title!='') {$return.='<span class="mediabox_title">'.$this->title.'</span><br/>';}
+				if ($this->title!='') {$return.='<span class="mediabox_title">'.$wgParser->recursiveTagParse($this->title).'</span><br/>';}
 				if ($this->description!='') {$return.='<span class="mediabox_description">'.$wgParser->recursiveTagParse($this->description).'</span><br/>';}
 				if (($this->show_copyright==true)&&($this->copyright!='')){$return.='<span class="mediabox_copyright">'.$this->copyright.'</span>';}
 				$return.='</div>';
