@@ -34,7 +34,7 @@ class LoopArea {
 	function LoopArea($input,$args) {
 		global $wgParser, $wgTitle, $wgParserConf, $wgUser, $wgLoopAreaDefaultRenderOption;
 
-		$areatypes=array('task','timerequirement','learningobjectives','arrangement','example','reflection','notice','sourcecode','summary','important','markedsentence','annotation','definition','formula','indentation','area','norm','law');
+		$areatypes=array('task','timerequirement','learningobjectives','arrangement','example','reflection','notice','sourcecode','summary','important','markedsentence','annotation','definition','formula','indentation','area','norm','law','question','practice','exercise','websource','experiment');
 
 		$this->input=trim($input);
 		$this->args=$args;
