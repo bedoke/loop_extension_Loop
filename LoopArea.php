@@ -64,6 +64,10 @@ class LoopArea {
 			$this->render=$wgLoopAreaDefaultRenderOption;
 		}
 
+		if ($this->render == 'frame') {
+			$this->render = 'marked';
+		}
+
 		if (array_key_exists('index', $args)) {
 			if ($args["index"]=='false') {
 				$this->index=false;
