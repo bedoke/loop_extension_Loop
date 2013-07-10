@@ -120,7 +120,7 @@ class LoopTask {
 				$return.='<div class="clearer"></div>';
 				break;
 			case 'title':
-				$return.='<div class="mediabox_'.$this->render.'">';
+				$return.='<div class="mediabox_marked">';
 				
 				$return.='<div class="mediabox_task_content">';
 				$return.='<div>';
