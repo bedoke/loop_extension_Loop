@@ -25,7 +25,7 @@ class LoopTask {
 	var $structureSequence=0;
 	var $pageTocNumber=0;
 
-	var $render_options=array('none','icon','marked','default');
+	var $render_options=array('none','icon','marked','default','title');
 
 	function LoopTask($input,$args,$parser) {
 		global $wgParser, $wgTitle, $wgParserConf, $wgUser, $wgLoopTaskDefaultRenderOption;
@@ -119,6 +119,19 @@ class LoopTask {
 				$return.='</div>';
 				$return.='<div class="clearer"></div>';
 				break;
+			case 'title':
+				$return.='<div class="mediabox_'.$this->render.'">';
+				
+				$return.='<div class="mediabox_task_content">';
+				$return.='<div>';
+				if ($this->title!='') {$return.='<span class="mediabox_title">'.$this->title.'</span>';}
+				$return.='</div>';
+				$output = $wgParser->recursiveTagParse($this->input);
+				$return.= $output;
+				$return.='</div>';
+				$return.='</div>';
+				$return.='<div class="clearer"></div>';
+				break;				
 			case 'none':
 			default:
 				$return.= $wgParser->recursiveTagParse($this->input);
