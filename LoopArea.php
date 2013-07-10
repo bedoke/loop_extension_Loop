@@ -26,7 +26,7 @@ class LoopArea {
 	var $structureSequence=0;
 	var $pageTocNumber=0;
 
-	var $render_options=array('none','icon','marked','default');
+	var $render_options=array('none','icon','marked','default','frame');
 
 
 
@@ -120,6 +120,7 @@ class LoopArea {
 		switch ($this->render) {
 			case 'marked':
 			case 'icon':
+			case 'frame':
 				$return.='<div class="areamark_'.$this->render.'">';
 				if ($this->type=='area') {
 					if ($this->icon) {
