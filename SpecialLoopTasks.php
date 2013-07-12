@@ -143,6 +143,7 @@ class SpecialLoopTasks extends SpecialPage {
 			$parser->extractTagsAndParams( array('loop_task') , $r_old_text, $matches);
 			//var_dump($matches);
 			//wfDebug( __METHOD__ . ': name : '.print_r($matches,true));	
+			$pageOrder=0;
 			foreach ($matches as $match) {
 				//var_dump($match);
 				//wfDebug( __METHOD__ . ': match : '.print_r($match,true));
@@ -157,16 +158,18 @@ class SpecialLoopTasks extends SpecialPage {
 				$specialtask->setStructureIndex($structure_index);
 				$specialtask->setStructureIndexOrder($structure_index_order);
 				$specialtask->setPageTocNumber($page_toc_number);
+				$specialtask->setPageOrder($pageOrder);
 
 				 //var_dump($specialtask);
-				 wfDebug( __METHOD__ . ': specialtask : '.print_r($specialtask,true));
+				 #wfDebug( __METHOD__ . ': specialtask : '.print_r($specialtask,true));
 				
 				$specialtasks[]=$specialtask;
+				$pageOrder++;
 			}
 
 		}
 
-		wfDebug( __METHOD__ . ': specialtasks : '.print_r($specialtasks,true));	
+		#wfDebug( __METHOD__ . ': specialtasks : '.print_r($specialtasks,true));	
 
 		usort($specialtasks, array('SpecialLoopTasks','loop_task_index_sort'));
 
@@ -220,9 +223,11 @@ class SpecialLoopTasks extends SpecialPage {
 		$a_lo = $a->structureIndex;
 		$a_p = $a->structureSequence;
 		$a_io = $a->structureIndexOrder;
+		$a_po = $a->pageOrder;
 		$b_lo = $b->structureIndex;
 		$b_p = $b->structureSequence;
 		$b_io = $b->structureIndexOrder;
+		$b_po = $b->pageOrder;
 
 		if ($a_io > $b_io) {
 			$return = +1;
@@ -239,7 +244,13 @@ class SpecialLoopTasks extends SpecialPage {
 				} else if ($a_p < $b_p) {
 					$return = -1;
 				} else {
-					$return=0;
+					if ($a_po > $b_po) {
+						$return=+1;
+					} else if ($a_po < $b_po) {
+						$return=-1;
+					} else {
+						$return=0;
+					}
 				}
 			}
 		}

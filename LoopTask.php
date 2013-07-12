@@ -24,6 +24,7 @@ class LoopTask {
 	var $structureIndexOrder=0;
 	var $structureSequence=0;
 	var $pageTocNumber=0;
+	var $pageOrder=0;
 
 	var $render_options=array('none','icon','marked','default','title');
 
@@ -94,6 +95,7 @@ class LoopTask {
 	function setStructureIndexOrder($structureIndexOrder)	{ $this->structureIndexOrder=$structureIndexOrder; return true; }
 	function setStructureSequence($structureSequence)	{ $this->structureSequence=$structureSequence; return true; }
 	function setPageTocnumber($pageTocNumber)	{ $this->pageTocNumber=$pageTocNumber; return true; }
+	function setPageOrder($pageOrder)	{ $this->pageOrder=$pageOrder; return true; }
 
 	public function render() {
 		global $wgStylePath, $wgParser;
