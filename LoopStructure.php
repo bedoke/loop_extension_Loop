@@ -884,7 +884,7 @@ function wfLoopStructureNavigation($item) {
 		$aktTocLevel=$item->mTocLevel;
 
 		$return.='<a href="'.$wgServer.'/'.$wgScriptPath.'/" alt="Home" title="Home"><div class="navicon_main"></div></a> ';
-
+		/*
 		if ($aktTocLevel==0) {
 			$return.= '<div class="navicon_home_in"></div>';
 		} else {
@@ -927,7 +927,7 @@ function wfLoopStructureNavigation($item) {
 
 				}
 		}
-
+		*/
 
 		$dbr = wfGetDB( DB_SLAVE );
 		$res = $dbr->select(
