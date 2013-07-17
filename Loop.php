@@ -5,6 +5,7 @@ define( 'LOOP_HEADER', 'header' );
 define( 'LOOP_LOCALTOC', 'looptoc' );
 define( 'LOOP_BIBLIOGRAPHYPAGE', 'bibliographypage' );
 define( 'LOOP_ABBREVIATIONPAGE', 'abbreviationpage' );
+define( 'LOOP_GLOSSARYPAGE', 'glossarypage' );
 
 $wgExtensionCredits['other'][] = array(
 	'path' => __FILE__,
@@ -282,6 +283,7 @@ function fnLoopRegisterMagicWords(&$magicWords, $langCode) {
 	$magicWords[LOOP_LOCALTOC] = array(0, 'looptoc');
 	$magicWords[LOOP_BIBLIOGRAPHYPAGE] = array(0, 'bibliographypage');
 	$magicWords[LOOP_ABBREVIATIONPAGE] = array(0, 'abbreviationpage');	
+	$magicWords[LOOP_GLOSSARYPAGE] = array(0, 'glossarypage');	
 	return true;
 }
 
@@ -331,6 +333,11 @@ function fnLoopAssignAValue( &$parser, &$cache, &$magicWordId, &$ret ) {
 			$ret =  $parser->insertStripItem( $output, $parser->mStripState );
 			break;
 
+		case LOOP_GLOSSARYPAGE:
+			$output= wfMsg('glossarypage');
+			$ret =  $parser->insertStripItem( $output, $parser->mStripState );
+			break;
+
 		default:
 			break;
 	}
@@ -342,6 +349,7 @@ function fnLoopDeclareVarIds( &$customVariableIds ) {
 	$customVariableIds[] = LOOP_LOCALTOC;
 	$customVariableIds[] = LOOP_BIBLIOGRAPHYPAGE;
 	$customVariableIds[] = LOOP_ABBREVIATIONPAGE;	
+	$customVariableIds[] = LOOP_GLOSSARYPAGE;	
 	return true;
 }
 

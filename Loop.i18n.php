@@ -48,6 +48,7 @@ $specialPageAliases['fr'] = array(
 	);
 
 $messages['de'] = array(
+	'glossarypage' => 'Glossar',
 	'loopbibliography' => 'Literaturverzeichnis',
 	'loopabbreviations' => 'Abkürzungsverzeichnis',
 	'loopfigures' => 'Abbildungsverzeichnis',
@@ -110,6 +111,7 @@ $messages['de'] = array(
 );
 
 $messages['en'] = array(
+	'glossarypage' => 'Terminology',
 	'loopbibliography' => 'Bibliography',
 	'loopabbreviations' => 'Abbreviations',
 	'loopfigures' => 'List of figures',
@@ -172,6 +174,7 @@ $messages['en'] = array(
 );
 
 $messages['fr'] = array(
+	'glossarypage' => 'Terminology',
 	'loopbibliography' => 'Bibliography',
 	'loopabbreviations' => 'Abbreviations',
 	'loopfigures' => 'Table des illustrations',
