@@ -49,7 +49,7 @@ $specialPageAliases['fr'] = array(
 
 $messages['de'] = array(
 	'loopbibliography' => 'Literaturverzeichnis',
-	'loopabbreviations' => 'Abkuerzungen',
+	'loopabbreviations' => 'Abkürzungsverzeichnis',
 	'loopfigures' => 'Abbildungsverzeichnis',
 	'looptables' => 'Tabellenverzeichnis',
 	'loopmedia' => 'Medienverzeichnis',
