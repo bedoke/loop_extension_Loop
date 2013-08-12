@@ -252,77 +252,87 @@ function xslt_figure_width($input) {
 	$return='';
 	$childs=array();
 	$input_object=$input[0];
+	
+	# edit ANDRE/AS:	
+	if(is_object($input[0])){
 
-	//$input_value=print_r($input_object->tagName,true);
-
-	if ($input_object->hasAttribute('type')) {
-		$childs['type']=$input_object->getAttribute('type');
-	}
-	if ($input_object->hasAttribute('href')) {
-		$childs['href']=$input_object->getAttribute('href');
-	}
-
-	$link_childs=$input_object->childNodes;
-	$num_childs=$link_childs->length;
-
-	for ($i = 0; $i < $num_childs; $i++) {
-		$child=$link_childs->item($i);
-		$child_name=$child->tagName;
-		if ($child_name=='') {$child_name='text';}
-		$child_value=$child->textContent;
-		$childs[$child_name]=$child_value;
-	}
-
-
-	if ($childs['type']=='external') {
-		$return =  '150' ;
-	} else {
-		$target=$childs['target'];
-		$target_array=explode(':',$target);
-		if ($target_array[0]=='Datei') {
-				
-			$target_uri=$target_array[1];
-			$filetitle=Title::newFromText( $target_uri, NS_FILE );
-			$file = wfLocalFile($filetitle);
-			$imagepath=$file->getLocalRefPath();
-				
-			$imagewidth='150';
-			if (array_key_exists('part', $childs)) {
-				$part=$childs['part'];
-				$part_array=explode('px',$part);
-				if (count($part_array)==2) {
-					$px=trim($part_array[0]);
-					$mm=round(0.214*intval($px),0);
-					$imagewidth=$mm;
-				}
-			} else {
-			    $size=getimagesize($imagepath);
-				$width=0.214*intval($size[0]);
-				if ($width>150) {
-					$imagewidth='150';
-				} else {
-					$imagewidth=round($width,0);
-				}				
-			}				
-			//$input_value=print_r($childs,true);
-			$return =  $imagewidth;
-				
-		} else {
-			// internal Link
-			if (!array_key_exists('text', $childs)) {
-				$childs['text']=$target;
-			}
-			if (!array_key_exists('href', $childs)) {
-				$childs['href']=$target;
-			}
-			$return= '150' ;
+		//$input_value=print_r($input_object->tagName,true);
+	
+		if ($input_object->hasAttribute('type')) {
+			$childs['type']=$input_object->getAttribute('type');
 		}
-
-
-
+		if ($input_object->hasAttribute('href')) {
+			$childs['href']=$input_object->getAttribute('href');
+		}
+	
+		$link_childs=$input_object->childNodes;
+		$num_childs=$link_childs->length;
+	
+		for ($i = 0; $i < $num_childs; $i++) {
+			$child=$link_childs->item($i);
+			$child_name=$child->tagName;
+			if ($child_name=='') {$child_name='text';}
+			$child_value=$child->textContent;
+			$childs[$child_name]=$child_value;
+		}
+	
+	
+		if ($childs['type']=='external') {
+			$return =  '150' ;
+		} else {
+			$target=$childs['target'];
+			$target_array=explode(':',$target);
+			if ($target_array[0]=='Datei') {
+					
+				$target_uri=$target_array[1];
+				$filetitle=Title::newFromText( $target_uri, NS_FILE );
+				$file = wfLocalFile($filetitle);
+				$imagepath=$file->getLocalRefPath();
+					
+				$imagewidth='150';
+				if (array_key_exists('part', $childs)) {
+					$part=$childs['part'];
+					$part_array=explode('px',$part);
+					if (count($part_array)==2) {
+						$px=trim($part_array[0]);
+						$mm=round(0.214*intval($px),0);
+						$imagewidth=$mm;
+					}
+				} else {
+				    $size=getimagesize($imagepath);
+					$width=0.214*intval($size[0]);
+					if ($width>150) {
+						$imagewidth='150';
+					} else {
+						$imagewidth=round($width,0);
+					}				
+				}				
+				//$input_value=print_r($childs,true);
+				$return =  $imagewidth;
+					
+			} else {
+				// internal Link
+				if (!array_key_exists('text', $childs)) {
+					$childs['text']=$target;
+				}
+				if (!array_key_exists('href', $childs)) {
+					$childs['href']=$target;
+				}
+				$return= '150' ;
+			}
+	
+	
+	
+		}
+	
+		return $return;
+		
+	}else{
+		
+		// input is non-object
+		
 	}
-
-	return $return;
+	
 }
 
 
@@ -565,7 +575,7 @@ class SpecialLoopPrintversion extends SpecialPage {
 		} catch (Exception $e) {
 			var_dump($e);
 		}
-
+		
 		#var_dump($xmlfo);
 		#exit;
 		
