@@ -205,9 +205,12 @@ class SpecialLoopMedia extends SpecialPage {
 		$a_lo = $a->structureIndex;
 		$a_p = $a->structureSequence;
 		$a_io = $a->structureIndexOrder;
+		$a_t = $a->title;
+		
 		$b_lo = $b->structureIndex;
 		$b_p = $b->structureSequence;
 		$b_io = $b->structureIndexOrder;
+		$b_t = $b->title;
 
 		if ($a_io > $b_io) {
 			$return = +1;
@@ -224,7 +227,15 @@ class SpecialLoopMedia extends SpecialPage {
 				} else if ($a_p < $b_p) {
 					$return = -1;
 				} else {
-					$return=0;
+					if($a_t > $b_t) {
+						$return = +1;
+					} else if ($a_t < $b_t) {
+						$return = -1;
+					} else {
+					
+						$return=0;
+						
+					}
 				}
 			}
 		}
