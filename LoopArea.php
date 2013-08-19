@@ -130,16 +130,16 @@ class LoopArea {
 					if ($this->icon) {
 						$image='[[Image:'.$this->icon.']]';
 						$output = $wgParser->recursiveTagParse($image);
-            $pattern = '$<img(.*)(?=</a>)$';
+            			$pattern = '$<img(.*)(?=</a>)$';
 						preg_match($pattern, $output, $matches);
 						
 						//$return.= '<!-- '.print_r($matches,true).' -->';
-            if (isset($matches[0])) {
-              $return.= $matches[0];
+			            if (isset($matches[0])) {
+			            	$return.= $matches[0];
 						} else {
-              $return.= $output;
+							$return.= $output;
 						}
-						//$return.='<br/><span class="areatext">'.$this->icontext.'</span>';
+						$return.='<br/><span class="areatext">'.$this->icontext.'</span>';
 						$return.='<div class="areafix"></div>';
 					}
 				} else {
