@@ -697,9 +697,9 @@ class SpecialLoopPrintversion extends SpecialPage {
 
 		// Datei Praefix nach LOOP Sprache editieren
 		if($lang == "de")
-			$xml = str_replace(">file:",">Datei:",$xml);
+			$xml = str_replace(array(">file:", ">File:", ">datei:"), ">Datei:", $xml);
 		elseif($lang == "en")
-			$xml = str_replace(">Datei:",">file:",$xml);
+			$xml = str_replace(array(">datei:", ">Datei:", ">File:"), ">file:", $xml);
 
 		//$qrFile = $IP."/tmp/".$tmp_name."_qr.png";
 		$qrFile = sys_get_temp_dir().'/'.$tmp_name."_qr.png";
