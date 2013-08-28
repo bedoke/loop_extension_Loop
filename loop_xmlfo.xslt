@@ -1245,8 +1245,14 @@
 			</xsl:when>
 			<xsl:when test="@extension_name='loop_print'">
 				<fo:block>
+					<xsl:value-of select="$word_printversion_begin"></xsl:value-of>
+				</fo:block>
+				<fo:block>
 					<xsl:apply-templates></xsl:apply-templates>
 				</fo:block>
+				<fo:block>
+					<xsl:value-of select="$word_printversion_end"></xsl:value-of>
+				</fo:block>				
 			</xsl:when>			
 			<xsl:when test="@extension_name='quiz'">
 				<fo:block margin-top="10mm">

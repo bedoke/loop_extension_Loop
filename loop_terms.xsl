@@ -48,5 +48,9 @@
 	<xsl:variable name="word_looptable"  select="functx:get_term_name('word_looptable')" />
 	
 	<xsl:variable name="word_embed_video_notice"  select="functx:get_term_name('word_embed_video_notice')" />
+
+	<xsl:variable name="word_printversion_begin"  select="functx:get_term_name('word_printversion_begin')" />
+	<xsl:variable name="word_printversion_end"  select="functx:get_term_name('word_printversion_end')" />
+
 	
 </xsl:stylesheet>
