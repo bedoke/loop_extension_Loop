@@ -1086,7 +1086,22 @@
 			</xsl:when>
 			<xsl:when test="@extension_name='loop_figure_description'">
 				<!-- <fo:block><xsl:apply-templates></xsl:apply-templates></fo:block> -->
-			</xsl:when>						
+			</xsl:when>	
+			<xsl:when test="@extension_name='spoiler'">
+				<xsl:choose>
+					<xsl:when test="@text">
+						<fo:block font-weight="bold">
+							<xsl:value-of select="@text"></xsl:value-of>
+						</fo:block>
+					</xsl:when>
+					<xsl:otherwise>
+						<fo:block font-weight="bold">
+							<xsl:value-of select="$word_spoiler_defaulttitle"></xsl:value-of>
+						</fo:block>
+					</xsl:otherwise>
+				</xsl:choose>
+				<fo:block><xsl:apply-templates></xsl:apply-templates></fo:block>
+			</xsl:when>								
 			<xsl:when test="@extension_name='loop_figure'">
 				<xsl:apply-templates></xsl:apply-templates>
 					<xsl:variable name="figurewidth"><xsl:value-of select="php:function('xslt_figure_width', descendant::link[1])"></xsl:value-of></xsl:variable>			

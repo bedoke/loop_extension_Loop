@@ -52,5 +52,7 @@
 	<xsl:variable name="word_printversion_begin"  select="functx:get_term_name('word_printversion_begin')" />
 	<xsl:variable name="word_printversion_end"  select="functx:get_term_name('word_printversion_end')" />
 
+	<xsl:variable name="word_spoiler_defaulttitle"  select="functx:get_term_name('word_spoiler_defaulttitle')" />
+
 	
 </xsl:stylesheet>
