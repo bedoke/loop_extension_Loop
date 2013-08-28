@@ -225,7 +225,7 @@
 			<xsl:value-of select="$word_bibliography"></xsl:value-of>
 		</fo:block>
 		<fo:block>
-			<xsl:apply-templates select="php:function('get_biblio', '')"></xsl:apply-templates>
+			<xsl:apply-templates select="php:function('get_biblio', '')" mode="biblio"></xsl:apply-templates>
 		</fo:block>
 	</xsl:template>		
 
@@ -1852,46 +1852,20 @@
 			<xsl:apply-templates></xsl:apply-templates>
 		</fo:list-block>
 	</xsl:template>
-	
-	<xsl:template match="li">
-		<fo:list-item>
-			<fo:list-item-label end-indent="label-end()">
-				<fo:block padding-left="-20mm">
-					<xsl:apply-templates select="preblock" mode="biblio_label"></xsl:apply-templates>
-				</fo:block>
-			</fo:list-item-label>
-			<fo:list-item-body start-indent="body-start()">
-				<fo:block>
-					<xsl:apply-templates select="." mode="biblio_entry"></xsl:apply-templates>
-				</fo:block>
-			</fo:list-item-body>
-		</fo:list-item>
-	</xsl:template>	
 
-	<xsl:template match="preblock" mode="biblio_label">
-		<xsl:apply-templates mode="biblio_label"></xsl:apply-templates>
-	</xsl:template>
-	<xsl:template match="preblock" mode="biblio_entry">
-		<xsl:apply-templates mode="biblio_entry"></xsl:apply-templates>
-	</xsl:template>
-	<xsl:template match="preline" mode="biblio_label">
-		<xsl:value-of select="span"></xsl:value-of>
-	</xsl:template>
-	<xsl:template match="preline" mode="biblio_entry">
-		<xsl:apply-templates mode="biblio_entry"></xsl:apply-templates>
-	</xsl:template>
-	
-	
-	<xsl:template match="span" mode="biblio_entry">
-	</xsl:template>
-	
-	<xsl:template match="i" mode="biblio_entry">
-		<fo:inline font-style="italic">
+	<xsl:template match="ul">
+		<fo:list-block
+			start-indent="inherited-property-value(&apos;start-indent&apos;) + 2mm"
+			provisional-distance-between-starts="8mm"
+			provisional-label-separation="2mm" space-before="4pt" space-after="4pt"
+			display-align="before">
 			<xsl:apply-templates></xsl:apply-templates>
-		</fo:inline>
+		</fo:list-block>
 	</xsl:template>	
 	
-	<xsl:template match="extension" mode="biblio_entry">
+	
+	
+	<xsl:template match="extension" mode="biblio">
 		<xsl:if test="@href">
 					<fo:basic-link>
 			<xsl:attribute name="external-destination"><xsl:value-of select="@href"></xsl:value-of></xsl:attribute>
@@ -1906,9 +1880,98 @@
 		</fo:basic-link>	
 		</xsl:if>
 	</xsl:template>	
+
+
+	<xsl:template match="span" mode="biblio_key">
+		<xsl:choose>
+			<xsl:when test="@class='bibkey'">
+				<fo:inline font-weight="bold"><xsl:apply-templates select="." ></xsl:apply-templates></fo:inline>
+			</xsl:when>
+			<xsl:otherwise>
+				
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+
+
+	<xsl:template match="span" mode="biblio">
+		<xsl:choose>
+			<xsl:when test="@class='bibkey'">
+				
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:apply-templates select="." ></xsl:apply-templates>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+
+	<xsl:template match="span" mode="biblio_entry">
+		<xsl:choose>
+			<xsl:when test="@class='bibkey'">
+				
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:apply-templates select="." ></xsl:apply-templates>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>	
+
+
+	<xsl:template match="ul" mode="biblio">
+		<fo:list-block provisional-label-separation="4mm" provisional-distance-between-starts="50mm">
+			<xsl:apply-templates  mode="biblio"></xsl:apply-templates>
+		</fo:list-block>
+	</xsl:template>
+
+	<xsl:template match="li" mode="biblio">
+		<fo:list-item space-before="4pt">
+			<fo:list-item-label end-indent="120mm">
+				<fo:block font-weight="bold" wrap-option="wrap">
+					<xsl:value-of select="descendant::span[@class='bibkey']"></xsl:value-of>
+					<!-- <xsl:apply-templates select="span" mode="biblio_key"></xsl:apply-templates> -->
+				</fo:block>
+			</fo:list-item-label>
+			<fo:list-item-body   start-indent="body-start()">
+				<fo:block>
+					<xsl:apply-templates select="." mode="biblio_entry"></xsl:apply-templates>
+				</fo:block>
+			</fo:list-item-body>
+		</fo:list-item>
+	</xsl:template>
+
+
+
+
+
+
 	<xsl:template match="space" mode="biblio_entry">
 		<xsl:text> </xsl:text>
 	</xsl:template>	
+
+
+	<xsl:template match="i" mode="biblio_entry">
+		<fo:inline font-style="italic">
+			<xsl:apply-templates mode="biblio_entry"></xsl:apply-templates>
+		</fo:inline>
+	</xsl:template>	
+
+	<xsl:template match="b" mode="biblio_entry">
+		<fo:inline font-weight="bold">
+			<xsl:apply-templates mode="biblio_entry"></xsl:apply-templates>
+		</fo:inline>
+	</xsl:template>	
+
+	<xsl:template match="preblock" mode="biblio_entry">
+		<xsl:apply-templates mode="biblio_entry"></xsl:apply-templates>
+	</xsl:template>
+	<xsl:template match="preline" mode="biblio_entry">
+		<xsl:apply-templates mode="biblio_entry"></xsl:apply-templates>
+	</xsl:template>
+
+	<xsl:template match="div" mode="biblio_entry">
+		<xsl:apply-templates mode="biblio_entry"></xsl:apply-templates>
+	</xsl:template>	
+
 
 	<xsl:template match="preblock" >
 		<xsl:apply-templates></xsl:apply-templates>

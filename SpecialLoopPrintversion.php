@@ -6,7 +6,7 @@ global $IP;
 require_once ($IP."/extensions/wiki2xml/mediawiki_converter.php");
 require_once ($IP."/extensions/Math/Math.body.php");
 require_once ($IP."/extensions/Loop/phpqrcode/phpqrcode.php");
-require_once ($IP."/extensions/Biblio.php");
+require_once ($IP."/extensions/BiblioPlus/BiblioPlus.php");
 
 
 
@@ -476,7 +476,7 @@ function get_biblio() {
 	
 	if (!$wikitext=='') {
 
-		$lbib=new Biblio();
+		$lbib=new BiblioPlus();
 
 		$parser = new Parser( $wgParserConf );
 		$parserOptions = ParserOptions::newFromUser( $wgUser );
@@ -497,10 +497,13 @@ function get_biblio() {
 		if (count($matches)>0) {
 			$b=array_pop($matches);
 			$bibtext=$b[1];
-			$test=$lbib->render_biblio($bibtext,$parser_data ,true);
+			$test=$lbib->render_biblio($bibtext,$parser_data ,true,true);
 			$return_xml =  trim($test);
 			$converter = new MediaWikiConverter ;
 			$articlexml=$converter->article2xml ( $bibliopagename, $return_xml  );
+
+wfDebug( __METHOD__ . ': articlexml : '.print_r($articlexml,true)."\n");	
+
 			$return_doc = new DOMDocument;
 			$return_doc->loadXml($articlexml);
 		}
@@ -511,6 +514,7 @@ function get_biblio() {
 		$return_doc->loadXml('<i></i>');
 	}
 	
+wfDebug( __METHOD__ . ': return_doc : '.print_r($return_doc->saveXML(),true)."\n");	
 	return $return_doc;
 }
 
