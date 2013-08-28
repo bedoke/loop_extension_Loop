@@ -1390,7 +1390,7 @@
 	</xsl:template>
 	
 	<xsl:template match="page">
-		<fo:block>
+		<fo:block text-align="left">
 			<xsl:value-of select="@tocnumber"></xsl:value-of>
 			<xsl:text> </xsl:text>
 			<fo:basic-link text-decoration="underline">
