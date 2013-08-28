@@ -474,7 +474,7 @@ class LoopStructure {
 							if ($ta==$thisid) {$return.='class="jstree-selected"';}
 							
 							if (strlen($tempTitle->mTextform)>20) {
-								$t=substr($tempTitle->mTextform,0,20).'...';
+								$t=mb_substr($tempTitle->mTextform,0,20).'...';
 							} else {
 								$t=$tempTitle->mTextform;
 							}
