@@ -71,7 +71,7 @@
 	<msg name="word_embed_video_notice" lang="en">Link to video</msg>
 	<msg name="word_embed_video_notice" lang="de">Link zum Video</msg>
 
-	<msg name="word_printversion_begin" lang="en">Begin printerversion</msg>
+	<msg name="word_printversion_begin" lang="en">Begin printversion</msg>
 	<msg name="word_printversion_begin" lang="de">Anfang Druckversion</msg>
 	<msg name="word_printversion_end" lang="en">End printversion</msg>
 	<msg name="word_printversion_end" lang="de">Ende Druckversion</msg>
