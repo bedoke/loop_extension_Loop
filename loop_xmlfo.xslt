@@ -1268,7 +1268,10 @@
 				<fo:block>
 					<xsl:value-of select="$word_printversion_end"></xsl:value-of>
 				</fo:block>				
-			</xsl:when>			
+			</xsl:when>
+			<xsl:when test="@extension_name='loop_noprint'">
+				<fo:block></fo:block>				
+			</xsl:when>						
 			<xsl:when test="@extension_name='quiz'">
 				<fo:block margin-top="10mm">
 					<xsl:value-of select="$word_quiz_notice"></xsl:value-of>

@@ -85,6 +85,7 @@ $wgAutoloadClasses['LoopStructureItem'] = $dir . 'LoopStructure.php';
 $wgAutoloadClasses['LoopArea'] = $dir . 'LoopArea.php';
 $wgAutoloadClasses['SpecialLoopToc'] = $dir . 'SpecialLoopToc.php';
 $wgAutoloadClasses['LoopPrint'] = $dir . 'LoopPrint.php';
+$wgAutoloadClasses['LoopNoprint'] = $dir . 'LoopNoprint.php';
 
 $wgAutoloadClasses['SpecialLoopIndex'] = $dir . 'SpecialLoopIndex.php';
 
@@ -143,6 +144,7 @@ function loopInit( Parser &$parser ) {
 	$parser->setHook( 'loop_area', 'fnRenderLoopArea' );
 	$parser->setHook( 'loop_toc', 'fnRenderLoopToc' );
 	$parser->setHook( 'loop_print', 'fnRenderLoopPrint' );
+	$parser->setHook( 'loop_noprint', 'fnRenderLoopNoprint' );
 
 	$parser->setFunctionHook('header', 'fnLoopHeaderRender');
 
@@ -203,6 +205,11 @@ function fnRenderLoopArea($input, array $args, Parser $parser, PPFrame $frame) {
 function fnRenderLoopPrint($input, array $args, Parser $parser, PPFrame $frame) {
 	$printarea = new LoopPrint($input,$args);
 	return $printarea->render();
+}
+
+function fnRenderLoopNoprint($input, array $args, Parser $parser, PPFrame $frame) {
+	$noprintarea = new LoopNoprint($input,$args);
+	return $noprintarea->render();
 }
 
 
