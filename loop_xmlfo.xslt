@@ -1375,7 +1375,18 @@
 </xsl:template>
 
     <xsl:template match="tablecell">
-        <fo:table-cell padding="3pt" border-style="solid" border-width="0.5pt" border-color="black" border-collapse="collapse">
+        <fo:table-cell>
+        	<xsl:attribute name="padding">3pt</xsl:attribute>
+        	<xsl:attribute name="border-style">solid</xsl:attribute>
+        	<xsl:attribute name="border-width">0.5pt</xsl:attribute>
+        	<xsl:attribute name="border-color">black</xsl:attribute>
+        	<xsl:attribute name="border-collapse">collapse</xsl:attribute>
+        	<xsl:if test="@colspan">
+				<xsl:attribute name="number-columns-spanned"><xsl:value-of select="@colspan"></xsl:value-of></xsl:attribute>
+        	</xsl:if>
+        	<xsl:if test="@rowspan">
+				<xsl:attribute name="number-rows-spanned"><xsl:value-of select="@rowspan"></xsl:value-of></xsl:attribute>
+        	</xsl:if>        	                	
         	<fo:block>
         		<xsl:apply-templates></xsl:apply-templates>
         	</fo:block>
@@ -1383,7 +1394,18 @@
     </xsl:template>
 
     <xsl:template match="tablehead">
-        <fo:table-cell padding="3pt" border-style="solid" border-width="0.5pt" border-color="black" border-collapse="collapse">
+        <fo:table-cell>
+        	<xsl:attribute name="padding">3pt</xsl:attribute>
+        	<xsl:attribute name="border-style">solid</xsl:attribute>
+        	<xsl:attribute name="border-width">0.5pt</xsl:attribute>
+        	<xsl:attribute name="border-color">black</xsl:attribute>
+        	<xsl:attribute name="border-collapse">collapse</xsl:attribute>
+        	<xsl:if test="@colspan">
+				<xsl:attribute name="number-columns-spanned"><xsl:value-of select="@colspan"></xsl:value-of></xsl:attribute>
+        	</xsl:if>
+        	<xsl:if test="@rowspan">
+				<xsl:attribute name="number-rows-spanned"><xsl:value-of select="@rowspan"></xsl:value-of></xsl:attribute>
+        	</xsl:if>        	           	        	
         	<fo:block font-weight="bold">
         		<xsl:apply-templates></xsl:apply-templates>
         	</fo:block>
