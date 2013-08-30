@@ -1158,6 +1158,9 @@
 				</fo:table>				
 			</xsl:when>
 			<xsl:when test="@extension_name='loop_task'">
+				<xsl:if test="@title">
+					<fo:block font-weight="bold"><xsl:value-of select="@title"></xsl:value-of></fo:block>
+				</xsl:if>
 				<xsl:apply-templates></xsl:apply-templates>
 			</xsl:when>
 			<xsl:when test="@extension_name='loop_table'">
