@@ -14,6 +14,7 @@ function escapexml($text) {
 	$text = str_replace('&', '&amp;', $text);
 	$text = str_replace('<', '&lt;', $text);
 	$text = str_replace('>', '&gt;', $text);
+	$text = str_replace('"', '&quot;', $text);
 	return $text;
 }
 
