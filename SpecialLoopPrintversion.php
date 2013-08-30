@@ -189,7 +189,7 @@ function xslt_transform_link($input) {
 	} else {
 		$target=$childs['target'];
 		$target_array=explode(':',$target);
-		if (($target_array[0]=='Datei')||($target_array[0]=='File')||($target_array[0]=='Bild')||($target_array[0]=='Image')) {
+		if (($target_array[0]=='Datei')||($target_array[0]=='File')||($target_array[0]=='Bild')||($target_array[0]=='Image')||($target_array[0]=='file')) {
 				
 			$target_uri=$target_array[1];
 			$filetitle=Title::newFromText( $target_uri, NS_FILE );
@@ -282,7 +282,7 @@ function xslt_figure_width($input) {
 		} else {
 			$target=$childs['target'];
 			$target_array=explode(':',$target);
-			if ($target_array[0]=='Datei') {
+			if (($target_array[0]=='Datei')||($target_array[0]=='File')||($target_array[0]=='Bild')||($target_array[0]=='Image')||($target_array[0]=='file')) {
 					
 				$target_uri=$target_array[1];
 				$filetitle=Title::newFromText( $target_uri, NS_FILE );
@@ -346,7 +346,7 @@ function xslt_linktype($input) {
 		if (count($input_array)==2) {
 			$target_type=trim($input_array[0]);
 			$target_uri=trim($input_array[1]);
-			if ($target_type=='Datei') {
+			if (($target_type=='Datei')||($target_type=='File')||($target_type=='Bild')||($target_type=='Image')||($target_type=='file')) {
 				$linktype='Datei';
 			}
 		}
@@ -420,7 +420,7 @@ function targetPath($input) {
 			$target_type=trim($input_array[0]);
 			$target_uri=trim($input_array[1]);
 				
-			if (($target_type=='Datei')||($target_type=='File')) {
+			if (($target_type=='Datei')||($target_type=='File')||($target_type=='Bild')||($target_type=='Image')||($target_type=='file')) {
 
 				$filetitle=Title::newFromText( $target_uri, NS_FILE );
 				$file = wfLocalFile($filetitle);
