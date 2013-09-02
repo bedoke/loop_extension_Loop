@@ -460,7 +460,35 @@
 				<fo:basic-link >
 					<xsl:attribute name="internal-destination"><xsl:value-of select="generate-id()"></xsl:value-of></xsl:attribute>
 					<fo:block>
+						<!--
 						<fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="8mm" src="/opt/www/loop.oncampus.de/mediawiki/skins/loop/images/media/type_video.png"></fo:external-graphic>
+					-->
+									<xsl:choose>
+										<xsl:when test="@type='animation'">
+											<fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="8mm" src="/opt/www/loop.oncampus.de/mediawiki/skins/loop/images/media/type_animation.png"></fo:external-graphic>
+										</xsl:when>
+										<xsl:when test="@type='audio'">
+											<fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="8mm" src="/opt/www/loop.oncampus.de/mediawiki/skins/loop/images/media/type_audio.png"></fo:external-graphic>
+										</xsl:when>
+										<xsl:when test="@type='click'">
+											<fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="8mm" src="/opt/www/loop.oncampus.de/mediawiki/skins/loop/images/media/type_click.png"></fo:external-graphic>
+										</xsl:when>
+										<xsl:when test="@type='dragdrop'">
+											<fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="8mm" src="/opt/www/loop.oncampus.de/mediawiki/skins/loop/images/media/type_dragdrop.png"></fo:external-graphic>
+										</xsl:when>
+										<xsl:when test="@type='rollover'">
+											<fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="8mm" src="/opt/www/loop.oncampus.de/mediawiki/skins/loop/images/media/type_rollover.png"></fo:external-graphic>
+										</xsl:when>
+										<xsl:when test="@type='simulation'">
+											<fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="8mm" src="/opt/www/loop.oncampus.de/mediawiki/skins/loop/images/media/type_simulation.png"></fo:external-graphic>
+										</xsl:when>
+										<xsl:when test="@type='video'">
+											<fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="8mm" src="/opt/www/loop.oncampus.de/mediawiki/skins/loop/images/media/type_video.png"></fo:external-graphic>
+										</xsl:when>
+										<xsl:otherwise>
+											<fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="8mm" src="/opt/www/loop.oncampus.de/mediawiki/skins/loop/images/media/type_media.png"></fo:external-graphic>
+										</xsl:otherwise>
+									</xsl:choose>						
 					</fo:block>
 				</fo:basic-link>
 				</fo:block>
@@ -1194,14 +1222,68 @@
 						<fo:table-row>
 							<fo:table-cell  number-columns-spanned="1" width="10mm">
 								<fo:block>
-									<fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="8mm" src="/opt/www/loop.oncampus.de/mediawiki/skins/loop/images/media/type_video.png"></fo:external-graphic>
+
+									<xsl:choose>
+										<xsl:when test="@type='animation'">
+											<fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="8mm" src="/opt/www/loop.oncampus.de/mediawiki/skins/loop/images/media/type_animation.png"></fo:external-graphic>
+										</xsl:when>
+										<xsl:when test="@type='audio'">
+											<fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="8mm" src="/opt/www/loop.oncampus.de/mediawiki/skins/loop/images/media/type_audio.png"></fo:external-graphic>
+										</xsl:when>
+										<xsl:when test="@type='click'">
+											<fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="8mm" src="/opt/www/loop.oncampus.de/mediawiki/skins/loop/images/media/type_click.png"></fo:external-graphic>
+										</xsl:when>
+										<xsl:when test="@type='dragdrop'">
+											<fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="8mm" src="/opt/www/loop.oncampus.de/mediawiki/skins/loop/images/media/type_dragdrop.png"></fo:external-graphic>
+										</xsl:when>
+										<xsl:when test="@type='rollover'">
+											<fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="8mm" src="/opt/www/loop.oncampus.de/mediawiki/skins/loop/images/media/type_rollover.png"></fo:external-graphic>
+										</xsl:when>
+										<xsl:when test="@type='simulation'">
+											<fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="8mm" src="/opt/www/loop.oncampus.de/mediawiki/skins/loop/images/media/type_simulation.png"></fo:external-graphic>
+										</xsl:when>
+										<xsl:when test="@type='video'">
+											<fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="8mm" src="/opt/www/loop.oncampus.de/mediawiki/skins/loop/images/media/type_video.png"></fo:external-graphic>
+										</xsl:when>
+										<xsl:otherwise>
+											<fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="8mm" src="/opt/www/loop.oncampus.de/mediawiki/skins/loop/images/media/type_media.png"></fo:external-graphic>
+										</xsl:otherwise>
+									</xsl:choose>	
+
+									
 								</fo:block>
 							</fo:table-cell>
 							<fo:table-cell  number-columns-spanned="1">
 								<xsl:attribute name="width">140mm</xsl:attribute>
 								<fo:block>
 									<fo:block>
-										<xsl:value-of select="$word_loopmedia_notice"></xsl:value-of>
+										<xsl:choose>
+											<xsl:when test="@type='animation'">
+												<xsl:value-of select="$word_loopmedia_notice_animation"></xsl:value-of>
+											</xsl:when>
+											<xsl:when test="@type='audio'">
+												<xsl:value-of select="$word_loopmedia_notice_audio"></xsl:value-of>
+											</xsl:when>
+											<xsl:when test="@type='click'">
+												<xsl:value-of select="$word_loopmedia_notice_click"></xsl:value-of>
+											</xsl:when>
+											<xsl:when test="@type='dragdrop'">
+												<xsl:value-of select="$word_loopmedia_notice_dragdrop"></xsl:value-of>
+											</xsl:when>
+											<xsl:when test="@type='rollover'">
+												<xsl:value-of select="$word_loopmedia_notice_rollover"></xsl:value-of>
+											</xsl:when>
+											<xsl:when test="@type='simulation'">
+												<xsl:value-of select="$word_loopmedia_notice_simulation"></xsl:value-of>
+											</xsl:when>
+											<xsl:when test="@type='video'">
+												<xsl:value-of select="$word_loopmedia_notice_video"></xsl:value-of>
+											</xsl:when>
+											<xsl:otherwise>
+												<xsl:value-of select="$word_loopmedia_notice"></xsl:value-of>
+											</xsl:otherwise>
+										</xsl:choose>	
+										
 									</fo:block>
 									<xsl:apply-templates></xsl:apply-templates>								
 									<xsl:if test="@title">

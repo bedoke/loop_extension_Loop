@@ -58,6 +58,21 @@
 	<msg name="word_loopmedia_notice" lang="en">In the online version an multimedia element is shown here.</msg>
 	<msg name="word_loopmedia_notice" lang="de">In der Online-Version befindet sich an dieser Stelle ein Multimedia-Element.</msg>
 
+	<msg name="word_loopmedia_notice_animation" lang="en">In the online version an animation is shown here.</msg>
+	<msg name="word_loopmedia_notice_animation" lang="de">In der Online-Version befindet sich an dieser Stelle eine Animation.</msg>
+	<msg name="word_loopmedia_notice_audio" lang="en">In the online version an audio element is shown here.</msg>
+	<msg name="word_loopmedia_notice_audio" lang="de">In der Online-Version befindet sich an dieser Stelle ein Audio-Element.</msg>
+	<msg name="word_loopmedia_notice_click" lang="en">In the online version an click animation is shown here.</msg>
+	<msg name="word_loopmedia_notice_click" lang="de">In der Online-Version befindet sich an dieser Stelle eine Klick-Animation.</msg>		
+	<msg name="word_loopmedia_notice_dragdrop" lang="en">In the online version an drag and drop element is shown here.</msg>
+	<msg name="word_loopmedia_notice_dragdrop" lang="de">In der Online-Version befindet sich an dieser Stelle ein Drag-and-drop-Element.</msg>
+	<msg name="word_loopmedia_notice_rollover" lang="en">In the online version an rollover element is shown here.</msg>
+	<msg name="word_loopmedia_notice_rollover" lang="de">In der Online-Version befindet sich an dieser Stelle ein Rollover-Element.</msg>
+	<msg name="word_loopmedia_notice_simulation" lang="en">In the online version an simulation is shown here.</msg>
+	<msg name="word_loopmedia_notice_simulation" lang="de">In der Online-Version befindet sich an dieser Stelle eine Simulation.</msg>
+	<msg name="word_loopmedia_notice_video" lang="en">In the online version an video is shown here.</msg>
+	<msg name="word_loopmedia_notice_video" lang="de">In der Online-Version befindet sich an dieser Stelle ein Video.</msg>
+
 	<msg name="word_quiz_notice" lang="en">In the online version an interactive Test is shown here.</msg>
 	<msg name="word_quiz_notice" lang="de">In der Online-Version befindet sich an dieser Stelle ein interaktiver Test.</msg>
 	

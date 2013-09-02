@@ -40,6 +40,14 @@
 	<xsl:variable name="word_looparea_indentation"  select="functx:get_term_name('word_looparea_indentation')" />
 	<xsl:variable name="word_looparea_norm"  select="functx:get_term_name('word_looparea_norm')" />
 	<xsl:variable name="word_loopmedia_notice"  select="functx:get_term_name('word_loopmedia_notice')" />
+
+	<xsl:variable name="word_loopmedia_notice_animation"  select="functx:get_term_name('word_loopmedia_notice_animation')" />
+	<xsl:variable name="word_loopmedia_notice_audio"  select="functx:get_term_name('word_loopmedia_notice_audio')" />
+	<xsl:variable name="word_loopmedia_notice_click"  select="functx:get_term_name('word_loopmedia_notice_click')" />
+	<xsl:variable name="word_loopmedia_notice_dragdrop"  select="functx:get_term_name('word_loopmedia_notice_dragdrop')" />
+	<xsl:variable name="word_loopmedia_notice_rollover"  select="functx:get_term_name('word_loopmedia_notice_rollover')" />
+	<xsl:variable name="word_loopmedia_notice_simulation"  select="functx:get_term_name('word_loopmedia_notice_simulation')" />
+	<xsl:variable name="word_loopmedia_notice_video"  select="functx:get_term_name('word_loopmedia_notice_video')" />
 	
 	<xsl:variable name="word_quiz_notice"  select="functx:get_term_name('word_quiz_notice')" />
 	
