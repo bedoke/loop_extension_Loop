@@ -24,6 +24,7 @@ class LoopFigure {
 	var $structureIndexOrder=0;
 	var $structureSequence=0;
 	var $pageTocNumber=0;
+	var $posOnPage=0;
 
 	var $render_options=array('none','icon','marked','default');
 
@@ -205,6 +206,7 @@ class LoopFigure {
 	function setStructureIndexOrder($structureIndexOrder)	{ $this->structureIndexOrder=$structureIndexOrder; return true; }
 	function setStructureSequence($structureSequence)	{ $this->structureSequence=$structureSequence; return true; }
 	function setPageTocnumber($pageTocNumber)	{ $this->pageTocNumber=$pageTocNumber; return true; }
+	function setPosOnPage($posOnPage)	{ $this->posOnPage=$posOnPage; return true; }
 
 	public function render() {
 		global $wgStylePath, $wgParser;

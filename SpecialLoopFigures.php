@@ -131,6 +131,7 @@ class SpecialLoopFigures extends SpecialPage {
 			
 			//wfDebug( __METHOD__ . ': name : '.print_r($matches,true));	
 			
+			$posOnPage=0;
 			foreach ($matches as $match) {
 				//var_dump($match);
 				if ($match[0]=='loop_figure') {
@@ -144,9 +145,11 @@ class SpecialLoopFigures extends SpecialPage {
 				$specialfigure->setStructureIndex($structure_index);
 				$specialfigure->setStructureIndexOrder($structure_index_order);
 				$specialfigure->setPageTocNumber($page_toc_number);
+				$specialfigure->setPosOnPage($posOnPage);
 
 				// var_dump($specialfigure);
 				$specialfigures[]=$specialfigure;
+				$posOnPage++;
 				}				
 			}
 				
@@ -219,9 +222,11 @@ class SpecialLoopFigures extends SpecialPage {
 		$a_lo = $a->structureIndex;
 		$a_p = $a->structureSequence;
 		$a_io = $a->structureIndexOrder;
+		$a_pop = $a->posOnPage;
 		$b_lo = $b->structureIndex;
 		$b_p = $b->structureSequence;
 		$b_io = $b->structureIndexOrder;
+		$b_pop = $b->posOnPage;
 
 		if ($a_io > $b_io) {
 			$return = +1;
@@ -238,7 +243,13 @@ class SpecialLoopFigures extends SpecialPage {
 				} else if ($a_p < $b_p) {
 					$return = -1;
 				} else {
-					$return=0;
+					if ($a_pop > $b_pop) {
+						$return = +1;
+					} else if ($a_pop < $b_pop) {
+						$return = -1;
+					} else {
+						$return=0;
+					}
 				}
 			}
 		}
