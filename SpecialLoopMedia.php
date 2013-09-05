@@ -177,7 +177,7 @@ class SpecialLoopMedia extends SpecialPage {
 				$return.='</td>';
 				$return.='<td>';
 				$return.='<div class="loop_media_index_title">'.$media->title.'</div>';
-				$return.='<div class="loop_media_index_description">'.$media->description.'</div>';
+				//$return.='<div class="loop_media_index_description">'.$media->description.'</div>';
 				$return.='<div class="loop_media_index_link"><a href="'.$media->pageURL;
 				if ($media->title) {
 					$return.='#'.htmlentities(str_replace( ' ', '_', trim($media->title) ),ENT_QUOTES, "UTF-8");

@@ -182,7 +182,7 @@ class SpecialLoopTables extends SpecialPage {
 				$return.='</td>';
 				$return.='<td>';
 				$return.='<div class="loop_table_index_title">'.$table->title.'</div>';
-				$return.='<div class="loop_table_index_description">'.$table->description.'</div>';
+				//$return.='<div class="loop_table_index_description">'.$table->description.'</div>';
 				$return.='<div class="loop_table_index_link"><a href="'.$table->pageURL;
 				if ($table->title) {
 					$return.='#'.htmlentities(str_replace( ' ', '_', trim($table->title) ),ENT_QUOTES, "UTF-8");

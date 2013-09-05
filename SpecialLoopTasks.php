@@ -195,7 +195,7 @@ class SpecialLoopTasks extends SpecialPage {
 				$return.='</td>';
 				$return.='<td>';
 				$return.='<div class="loop_task_index_title">'.$task->title.'</div>';
-				$return.='<div class="loop_task_index_description">'.$task->description.'</div>';
+				//$return.='<div class="loop_task_index_description">'.$task->description.'</div>';
 				$return.='<div class="loop_task_index_link"><a href="'.$task->pageURL;
 				if ($task->title) {
 					$return.='#'.htmlentities(str_replace( ' ', '_', trim($task->title) ),ENT_QUOTES, "UTF-8");

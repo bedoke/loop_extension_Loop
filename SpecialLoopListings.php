@@ -182,7 +182,7 @@ class SpecialLoopListings extends SpecialPage {
 				$return.='</td>';
 				$return.='<td>';
 				$return.='<div class="loop_listing_index_title">'.$listing->title.'</div>';
-				$return.='<div class="loop_listing_index_description">'.$listing->description.'</div>';
+				//$return.='<div class="loop_listing_index_description">'.$listing->description.'</div>';
 				$return.='<div class="loop_listing_index_link"><a href="'.$listing->pageURL;
 				if ($listing->title) {
 					$return.='#'.htmlentities(str_replace( ' ', '_', trim($listing->title) ),ENT_QUOTES, "UTF-8");

@@ -182,7 +182,7 @@ class SpecialLoopFormulas extends SpecialPage {
 				$return.='</td>';
 				$return.='<td>';
 				$return.='<div class="loop_formula_index_title">'.$formula->title.'</div>';
-				$return.='<div class="loop_formula_index_description">'.$formula->description.'</div>';
+				//$return.='<div class="loop_formula_index_description">'.$formula->description.'</div>';
 				$return.='<div class="loop_formula_index_link"><a href="'.$formula->pageURL;
 				if ($formula->title) {
 					$return.='#'.htmlentities(str_replace( ' ', '_', trim($formula->title) ),ENT_QUOTES, "UTF-8");

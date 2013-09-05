@@ -195,7 +195,7 @@ class SpecialLoopFigures extends SpecialPage {
 				$parseroutput = $parser->parse($figure->description,$parsertitle,$parserOptions);
 				$output_description=$parseroutput->mText;				
 				$return.='<div class="loop_figure_index_title">'.$output_title.'</div>';
-				$return.='<div class="loop_figure_index_description">'.$output_description.'</div>';
+				//$return.='<div class="loop_figure_index_description">'.$output_description.'</div>';
 				$return.='<div class="loop_figure_index_link"><a href="'.$figure->pageURL;
 				if ($figure->title) {
 					$return.='#'.htmlentities(str_replace( ' ', '_', trim($figure->title) ),ENT_QUOTES, "UTF-8");
