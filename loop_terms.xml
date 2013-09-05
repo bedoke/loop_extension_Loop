@@ -62,8 +62,8 @@
 	<msg name="word_loopmedia_notice_animation" lang="de">In der Online-Version befindet sich an dieser Stelle eine Animation.</msg>
 	<msg name="word_loopmedia_notice_audio" lang="en">In the online version an audio element is shown here.</msg>
 	<msg name="word_loopmedia_notice_audio" lang="de">In der Online-Version befindet sich an dieser Stelle ein Audio-Element.</msg>
-	<msg name="word_loopmedia_notice_click" lang="en">In the online version an click animation is shown here.</msg>
-	<msg name="word_loopmedia_notice_click" lang="de">In der Online-Version befindet sich an dieser Stelle eine Klick-Animation.</msg>		
+	<msg name="word_loopmedia_notice_click" lang="en">In the online version an click interaction is shown here.</msg>
+	<msg name="word_loopmedia_notice_click" lang="de">In der Online-Version befindet sich an dieser Stelle eine Klick-Interaktion.</msg>		
 	<msg name="word_loopmedia_notice_dragdrop" lang="en">In the online version an drag and drop element is shown here.</msg>
 	<msg name="word_loopmedia_notice_dragdrop" lang="de">In der Online-Version befindet sich an dieser Stelle ein Drag-and-drop-Element.</msg>
 	<msg name="word_loopmedia_notice_rollover" lang="en">In the online version an rollover element is shown here.</msg>
