@@ -22,6 +22,7 @@ class LoopTable {
 	var $structureIndexOrder=0;
 	var $structureSequence=0;
 	var $pageTocNumber=0;
+	var $posOnPage=0;
 
 	var $render_options=array('none','icon','marked','default');
 	

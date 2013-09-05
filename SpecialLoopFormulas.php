@@ -137,6 +137,7 @@ class SpecialLoopFormulas extends SpecialPage {
 			$matches=array();
 			$parser->extractTagsAndParams( array('loop_formula') , $r_old_text, $matches);
 			//var_dump($matches);
+			$posOnPage=0;
 			foreach ($matches as $match) {
 				//var_dump($match);
 				$specialformula=new LoopFormula($match[1],$match[2]);
@@ -149,9 +150,11 @@ class SpecialLoopFormulas extends SpecialPage {
 				$specialformula->setStructureIndex($structure_index);
 				$specialformula->setStructureIndexOrder($structure_index_order);
 				$specialformula->setPageTocNumber($page_toc_number);
+				$specialformula->setPosOnPage($posOnPage);
 
 				// var_dump($specialformula);
 				$specialformulas[]=$specialformula;
+				$posOnPage++;
 			}
 
 		}
@@ -210,9 +213,11 @@ class SpecialLoopFormulas extends SpecialPage {
 		$a_lo = $a->structureIndex;
 		$a_p = $a->structureSequence;
 		$a_io = $a->structureIndexOrder;
+		$a_pop = $a->posOnPage;
 		$b_lo = $b->structureIndex;
 		$b_p = $b->structureSequence;
 		$b_io = $b->structureIndexOrder;
+		$b_pop = $b->posOnPage;
 
 		if ($a_io > $b_io) {
 			$return = +1;
@@ -229,7 +234,13 @@ class SpecialLoopFormulas extends SpecialPage {
 				} else if ($a_p < $b_p) {
 					$return = -1;
 				} else {
-					$return=0;
+					if ($a_pop > $b_pop) {
+						$return = +1;
+					} else if ($a_pop < $b_pop) {
+						$return = -1;
+					} else {
+						$return=0;
+					}
 				}
 			}
 		}

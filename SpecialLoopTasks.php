@@ -144,6 +144,7 @@ class SpecialLoopTasks extends SpecialPage {
 			//var_dump($matches);
 			//wfDebug( __METHOD__ . ': name : '.print_r($matches,true));	
 			$pageOrder=0;
+			$posOnPage=0;
 			foreach ($matches as $match) {
 				//var_dump($match);
 				//wfDebug( __METHOD__ . ': match : '.print_r($match,true));
@@ -159,12 +160,14 @@ class SpecialLoopTasks extends SpecialPage {
 				$specialtask->setStructureIndexOrder($structure_index_order);
 				$specialtask->setPageTocNumber($page_toc_number);
 				$specialtask->setPageOrder($pageOrder);
+				$specialtask->setPosOnPage($posOnPage);
 
 				 //var_dump($specialtask);
 				 #wfDebug( __METHOD__ . ': specialtask : '.print_r($specialtask,true));
 				
 				$specialtasks[]=$specialtask;
 				$pageOrder++;
+				$posOnPage++;
 			}
 
 		}
@@ -223,11 +226,11 @@ class SpecialLoopTasks extends SpecialPage {
 		$a_lo = $a->structureIndex;
 		$a_p = $a->structureSequence;
 		$a_io = $a->structureIndexOrder;
-		$a_po = $a->pageOrder;
+		$a_pop = $a->posOnPage;
 		$b_lo = $b->structureIndex;
 		$b_p = $b->structureSequence;
 		$b_io = $b->structureIndexOrder;
-		$b_po = $b->pageOrder;
+		$b_pop = $b->posOnPage;
 
 		if ($a_io > $b_io) {
 			$return = +1;
@@ -244,16 +247,16 @@ class SpecialLoopTasks extends SpecialPage {
 				} else if ($a_p < $b_p) {
 					$return = -1;
 				} else {
-					if ($a_po > $b_po) {
-						$return=+1;
-					} else if ($a_po < $b_po) {
-						$return=-1;
+					if ($a_pop > $b_pop) {
+						$return = +1;
+					} else if ($a_pop < $b_pop) {
+						$return = -1;
 					} else {
 						$return=0;
 					}
 				}
 			}
-		}
+		}	
 
 
 

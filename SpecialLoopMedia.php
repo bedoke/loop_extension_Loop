@@ -132,6 +132,7 @@ class SpecialLoopMedia extends SpecialPage {
 			$matches=array();
 			$parser->extractTagsAndParams( array('loop_media') , $r_old_text, $matches);
 			//var_dump($matches);
+			$posOnPage=0;
 			foreach ($matches as $match) {
 				//var_dump($match);
 				$specialmedia=new LoopMedia($match[1],$match[2]);
@@ -144,9 +145,11 @@ class SpecialLoopMedia extends SpecialPage {
 				$specialmedia->setStructureIndex($structure_index);
 				$specialmedia->setStructureIndexOrder($structure_index_order);
 				$specialmedia->setPageTocNumber($page_toc_number);
+				$specialmedia->setPosOnPage($posOnPage);
 
 				// var_dump($specialmedia);
 				$specialmedias[]=$specialmedia;
+				$posOnPage++;
 			}
 
 		}
@@ -205,12 +208,11 @@ class SpecialLoopMedia extends SpecialPage {
 		$a_lo = $a->structureIndex;
 		$a_p = $a->structureSequence;
 		$a_io = $a->structureIndexOrder;
-		$a_t = $a->title;
-		
+		$a_pop = $a->posOnPage;
 		$b_lo = $b->structureIndex;
 		$b_p = $b->structureSequence;
 		$b_io = $b->structureIndexOrder;
-		$b_t = $b->title;
+		$b_pop = $b->posOnPage;
 
 		if ($a_io > $b_io) {
 			$return = +1;
@@ -227,14 +229,12 @@ class SpecialLoopMedia extends SpecialPage {
 				} else if ($a_p < $b_p) {
 					$return = -1;
 				} else {
-					if($a_t > $b_t) {
+					if ($a_pop > $b_pop) {
 						$return = +1;
-					} else if ($a_t < $b_t) {
+					} else if ($a_pop < $b_pop) {
 						$return = -1;
 					} else {
-					
 						$return=0;
-						
 					}
 				}
 			}
