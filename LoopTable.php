@@ -75,6 +75,7 @@ class LoopTable {
 	function setStructureIndexOrder($structureIndexOrder)	{ $this->structureIndexOrder=$structureIndexOrder; return true; }
 	function setStructureSequence($structureSequence)	{ $this->structureSequence=$structureSequence; return true; }	
 	function setPageTocnumber($pageTocNumber)	{ $this->pageTocNumber=$pageTocNumber; return true; }	
+	function setPosOnPage($posOnPage)	{ $this->posOnPage=$posOnPage; return true; }
 	
 	function render() {
 		global $wgStylePath,  $wgParser;
