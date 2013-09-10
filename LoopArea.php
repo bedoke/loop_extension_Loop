@@ -161,7 +161,7 @@ class LoopArea {
 
 		$return.='</div>';
 
-		return array( $return, "markerType" => 'nowiki' );
+		return $return;
 	}
 
 }
