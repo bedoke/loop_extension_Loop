@@ -134,12 +134,14 @@ class LoopArea {
 						preg_match($pattern, $output, $matches);
 						
 						//$return.= '<!-- '.print_r($matches,true).' -->';
+						$return.= '<div class="loop_areaicon_custom">';
 			            if (isset($matches[0])) {
 			            	$return.= $matches[0];
 						} else {
 							$return.= $output;
 						}
-						$return.='<br/><span class="areatext">'.$this->icontext.'</span>';
+						$return.= '</div>';
+						$return.='<div class="areatext">'.$this->icontext.'</div>';
 						$return.='<div class="areafix"></div>';
 					}
 				} else {
