@@ -143,9 +143,10 @@ class LoopArea {
 						$return.='<div class="areafix"></div>';
 					}
 				} else {
-					//$return.='<img src="'.$wgStylePath .'/loop/images/area/'.$this->type.'.png"/><br/><span class="areatext">'.wfMsg('looparea-'.$this->type).'</span>';
-					//$return.='<div class="loop_areamark_'.$this->type.'"></div><br/><span class="areatext">'.wfMsg('looparea-'.$this->type).'</span>';
-					$return.='<div class="loop_areamark_'.$this->type.'" title="'.wfMsg('looparea-'.$this->type).'"></div><br/>';
+					
+					$return.='<div class="loop_areamark_'.$this->type.'"></div><div class="areatext">'.wfMsg('looparea-icontext-'.$this->type).'</div>';
+
+					
 					$return.='<div class="areafix"></div>';
 				}
 				$return.='</div><div class="areacontent_'.$this->render.'">';
