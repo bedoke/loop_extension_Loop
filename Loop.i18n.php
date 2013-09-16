@@ -14,7 +14,8 @@ $specialPageAliases['de'] = array(
 	'LoopPrintversion' => array( 'LoopPrintversion', 'Druckversion' ),
 	'LoopImprint' => array( 'LoopImprint', 'Impressum' ),
 	'LoopAudio' => array( 'LoopAudio', 'Audio' ),
-	'LoopChapteraudio' => array( 'LoopChapteraudio', 'Kapitelaudio' )
+	'LoopChapteraudio' => array( 'LoopChapteraudio', 'Kapitelaudio' ),
+	'LoopNoToc' => array( 'LoopNoToc', 'Seiten nicht im Inhaltsverzeichnis' )
 );
 
 $specialPageAliases['en'] = array(
@@ -29,7 +30,8 @@ $specialPageAliases['en'] = array(
 	'LoopPrintversion' => array( 'LoopPrintversion', 'Print version' ),
 	'LoopImprint' => array( 'LoopImprint', 'Imprint' ),
 	'LoopAudio' => array( 'LoopAudio', 'Audio' ),
-	'LoopChapteraudio' => array( 'LoopChapteraudio', 'Chapteraudio' )
+	'LoopChapteraudio' => array( 'LoopChapteraudio', 'Chapteraudio' ),
+	'LoopNoToc' => array( 'LoopNoToc', 'Pages not in table of contents' )
 );
 
 $specialPageAliases['fr'] = array(
@@ -130,7 +132,8 @@ $messages['de'] = array(
 	'loop-show-left-sidebar' => 'linke Randleiste anzeigen',
 	'loop-hide-left-sidebar' => 'linke Randleiste verbergen',
 	'loop-show-right-sidebar' => 'rechte Randleiste anzeigen',
-	'loop-hide-right-sidebar' => 'rechte Randleiste verbergen'
+	'loop-hide-right-sidebar' => 'rechte Randleiste verbergen',
+	'loopnotoc' => 'Seiten nicht im Inhaltsverzeichnis'
 );
 
 $messages['en'] = array(
@@ -216,7 +219,8 @@ $messages['en'] = array(
 	'loop-show-left-sidebar' => 'show left sidebar',
 	'loop-hide-left-sidebar' => 'hide left sidebar',
 	'loop-show-right-sidebar' => 'show right sidebar',
-	'loop-hide-right-sidebar' => 'hide right sidebar'
+	'loop-hide-right-sidebar' => 'hide right sidebar',
+	'loopnotoc' => 'Pages not in table of contents'
 );
 
 $messages['fr'] = array(

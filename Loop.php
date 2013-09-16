@@ -129,6 +129,11 @@ $wgSpecialPages['LoopAudio'] = 'SpecialLoopAudio';
 $wgSpecialPageGroups['LoopAudio'] = 'pages'; 
 
 
+$wgAutoloadClasses['SpecialLoopNoToc'] = $dir . 'SpecialLoopNoToc.php';
+$wgSpecialPages['LoopNoToc'] = 'SpecialLoopNoToc'; 
+$wgSpecialPageGroups['LoopNoToc'] = 'maintenance'; 
+
+
 function loopInit( Parser &$parser ) {
 
 
