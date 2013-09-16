@@ -56,18 +56,24 @@ class LoopStructure {
 		$toc = preg_replace ($pattern, $replacement, $toc, 1);
 
 		// change TOC links
+		$error=false;
 		$pattern = '@<li class="toclevel-(.*?)"><a href="(#.*?)"><span class="tocnumber">(.*?)</span> <span class="toctext">(.*?)</span></a>@';
 		do {
 			$topic_found = preg_match($pattern, $toc, $matches, PREG_OFFSET_CAPTURE);
 			if ($topic_found) {
 				$item_text = $matches[4][0];
 				$title = Title::newFromText($item_text);
-				$page_url = $title->escapeLocalURL();
-				$url_position = $matches[2][1];
-				$url_length = strlen($matches[2][0]);
-				$toc = substr_replace($toc, $page_url, $url_position, $url_length);
+				if ($title) {
+					$page_url = $title->escapeLocalURL();
+					$url_position = $matches[2][1];
+					$url_length = strlen($matches[2][0]);
+					$toc = substr_replace($toc, $page_url, $url_position, $url_length);
+				} else {
+					$toc = 'error: '.$matches[2][0];
+					$error=true;
+				}
 			}
-		} while ($topic_found);
+		} while ($topic_found && !$error);
 
 
 		if ($wgLoopStructureNumbering) {
