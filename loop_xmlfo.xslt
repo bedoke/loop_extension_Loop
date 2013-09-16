@@ -1417,10 +1417,10 @@
 					<xsl:value-of select="$word_embed_video_notice"></xsl:value-of>
 					<xsl:text> : </xsl:text>
 					<xsl:choose>
-						<xsl:when test="@service='youtube'"> 
+						<xsl:when test="(@service='youtube') or (@service='youtubehd')"> 
 							<fo:basic-link>
-								<xsl:attribute name="external-destination">http://www.youtube.com/embed/<xsl:value-of select="@videoid"></xsl:value-of></xsl:attribute>
-								<fo:inline text-decoration="underline">http://www.youtube.com/embed/<xsl:value-of select="@videoid"></xsl:value-of></fo:inline>
+								<xsl:attribute name="external-destination">http://www.youtube.com/embed/<xsl:value-of select="substring-before(@videoid,'|')"></xsl:value-of></xsl:attribute>
+								<fo:inline text-decoration="underline">http://www.youtube.com/embed/<xsl:value-of select="substring-before(@videoid,'|')"></xsl:value-of></fo:inline>
 								<xsl:text> </xsl:text>
 								<fo:inline ><fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="2mm" src="/opt/www/loop.oncampus.de/mediawiki/skins/loop/images/print/www_link.png"></fo:external-graphic></fo:inline>
 							</fo:basic-link>
@@ -1428,7 +1428,7 @@
 						<xsl:otherwise>
 							<xsl:value-of select="@service"></xsl:value-of>
 							<xsl:text> </xsl:text>
-							<xsl:value-of select="@videoid"></xsl:value-of>
+							<xsl:value-of select="fn:substring-before(@videoid,'|')"></xsl:value-of>
 						</xsl:otherwise>
 					</xsl:choose>
 				</fo:block>
