@@ -45,9 +45,9 @@ class SpecialLoopIndex extends SpecialPage {
 				
 				//$act_index_title = str_replace( '_', ' ', Sanitizer::decodeCharReferencesAndNormalize( $act_index_title ) );
 				
-				$act_index_title = Sanitizer::decodeCharReferencesAndNormalize( str_replace( '_', ' ', $act_index_title ) );
+				$act_index_title_print = Sanitizer::decodeCharReferencesAndNormalize( str_replace( '_', ' ', $act_index_title ) );
 				
-				$return.= '<tr><td class="loopindex_title">'.$act_index_title.'</td><td class="loopindex_pages">';
+				$return.= '<tr><td class="loopindex_title">'.$act_index_title_print.'</td><td class="loopindex_pages">';
 				$link_title='';
 				if (($wgLoopStructureNumbering) && ($row->TocNumber)) {
 					$link_title.=$row->TocNumber.' ';
