@@ -1179,6 +1179,11 @@
 											</xsl:if>
 										</xsl:otherwise>
 									</xsl:choose>
+									<xsl:if test="@show_copyright='true'">
+										<xsl:if test="@copyright">
+											<fo:block line-height="12.5pt" font-weight="bold" font-size="9.5pt"><xsl:value-of select="@copyright"></xsl:value-of></fo:block>
+										</xsl:if>										
+									</xsl:if>
 								</fo:block>
 							</fo:table-cell>
 						</fo:table-row>
