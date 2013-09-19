@@ -600,14 +600,14 @@ class SpecialLoopPrintversion extends SpecialPage {
 		
 		#exit;
 		
-		$cmd = `fop -c /opt/www/loop.oncampus.de/mediawiki-1.18.1/extensions/Loop/fop/fop.xml -fo $xmlFile -pdf $pdfFile`;
+		$cmd = `fop -c /opt/www/loop.oncampus.de/mediawiki-1.18.1/extensions/Loop/fop/fop.xml -fo $xmlFile -pdf $pdfFile 2>&1`;
 		
 		//$cmd = 'fop -c '.$wgeLoopFopConfig.' -fo '.$xmlFile.' -pdf '.$pdfFile;
 		//shell_exec ($cmd);
 
 		$pdfFileName = $wgSitename.".pdf";
 
-		$fh = fopen($pdfFile, 'r') or die("can't open pdf file".print_r($cmd,true));
+		$fh = fopen($pdfFile, 'r') or die("can't open pdf file<br/><br/>".$xmlfo."<pre>".print_r($cmd,true).'</pre>');
 		$content = fread($fh, filesize($pdfFile));
 		fclose($fh);
 
