@@ -1018,6 +1018,16 @@
 			<xsl:apply-templates></xsl:apply-templates>
 		</fo:inline>
 	</xsl:template>
+	<xsl:template match="b">
+		<fo:inline font-weight="bold">
+			<xsl:apply-templates></xsl:apply-templates>
+		</fo:inline>
+	</xsl:template>
+	<xsl:template match="strong">
+		<fo:inline font-weight="bold">
+			<xsl:apply-templates></xsl:apply-templates>
+		</fo:inline>
+	</xsl:template>	
 
 	<xsl:template match="italics">
 		<fo:inline font-style="italic">
