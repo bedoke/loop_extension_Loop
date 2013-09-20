@@ -28,7 +28,8 @@ the location of this file.
 -->
 <!-- NOTE: This is the version of the configuration -->
 <fop version="1.0">
-
+  <cache-file>/opt/www/loop.oncampus.de/mediawiki/extensions/Loop/fonts/.font-cache</cache-file>
+  <use-cache>false</use-cache>
   <!-- Base URL for resolving relative URLs -->
 	
   <!--<base>.</base>-->
@@ -60,7 +61,7 @@ the location of this file.
       </filterList>
 
       <fonts>
-      	<directory>/opt/www/devloop.oncampus.de/mediawiki/extensions/Loop/fonts</directory>
+      	<directory>/opt/www/loop.oncampus.de/mediawiki/extensions/Loop/fonts</directory>
 
         <!-- embedded fonts -->
         <!--
@@ -95,17 +96,17 @@ the location of this file.
           <font-triplet name="ArialMT" style="normal" weight="bold"/>
         </font>
         -->
-        <font metrics-url="/opt/www/devloop.oncampus.de/mediawiki/extensions/Loop/fonts/cambria.xml" kerning="yes" embed-url="/opt/www/devloop.oncampus.de/mediawiki/extensions/Loop/fonts/cambria.ttc">
+        <font metrics-url="/opt/www/loop.oncampus.de/mediawiki/extensions/Loop/fonts/cambria.xml" kerning="yes" embed-url="/opt/www/loop.oncampus.de/mediawiki/extensions/Loop/fonts/cambria.ttc">
           <font-triplet name="Cambria Math" style="normal" weight="normal"></font-triplet>
           <font-triplet name="Cambria" style="normal" weight="normal"></font-triplet>
         </font>			  
-        <font metrics-url="/opt/www/devloop.oncampus.de/mediawiki/extensions/Loop/fonts/cambriab.xml" kerning="yes" embed-url="/opt/www/devloop.oncampus.de/mediawiki/extensions/Loop/fonts/cambriab.ttf">
+        <font metrics-url="/opt/www/loop.oncampus.de/mediawiki/extensions/Loop/fonts/cambriab.xml" kerning="yes" embed-url="/opt/www/loop.oncampus.de/mediawiki/extensions/Loop/fonts/cambriab.ttf">
           <font-triplet name="Cambria" style="normal" weight="bold"></font-triplet>
         </font>			  
-        <font metrics-url="/opt/www/devloop.oncampus.de/mediawiki/extensions/Loop/fonts/cambriai.xml" kerning="yes" embed-url="/opt/www/devloop.oncampus.de/mediawiki/extensions/Loop/fonts/cambriai.ttf">
+        <font metrics-url="/opt/www/loop.oncampus.de/mediawiki/extensions/Loop/fonts/cambriai.xml" kerning="yes" embed-url="/opt/www/loop.oncampus.de/mediawiki/extensions/Loop/fonts/cambriai.ttf">
           <font-triplet name="Cambria" style="italic" weight="normal"></font-triplet>
         </font>			  
-        <font metrics-url="/opt/www/devloop.oncampus.de/mediawiki/extensions/Loop/fonts/cambriaz.xml" kerning="yes" embed-url="/opt/www/devloop.oncampus.de/mediawiki/extensions/Loop/fonts/cambriaz.ttf">
+        <font metrics-url="/opt/www/loop.oncampus.de/mediawiki/extensions/Loop/fonts/cambriaz.xml" kerning="yes" embed-url="/opt/www/loop.oncampus.de/mediawiki/extensions/Loop/fonts/cambriaz.ttf">
           <font-triplet name="Cambria" style="italic" weight="bold"></font-triplet>
         </font>	
 		      		  		  		  		 		  		  		  		  		  
