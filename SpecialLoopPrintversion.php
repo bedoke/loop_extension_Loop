@@ -204,11 +204,21 @@ function xslt_transform_link($input) {
 			$imagewidth='150mm';
 			if (array_key_exists('part', $childs)) {
 				$part=$childs['part'];
-				$part_array=explode('px',$part);
-				if (count($part_array)==2) {
-					$px=trim($part_array[0]);
-					$mm=round(0.214*intval($px),0);
-					$imagewidth=$mm.'mm';
+				if (stristr('px',$part)) {
+					$part_array=explode('px',$part);
+					if (count($part_array)==2) {
+						$px=trim($part_array[0]);
+						$mm=round(0.214*intval($px),0);
+						$imagewidth=$mm.'mm';
+					}
+				} else {
+				    $size=getimagesize($imagepath);
+					$width=0.214*intval($size[0]);
+					if ($width>150) {
+						$imagewidth='150mm';
+					} else {
+						$imagewidth=round($width,0).'mm';
+					}				
 				}
 			} else {
 			    $size=getimagesize($imagepath);
