@@ -1093,7 +1093,7 @@
 								<fo:table-cell width="12mm" text-align="center">
 									<fo:block>
 										<fo:external-graphic scaling="uniform" content-width="12mm" content-height="scale-to-fit"> 
-										<xsl:attribute name="src">/opt/www/loop.oncampus.de/mediawiki/skins/loop/images/area/<xsl:value-of select="@type"></xsl:value-of>.png</xsl:attribute>
+										<xsl:attribute name="src">/opt/www/loop.oncampus.de/mediawiki/skins/lubeca/pix/area/<xsl:value-of select="@type"></xsl:value-of>.png</xsl:attribute>
 										</fo:external-graphic>
 									</fo:block>
 									<fo:block keep-with-previous.within-page="always" keep-together="auto">
