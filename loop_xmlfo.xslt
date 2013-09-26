@@ -275,7 +275,7 @@
 					
 					<fo:block>
 					<fo:external-graphic scaling="uniform" content-width="24mm" content-height="scale-to-fit">
-						<xsl:attribute name="src"><xsl:value-of select="php:function('xslt_imagepath', link/target)"></xsl:value-of></xsl:attribute>
+						<xsl:attribute name="src"><xsl:value-of select="php:function('xslt_imagepath', descendant::link/target)"></xsl:value-of></xsl:attribute>
 					</fo:external-graphic>
 					</fo:block>
 					
