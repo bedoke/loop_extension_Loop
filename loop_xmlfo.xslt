@@ -1092,11 +1092,11 @@
 							<fo:table-row>
 								<fo:table-cell width="12mm" text-align="center">
 									<fo:block>
-										<fo:external-graphic scaling="uniform" content-width="12mm" content-height="scale-to-fit"> 
-										<xsl:attribute name="src">/opt/www/loop.oncampus.de/mediawiki/skins/lubeca/pix/area/<xsl:value-of select="@type"></xsl:value-of>.png</xsl:attribute>
+										<fo:external-graphic scaling="uniform" content-width="10mm" content-height="scale-to-fit"> 
+										<xsl:attribute name="src">/opt/www/loop.oncampus.de/mediawiki/skins/lubeca/pix/area/print/<xsl:value-of select="@type"></xsl:value-of>.png</xsl:attribute>
 										</fo:external-graphic>
 									</fo:block>
-									<fo:block keep-with-previous.within-page="always" keep-together="auto">
+									<fo:block keep-with-previous.within-page="always" keep-together="auto" margin-top="-1mm">
 										<xsl:call-template name="font_icon"></xsl:call-template>
 										<!-- <xsl:value-of select="@type"></xsl:value-of> -->
 										<xsl:call-template name="looparea_name"><xsl:with-param name="areaname" select="@type"></xsl:with-param></xsl:call-template>
@@ -1563,6 +1563,12 @@
 			<xsl:when test="$areaname='summary'"><xsl:value-of select="$word_looparea_summary"></xsl:value-of></xsl:when>
 			<xsl:when test="$areaname='indentation'"><xsl:value-of select="$word_looparea_indentation"></xsl:value-of></xsl:when>
 			<xsl:when test="$areaname='norm'"><xsl:value-of select="$word_looparea_norm"></xsl:value-of></xsl:when>
+
+			<xsl:when test="$areaname='law'"><xsl:value-of select="$word_looparea_law"></xsl:value-of></xsl:when>
+			<xsl:when test="$areaname='question'"><xsl:value-of select="$word_looparea_question"></xsl:value-of></xsl:when>
+			<xsl:when test="$areaname='practice'"><xsl:value-of select="$word_looparea_practice"></xsl:value-of></xsl:when>
+			<xsl:when test="$areaname='exercise'"><xsl:value-of select="$word_looparea_exercise"></xsl:value-of></xsl:when>
+			<xsl:when test="$areaname='websource'"><xsl:value-of select="$word_looparea_websource"></xsl:value-of></xsl:when>
 						
 		</xsl:choose>
 		

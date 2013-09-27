@@ -55,6 +55,18 @@
 	<msg name="word_looparea_indentation" lang="de">Vertiefung</msg>
 	<msg name="word_looparea_norm" lang="en">norm</msg>
 	<msg name="word_looparea_norm" lang="de">Norm</msg>
+
+	<msg name="word_looparea_law" lang="en">law</msg>
+	<msg name="word_looparea_law" lang="de">Gesetz</msg>
+	<msg name="word_looparea_question" lang="en">question</msg>
+	<msg name="word_looparea_question" lang="de">Frage</msg>
+	<msg name="word_looparea_practice" lang="en">practice</msg>
+	<msg name="word_looparea_practice" lang="de">Aus der Praxis</msg>
+	<msg name="word_looparea_exercise" lang="en">exercise</msg>
+	<msg name="word_looparea_exercise" lang="de">Übung</msg>
+	<msg name="word_looparea_websource" lang="en">websource</msg>
+	<msg name="word_looparea_websource" lang="de">Quelle im Web</msg>		
+
 	<msg name="word_loopmedia_notice" lang="en">In the online version an multimedia element is shown here.</msg>
 	<msg name="word_loopmedia_notice" lang="de">In der Online-Version befindet sich an dieser Stelle ein Multimedia-Element.</msg>
 

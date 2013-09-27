@@ -41,6 +41,12 @@
 	<xsl:variable name="word_looparea_norm"  select="functx:get_term_name('word_looparea_norm')" />
 	<xsl:variable name="word_loopmedia_notice"  select="functx:get_term_name('word_loopmedia_notice')" />
 
+	<xsl:variable name="word_looparea_law"  select="functx:get_term_name('word_looparea_law')" />
+	<xsl:variable name="word_looparea_question"  select="functx:get_term_name('word_looparea_question')" />
+	<xsl:variable name="word_looparea_practice"  select="functx:get_term_name('word_looparea_practice')" />
+	<xsl:variable name="word_looparea_exercise"  select="functx:get_term_name('word_looparea_exercise')" />
+	<xsl:variable name="word_looparea_websource"  select="functx:get_term_name('word_looparea_websource')" />
+
 	<xsl:variable name="word_loopmedia_notice_animation"  select="functx:get_term_name('word_loopmedia_notice_animation')" />
 	<xsl:variable name="word_loopmedia_notice_audio"  select="functx:get_term_name('word_loopmedia_notice_audio')" />
 	<xsl:variable name="word_loopmedia_notice_click"  select="functx:get_term_name('word_loopmedia_notice_click')" />
