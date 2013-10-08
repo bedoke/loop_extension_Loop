@@ -17,6 +17,8 @@
 	<msg name="word_list_of_tables" lang="de">Tabellenverzeichnis</msg>
 	<msg name="word_list_of_media" lang="en">List of media</msg>
 	<msg name="word_list_of_media" lang="de">Medienverzeichnis</msg>
+	<msg name="word_list_of_formulas" lang="en">List of formulas</msg>
+	<msg name="word_list_of_formulas" lang="de">Formelverzeichnis</msg>	
 	<msg name="word_list_of_tasks" lang="en">List of tasks</msg>
 	<msg name="word_list_of_tasks" lang="de">Aufgabenverzeichnis</msg>
 	<msg name="word_index" lang="en">Index</msg>

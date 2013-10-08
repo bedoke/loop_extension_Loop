@@ -20,6 +20,7 @@
 	<xsl:variable name="word_list_of_figures"  select="functx:get_term_name('word_list_of_figures')" />
 	<xsl:variable name="word_list_of_tables"  select="functx:get_term_name('word_list_of_tables')" />
 	<xsl:variable name="word_list_of_media"  select="functx:get_term_name('word_list_of_media')" />
+	<xsl:variable name="word_list_of_formulas"  select="functx:get_term_name('word_list_of_formulas')" />
 	<xsl:variable name="word_list_of_tasks"  select="functx:get_term_name('word_list_of_tasks')" />	
 	<xsl:variable name="word_index"  select="functx:get_term_name('word_index')" />
 	
