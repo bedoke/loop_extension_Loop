@@ -15,7 +15,7 @@ class SpecialLoopIndex extends SpecialPage {
 		$indexitems=array();
 		$return = '<h1>'.wfMsg('loopindex').'</h1>';
 
-		$sql="select indexes.in_title, page.page_id, page.page_title, loopstructure.TocNumber from (indexes left join page on indexes.in_from=page.page_id) left join loopstructure on page.page_id= loopstructure.ArticleId  order by indexes.in_title, loopstructure.TocNumber";
+		$sql="select indexes.in_title, page.page_id, page.page_title, loopstructure.TocNumber from (indexes left join page on indexes.in_from=page.page_id) left join loopstructure on page.page_id= loopstructure.ArticleId  order by LOWER(indexes.in_title), loopstructure.TocNumber";
 		$dbr = wfGetDB( DB_SLAVE );
 		$res = $dbr->query( $sql, __METHOD__, true );
 
