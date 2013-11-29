@@ -179,7 +179,13 @@ class SpecialLoopMedia extends SpecialPage {
 					$return.='<div class="mediabox_typeicon_'.$media->type.'"></div>';
 				$return.='</td>';
 				$return.='<td>';
-				$return.='<div class="loop_media_index_title">'.$media->title.'</div>';
+				$parserOptions = ParserOptions::newFromUser( $wgUser );
+				$parsertitle = Title::newFromText('media');
+				$parseroutput = $parser->parse($media->title,$parsertitle,$parserOptions);
+				$output_title=$parseroutput->mText;
+				// $parseroutput = $parser->parse($media->description,$parsertitle,$parserOptions);
+				// $output_description=$parseroutput->mText;					
+				$return.='<div class="loop_media_index_title">'.$output_title.'</div>';
 				//$return.='<div class="loop_media_index_description">'.$media->description.'</div>';
 				$return.='<div class="loop_media_index_link"><a href="'.$media->pageURL;
 				if ($media->title) {
