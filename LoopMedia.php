@@ -33,6 +33,36 @@ class LoopMedia {
 
 		$mediatypes=array('rollover','video','interaction','audio','animation','simulation','click','dragdrop');
 
+
+
+		$matches=array();
+		$pattern = '@(?<=<loop_title>)(.*?)(?=<\/loop_title>)@isu';
+		if (preg_match($pattern, $input, $matches)==1) {
+				# $this->title = $wgParser->recursiveTagParse($matches[1]);
+				$this->title = $matches[1];
+		}
+
+		$matches=array();
+		$pattern = '@(?<=<loop_description>)(.*?)(?=<\/loop_description>)@isu';
+		if (preg_match($pattern, $input, $matches)==1) {
+				# $this->description = $wgParser->recursiveTagParse($matches[1]);
+				$this->description = $matches[1];
+		}
+
+		$pattern = "/(\r\n|\r|\n)/";
+		$replacement = PHP_EOL;
+		$string = preg_replace($pattern, $replacement, $input);
+			
+		$pattern = '@(<loop_title>)(.*?)(<\/loop_title>)@isu';
+		$replace = '';
+		$input = preg_replace($pattern, $replace, $input);
+
+		$pattern = '@(<loop_description>)(.*?)(<\/loop_description>)@isu';
+		$replace = '';
+		$input = preg_replace($pattern, $replace, $input);
+
+
+
 		$this->input=$input;
 		$this->args=$args;
 
@@ -113,8 +143,8 @@ class LoopMedia {
 				//$return.='<div class="mediabox_typeicon"><img src="'.$wgStylePath .'/loop/images/media/type_'.$this->type.'.png"></div>';
 				$return.='<div class="mediabox_typeicon"><div class="mediabox_typeicon_'.$this->type.'"></div></div>';
 				$return.='<div class="mediabox_footertext">';
-				if ($this->title!='') {$return.='<span class="mediabox_title">'.$this->title.'</span><br/>';}
-				if ($this->description!='') {$return.='<span class="mediabox_description">'.$this->description.'</span><br/>';}
+				if ($this->title!='') {$return.='<span class="mediabox_title">'.$wgParser->recursiveTagParse($this->title).'</span><br/>';}
+				if ($this->description!='') {$return.='<span class="mediabox_description">'.$wgParser->recursiveTagParse($this->description).'</span><br/>';}
 				if (($this->show_copyright==true)&&($this->copyright!='')){$return.='<span class="mediabox_copyright">'.$this->copyright.'</span>';}
 				$return.='</div>';
 				$return.='<div class="clearer"></div>';
