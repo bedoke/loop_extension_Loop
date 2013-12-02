@@ -1574,7 +1574,10 @@
 				<fo:block>
 					<xsl:apply-templates select="php:function('xslt_transform_graphviz', .)"></xsl:apply-templates>
 				</fo:block>
-			</xsl:when>					
+			</xsl:when>			
+			<xsl:when test="@extension_name='nowiki'">
+				<fo:inline font-family="monospace" wrap-option="wrap" linefeed-treatment="preserve" white-space-collapse="false" white-space-treatment="preserve"><xsl:value-of select="."></xsl:value-of></fo:inline>
+			</xsl:when>
 		</xsl:choose>
 
 	</xsl:template>	
