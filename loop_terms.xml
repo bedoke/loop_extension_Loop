@@ -23,6 +23,8 @@
 	<msg name="word_list_of_tasks" lang="de">Aufgabenverzeichnis</msg>
 	<msg name="word_index" lang="en">Index</msg>
 	<msg name="word_index" lang="de">Index</msg>			 
+	<msg name="word_glossary" lang="en">Glossary</msg>
+	<msg name="word_glossary" lang="de">Glossar</msg>
 				 
 		 
 	<msg name="word_looparea_task" lang="en">task</msg>

@@ -233,6 +233,10 @@ function xslt_transform_link($input) {
 			//$input_value=print_r($childs,true);
 			$return_xml =  '<php_link_image imagepath="'.$imagepath.'" imagewidth="'.$imagewidth.'"></php_link_image>';
 				
+		} else if (($target_array[0]=='Kategorie')||($target_array[0]=='Category')) {
+		
+			$return_xml = '';
+		
 		} else {
 			// internal Link
 			if (!array_key_exists('text', $childs)) {
@@ -732,12 +736,40 @@ class SpecialLoopPrintversion extends SpecialPage {
 		$tocxml=$this->get_toc();
 		$xmlresult.="<toc>".$tocxml."</toc>";
 		$xmlresult.=$xml;
+		$glossaryxml=$this->get_glossary();
+		$xmlresult.="<glossary>".$glossaryxml."</glossary>";
 		$xmlresult.="</articles>" ;
 
 		return $xmlresult;
 
 	}
-
+	function get_glossary () {
+		// global $converter, $content_provider;
+		
+		$content_provider = new ContentProviderMySQL ;
+		$converter = new MediaWikiConverter ;
+		
+		$return = '';
+		
+		$glossary = Category::newFromName('Glossar');
+		$glossary_entrys = $glossary->getMembers();
+		
+		foreach ($glossary_entrys as $glossary_entry) {
+			$wikitext = $content_provider->get_wiki_text ( $glossary_entry ) ;
+			
+			// deal with special characters
+			$wikitext = html_entity_decode($wikitext,ENT_NOQUOTES,'UTF-8');
+			
+			//add_authors ( $content_provider->authors ) ;
+			$articlexml="";
+			$articlexml=$converter->article2xml ( $glossary_entry->getText() , $wikitext  );
+			$return.=$articlexml;		
+		}
+		
+		return $return;
+	}
+	
+	
 	function get_toc () {
 
 		global $wgLoopStructureNumbering, $wgLoopStructureUseTopLevel, $wgParser;

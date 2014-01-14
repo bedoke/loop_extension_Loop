@@ -31,6 +31,7 @@
 		<xsl:param name="formula_exists"><xsl:call-template name="formula_exists"></xsl:call-template></xsl:param>
 		<xsl:param name="task_exists"><xsl:call-template name="task_exists"></xsl:call-template></xsl:param>			
 		<xsl:param name="index_exists"><xsl:call-template name="index_exists"></xsl:call-template></xsl:param>
+		<xsl:param name="glossary_exists"><xsl:call-template name="glossary_exists"></xsl:call-template></xsl:param>
 		<fo:root>
 			<fo:layout-master-set>
 				<fo:simple-page-master master-name="cover-page"
@@ -69,7 +70,7 @@
 			<xsl:call-template name="page-sequence-table-of-content"></xsl:call-template>
 			<xsl:call-template name="page-sequence-contentpages"></xsl:call-template>
 			
-			<xsl:if test="($cite_exists='1') or ($figure_exists='1') or ($table_exists='1') or ($media_exists='1') or ($formula_exists='1') or ($task_exists='1') or ($index_exists='1')">
+			<xsl:if test="($cite_exists='1') or ($figure_exists='1') or ($table_exists='1') or ($media_exists='1') or ($formula_exists='1') or ($task_exists='1') or ($index_exists='1') or ($glossary_exists='1')">
 				<xsl:call-template name="page-sequence-appendix"></xsl:call-template>
 			</xsl:if>
 
@@ -84,6 +85,7 @@
 		<xsl:param name="formula_exists"><xsl:call-template name="formula_exists"></xsl:call-template></xsl:param>
 		<xsl:param name="task_exists"><xsl:call-template name="task_exists"></xsl:call-template></xsl:param>
 		<xsl:param name="index_exists"><xsl:call-template name="index_exists"></xsl:call-template></xsl:param>			
+		<xsl:param name="glossary_exists"><xsl:call-template name="glossary_exists"></xsl:call-template></xsl:param>
 		<fo:page-sequence master-reference="full-page" id="appendix_sequence">
 			<fo:static-content font-family="'Cambria Math', Cambria" flow-name="xsl-region-before">
 				<xsl:call-template name="default-header"></xsl:call-template>			
@@ -115,6 +117,19 @@
                 
 			</fo:flow>
 		</fo:page-sequence>	
+		<xsl:if test="$glossary_exists='1'">
+		<fo:page-sequence master-reference="full-page" id="glossary_sequence">
+			<fo:static-content font-family="'Cambria Math', Cambria" flow-name="xsl-region-before">
+				<xsl:call-template name="default-header"></xsl:call-template>			
+			</fo:static-content>			
+			<fo:static-content font-family="'Cambria Math', Cambria" flow-name="xsl-region-after">
+				<xsl:call-template name="default-footer"></xsl:call-template>
+			</fo:static-content>
+			<fo:flow font-family="'Cambria Math', Cambria" flow-name="xsl-region-body">
+				<xsl:call-template name="page-content-glossary"></xsl:call-template>
+			</fo:flow>
+		</fo:page-sequence>	            	
+        </xsl:if>			
 		<xsl:if test="$index_exists='1'">
 		<fo:page-sequence master-reference="full-page-2column" id="index_sequence">
 			<fo:static-content font-family="'Cambria Math', Cambria" flow-name="xsl-region-before">
@@ -127,7 +142,8 @@
             	<xsl:call-template name="page-content-index"></xsl:call-template>
 			</fo:flow>
 		</fo:page-sequence>	            	
-        </xsl:if>                                
+        </xsl:if>       
+	
 	</xsl:template>		
 
 
@@ -684,6 +700,44 @@
 	</xsl:template>
 
 
+	<xsl:template name="page-content-glossary">
+		<xsl:param name="cite_exists"><xsl:call-template name="cite_exists"></xsl:call-template></xsl:param>
+		<xsl:param name="figure_exists"><xsl:call-template name="figure_exists"></xsl:call-template></xsl:param>
+		<xsl:param name="table_exists"><xsl:call-template name="table_exists"></xsl:call-template></xsl:param>
+		<xsl:param name="media_exists"><xsl:call-template name="media_exists"></xsl:call-template></xsl:param>
+		<xsl:param name="formula_exists"><xsl:call-template name="formula_exists"></xsl:call-template></xsl:param>
+		<xsl:param name="task_exists"><xsl:call-template name="task_exists"></xsl:call-template></xsl:param>			
+		
+		<xsl:if test="($cite_exists='1') or ($figure_exists='1') or ($table_exists='1') or ($media_exists='1') or ($formula_exists='1') or ($task_exists='1')">
+			<fo:block break-before="page"></fo:block>
+		</xsl:if>		
+		<fo:block>
+			<fo:marker marker-class-name="page-title-left">
+				<xsl:value-of select="$word_appendix"></xsl:value-of>
+			</fo:marker>
+		</fo:block>
+		<fo:block>
+			<fo:marker marker-class-name="page-title-right">
+				<xsl:call-template name="appendix_number">
+					<xsl:with-param name="content" select="'glossary'"></xsl:with-param>
+				</xsl:call-template>
+				<xsl:text> </xsl:text>			
+				<xsl:value-of select="$word_glossary"></xsl:value-of>
+			</fo:marker>
+		</fo:block>
+		<fo:block id="glossary" keep-with-next="always" margin-bottom="10mm">
+			<xsl:call-template name="font_head"></xsl:call-template>
+				<xsl:call-template name="appendix_number">
+					<xsl:with-param name="content" select="'glossary'"></xsl:with-param>
+				</xsl:call-template>
+				<xsl:text> </xsl:text>			
+			<xsl:value-of select="$word_glossary"></xsl:value-of>
+		</fo:block>
+		<xsl:apply-templates select="//*/glossary/article" mode="glossary"></xsl:apply-templates>
+	</xsl:template>		
+	
+	
+	
 
 	<!-- Page Sequence für Cover-Page -->
 	<xsl:template name="page-sequence-cover">
@@ -754,6 +808,7 @@
 		<xsl:param name="formula_exists"><xsl:call-template name="formula_exists"></xsl:call-template></xsl:param>
 		<xsl:param name="task_exists"><xsl:call-template name="task_exists"></xsl:call-template></xsl:param>
 		<xsl:param name="index_exists"><xsl:call-template name="index_exists"></xsl:call-template></xsl:param>
+		<xsl:param name="glossary_exists"><xsl:call-template name="glossary_exists"></xsl:call-template></xsl:param>
 		<fo:block>
 			<fo:marker marker-class-name="page-title-left">
 				<xsl:value-of select="/articles/@title"></xsl:value-of>
@@ -771,7 +826,7 @@
 		
 		<xsl:call-template name="make-toc"></xsl:call-template>
 		
-		<xsl:if test="($cite_exists='1') or ($figure_exists='1') or ($table_exists='1') or ($media_exists='1') or ($task_exists='1') or ($index_exists='1')">
+		<xsl:if test="($cite_exists='1') or ($figure_exists='1') or ($table_exists='1') or ($media_exists='1') or ($task_exists='1') or ($index_exists='1') or ($glossary_exists='1')">
 			<fo:block margin-bottom="1em"></fo:block>
 			<fo:block>
 				<xsl:call-template name="font_subsubhead"></xsl:call-template>
@@ -886,7 +941,25 @@
 					</fo:page-number-citation>
 				</fo:inline>
 			</fo:block>		
-		</xsl:if>				
+		</xsl:if>		
+		<xsl:if test="$glossary_exists='1'">
+			<fo:block text-align-last="justify">
+				<xsl:call-template name="font_normal"></xsl:call-template>
+				<fo:basic-link color="black">
+					<xsl:attribute name="internal-destination">glossary</xsl:attribute>
+					<xsl:call-template name="appendix_number">
+						<xsl:with-param name="content" select="'glossary'"></xsl:with-param>
+					</xsl:call-template>					
+					<xsl:text> </xsl:text><xsl:value-of select="$word_glossary"></xsl:value-of>
+				</fo:basic-link>
+				<fo:inline keep-together.within-line="always">
+					<fo:leader leader-pattern="dots"></fo:leader>
+					<fo:page-number-citation>
+						<xsl:attribute name="ref-id" >glossary</xsl:attribute>
+					</fo:page-number-citation>
+				</fo:inline>
+			</fo:block>		
+		</xsl:if>			
 		<xsl:if test="$index_exists='1'">
 			<fo:block text-align-last="justify">
 				<xsl:call-template name="font_normal"></xsl:call-template>
@@ -995,6 +1068,13 @@
 	</xsl:template>
 
 
+	<xsl:template match="article" mode="glossary">
+		<fo:block keep-with-next.within-page="always">
+			<xsl:call-template name="font_subhead"></xsl:call-template>
+			<xsl:apply-templates></xsl:apply-templates>
+		</fo:block>
+	</xsl:template>
+
 	<!-- Default Header -->
 	<xsl:template name="default-header">
 		<fo:table table-layout="fixed" width="100%" margin-bottom="2mm">
@@ -1049,6 +1129,11 @@
 			</xsl:when>
 			<xsl:otherwise>
 				<fo:block keep-with-next.within-page="always">
+					<xsl:attribute name="id">
+						<xsl:value-of select="ancestor::article/@title"></xsl:value-of>
+						<xsl:text>#</xsl:text>
+						<xsl:value-of select="."></xsl:value-of>
+					</xsl:attribute>
 					<xsl:choose>
 						<xsl:when test="$level='1'">
 							<xsl:call-template name="font_head"></xsl:call-template>
@@ -1063,7 +1148,8 @@
 							<xsl:call-template name="font_subsubhead"></xsl:call-template>
 						</xsl:otherwise>
 					</xsl:choose>
-					<xsl:value-of select="."></xsl:value-of>
+					<!-- <xsl:value-of select="."></xsl:value-of> -->
+					<xsl:apply-templates></xsl:apply-templates>
 				</fo:block>
 			</xsl:otherwise>
 		</xsl:choose>
@@ -1775,13 +1861,17 @@
 		<xsl:param name="formula_exists"><xsl:call-template name="formula_exists"></xsl:call-template></xsl:param>
 		<xsl:param name="task_exists"><xsl:call-template name="task_exists"></xsl:call-template></xsl:param>			
 		<xsl:param name="index_exists"><xsl:call-template name="index_exists"></xsl:call-template></xsl:param>		
+		<xsl:param name="glossary_exists"><xsl:call-template name="glossary_exists"></xsl:call-template></xsl:param>
 		
 		
 		<xsl:choose>
+			<xsl:when test="($glossary_exists='1')">
+				<xsl:text>glossary_sequence</xsl:text>
+			</xsl:when>		
 			<xsl:when test="($index_exists='1')">
 				<xsl:text>index_sequence</xsl:text>
 			</xsl:when>
-			<xsl:when test="($cite_exists='1') or ($figure_exists='1') or ($table_exists='1') or ($media_exists='1') or ($formula_exists='1') or ($task_exists='1')">
+			<xsl:when test="($cite_exists='1') or ($figure_exists='1') or ($table_exists='1') or ($media_exists='1') or ($formula_exists='1') or ($task_exists='1') or ($glossary_exists='1')">
 				<xsl:text>appendix_sequence</xsl:text>
 			</xsl:when>			
 			<xsl:otherwise>
@@ -1789,7 +1879,17 @@
 			</xsl:otherwise>
 		</xsl:choose>	
 	</xsl:template>
-	
+
+	<xsl:template name="glossary_exists">
+		<xsl:choose>
+			<xsl:when test="//*/glossary/article">
+				<xsl:text>1</xsl:text>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:text>0</xsl:text>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>		
 	
 	<xsl:template name="cite_exists">
 		<xsl:choose>
@@ -1879,6 +1979,7 @@
 		<xsl:variable name="c_formulas" ><xsl:call-template name="formula_exists"></xsl:call-template></xsl:variable>
 		<xsl:variable name="c_tasks" ><xsl:call-template name="task_exists"></xsl:call-template></xsl:variable>
 		<xsl:variable name="c_index" ><xsl:call-template name="index_exists"></xsl:call-template></xsl:variable>
+		<xsl:variable name="c_glossary" ><xsl:call-template name="glossary_exists"></xsl:call-template></xsl:variable>
 
 		<xsl:variable name="temp_nr">
 			<xsl:choose>
@@ -1903,7 +2004,9 @@
 				<xsl:when test="$content='index'">
 					<xsl:value-of select="$c_bibliography + $c_figures + $c_tables + $c_media + $c_formulas + $c_tasks + $c_index"></xsl:value-of>
 				</xsl:when>												
-																
+				<xsl:when test="$content='glossary'">
+					<xsl:value-of select="$c_bibliography + $c_figures + $c_tables + $c_media + $c_formulas + $c_tasks + $c_index + $c_glossary"></xsl:value-of>
+				</xsl:when>																												
 			</xsl:choose>
 		</xsl:variable>
 		<xsl:choose>
@@ -1914,6 +2017,7 @@
 			<xsl:when test="$temp_nr='5'"><xsl:text>V</xsl:text></xsl:when>
 			<xsl:when test="$temp_nr='6'"><xsl:text>VI</xsl:text></xsl:when>
 			<xsl:when test="$temp_nr='7'"><xsl:text>VII</xsl:text></xsl:when>
+			<xsl:when test="$temp_nr='8'"><xsl:text>VIII</xsl:text></xsl:when>
 		</xsl:choose>
 
 	</xsl:template>
@@ -1928,6 +2032,7 @@
 		<xsl:param name="formula_exists"><xsl:call-template name="formula_exists"></xsl:call-template></xsl:param>
 		<xsl:param name="task_exists"><xsl:call-template name="task_exists"></xsl:call-template></xsl:param>		
 		<xsl:param name="index_exists"><xsl:call-template name="index_exists"></xsl:call-template></xsl:param>
+		<xsl:param name="glossary_exists"><xsl:call-template name="glossary_exists"></xsl:call-template></xsl:param>
 		<fo:bookmark-tree>
 			<fo:bookmark internal-destination="cover">
 				<fo:bookmark-title><xsl:value-of select="normalize-space(//article[1]/@title)"></xsl:value-of></fo:bookmark-title>
@@ -2005,7 +2110,18 @@
 								<xsl:value-of select="$word_list_of_tasks"></xsl:value-of>
 							</fo:bookmark-title>
 						</fo:bookmark>
-					</xsl:if>									
+					</xsl:if>		
+					<xsl:if test="$glossary_exists='1'">
+						<fo:bookmark internal-destination="glossary">
+							<fo:bookmark-title>
+								<xsl:call-template name="appendix_number">
+									<xsl:with-param name="content" select="'glossary'"></xsl:with-param>
+								</xsl:call-template>
+								<xsl:text> </xsl:text>							
+								<xsl:value-of select="$word_glossary"></xsl:value-of>
+							</fo:bookmark-title>
+						</fo:bookmark>
+					</xsl:if>						
 					<xsl:if test="$index_exists='1'">
 						<fo:bookmark internal-destination="index">
 							<fo:bookmark-title>
