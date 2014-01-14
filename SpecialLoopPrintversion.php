@@ -262,6 +262,26 @@ function xslt_transform_link($input) {
 	return $return;
 }
 
+function xslt_get_config($paramter) {
+	global $wgLoopShowPagetitle;
+	$return = '';
+	
+	switch ($paramter) {
+		case 'wgLoopShowPagetitle':
+			if ($wgLoopShowPagetitle) {
+				$return = 'true';
+			} else {
+				$return = 'false';
+			}
+				
+			break;
+		default:
+			break;
+	}
+	
+	return $return;
+}
+
 
 function xslt_figure_width($input) {
 	$return='';
