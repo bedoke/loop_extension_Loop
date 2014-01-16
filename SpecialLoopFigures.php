@@ -7,7 +7,7 @@ class SpecialLoopFigures extends SpecialPage {
 	}
 
 	function execute( $par ) {
-		global $wgOut, $wgParser, $wgUser, $wgParserConf, $wgLoopStructureNumbering, $wgLoopStructureUseTopLevel;
+		global $wgeLoopListOfFiguresShowPageText, $wgOut, $wgParser, $wgUser, $wgParserConf, $wgLoopStructureNumbering, $wgLoopStructureUseTopLevel;
 
 		//var_dump($wgParserConf);
 
@@ -178,6 +178,19 @@ class SpecialLoopFigures extends SpecialPage {
 				$return.='<tr>';
 				$return.='<td class="loop_figure_index_thumb">';
 				if ($figure->file) {
+				$file_pagetext = '';
+					if ($wgeLoopListOfFiguresShowPageText == true) {
+						try {
+							$ft = Title::makeTitle(NS_FILE,$figure->file);
+							$wp = WikiPage::factory($ft);
+							$fc = $wp->getContent(Revision::RAW );
+							$po = $fc->getParserOutput($ft);
+							$file_pagetext = $po->getText();
+						} catch (Exception $e) {
+						
+						}
+					}				
+				
 					// wfDebug( __METHOD__ . ': figure file : '.print_r($figure->file,true)."\n");
 					$file = wfLocalFile($figure->file);
 					// wfDebug( __METHOD__ . ': file : '.print_r($file,true)."\n");
@@ -196,6 +209,9 @@ class SpecialLoopFigures extends SpecialPage {
 				$output_description=$parseroutput->mText;				
 				$return.='<div class="loop_figure_index_title">'.$output_title.'</div>';
 				//$return.='<div class="loop_figure_index_description">'.$output_description.'</div>';
+				if (($wgeLoopListOfFiguresShowPageText == true) && ($file_pagetext!='')) {
+					$return.='<div class="loop_figure_index_description">'.$file_pagetext.'</div>';
+				}				
 				$return.='<div class="loop_figure_index_link"><a href="'.$figure->pageURL;
 				if ($figure->title) {
 					$return.='#'.htmlentities(str_replace( ' ', '_', trim($figure->title) ),ENT_QUOTES, "UTF-8");
