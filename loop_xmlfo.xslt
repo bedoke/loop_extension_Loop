@@ -1674,6 +1674,9 @@
 			<xsl:when test="@extension_name='nowiki'">
 				<fo:inline font-family="monospace" wrap-option="wrap" linefeed-treatment="preserve" white-space-collapse="false" white-space-treatment="preserve"><xsl:value-of select="."></xsl:value-of></fo:inline>
 			</xsl:when>
+			<xsl:when test="@extension_name='hr'">
+				<fo:block><fo:leader leader-length="100%" leader-pattern="rule"/></fo:block>
+			</xsl:when>			
 		</xsl:choose>
 
 	</xsl:template>	
