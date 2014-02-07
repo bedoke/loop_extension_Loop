@@ -140,21 +140,23 @@ class SpecialLoopTables extends SpecialPage {
 			$posOnPage=0;
 			foreach ($matches as $match) {
 				//var_dump($match);
-				$specialtable=new LoopTable($match[1],$match[2]);
-				$specialtable->setPageTitle($page_title);
-				$specialtable->setPageURL($page_url);
+				if ($match[0] == 'loop_table') {
+					$specialtable=new LoopTable($match[1],$match[2]);
+					$specialtable->setPageTitle($page_title);
+					$specialtable->setPageURL($page_url);
 
-				$specialtable->setStructureTitle($structure_title);
-				$specialtable->setStructureURL($structure_url);
-				$specialtable->setStructureSequence($structure_sequence);
-				$specialtable->setStructureIndex($structure_index);
-				$specialtable->setStructureIndexOrder($structure_index_order);
-				$specialtable->setPageTocNumber($page_toc_number);
-				$specialtable->setPosOnPage($posOnPage);
+					$specialtable->setStructureTitle($structure_title);
+					$specialtable->setStructureURL($structure_url);
+					$specialtable->setStructureSequence($structure_sequence);
+					$specialtable->setStructureIndex($structure_index);
+					$specialtable->setStructureIndexOrder($structure_index_order);
+					$specialtable->setPageTocNumber($page_toc_number);
+					$specialtable->setPosOnPage($posOnPage);
 
-				// var_dump($specialtable);
-				$specialtables[]=$specialtable;
-				$posOnPage++;
+					// var_dump($specialtable);
+					$specialtables[]=$specialtable;
+					$posOnPage++;
+				}
 			}
 
 		}

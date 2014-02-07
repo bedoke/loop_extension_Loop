@@ -146,28 +146,30 @@ class SpecialLoopTasks extends SpecialPage {
 			$pageOrder=0;
 			$posOnPage=0;
 			foreach ($matches as $match) {
-				//var_dump($match);
-				//wfDebug( __METHOD__ . ': match : '.print_r($match,true));
-				$specialtask=new LoopTask($match[1],$match[2],$parser);
-				//wfDebug( __METHOD__ . ': specialtask : '.print_r($specialtask,true));
-				$specialtask->setPageTitle($page_title);
-				$specialtask->setPageURL($page_url);
+				if ($match[0] == 'loop_task') {
+					//var_dump($match);
+					//wfDebug( __METHOD__ . ': match : '.print_r($match,true));
+					$specialtask=new LoopTask($match[1],$match[2],$parser);
+					//wfDebug( __METHOD__ . ': specialtask : '.print_r($specialtask,true));
+					$specialtask->setPageTitle($page_title);
+					$specialtask->setPageURL($page_url);
 
-				$specialtask->setStructureTitle($structure_title);
-				$specialtask->setStructureURL($structure_url);
-				$specialtask->setStructureSequence($structure_sequence);
-				$specialtask->setStructureIndex($structure_index);
-				$specialtask->setStructureIndexOrder($structure_index_order);
-				$specialtask->setPageTocNumber($page_toc_number);
-				$specialtask->setPageOrder($pageOrder);
-				$specialtask->setPosOnPage($posOnPage);
+					$specialtask->setStructureTitle($structure_title);
+					$specialtask->setStructureURL($structure_url);
+					$specialtask->setStructureSequence($structure_sequence);
+					$specialtask->setStructureIndex($structure_index);
+					$specialtask->setStructureIndexOrder($structure_index_order);
+					$specialtask->setPageTocNumber($page_toc_number);
+					$specialtask->setPageOrder($pageOrder);
+					$specialtask->setPosOnPage($posOnPage);
 
-				 //var_dump($specialtask);
-				 #wfDebug( __METHOD__ . ': specialtask : '.print_r($specialtask,true));
-				
-				$specialtasks[]=$specialtask;
-				$pageOrder++;
-				$posOnPage++;
+					 //var_dump($specialtask);
+					 #wfDebug( __METHOD__ . ': specialtask : '.print_r($specialtask,true));
+					
+					$specialtasks[]=$specialtask;
+					$pageOrder++;
+					$posOnPage++;
+				}
 			}
 
 		}

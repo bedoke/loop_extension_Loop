@@ -135,21 +135,23 @@ class SpecialLoopMedia extends SpecialPage {
 			$posOnPage=0;
 			foreach ($matches as $match) {
 				//var_dump($match);
-				$specialmedia=new LoopMedia($match[1],$match[2]);
-				$specialmedia->setPageTitle($page_title);
-				$specialmedia->setPageURL($page_url);
+				if ($match[0] == 'loop_media') {
+					$specialmedia=new LoopMedia($match[1],$match[2]);
+					$specialmedia->setPageTitle($page_title);
+					$specialmedia->setPageURL($page_url);
 
-				$specialmedia->setStructureTitle($structure_title);
-				$specialmedia->setStructureURL($structure_url);
-				$specialmedia->setStructureSequence($structure_sequence);
-				$specialmedia->setStructureIndex($structure_index);
-				$specialmedia->setStructureIndexOrder($structure_index_order);
-				$specialmedia->setPageTocNumber($page_toc_number);
-				$specialmedia->setPosOnPage($posOnPage);
+					$specialmedia->setStructureTitle($structure_title);
+					$specialmedia->setStructureURL($structure_url);
+					$specialmedia->setStructureSequence($structure_sequence);
+					$specialmedia->setStructureIndex($structure_index);
+					$specialmedia->setStructureIndexOrder($structure_index_order);
+					$specialmedia->setPageTocNumber($page_toc_number);
+					$specialmedia->setPosOnPage($posOnPage);
 
-				// var_dump($specialmedia);
-				$specialmedias[]=$specialmedia;
-				$posOnPage++;
+					// var_dump($specialmedia);
+					$specialmedias[]=$specialmedia;
+					$posOnPage++;
+				}
 			}
 
 		}

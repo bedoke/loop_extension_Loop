@@ -140,21 +140,23 @@ class SpecialLoopListings extends SpecialPage {
 			$posOnPage=0;
 			foreach ($matches as $match) {
 				//var_dump($match);
-				$speciallisting=new LoopListing($match[1],$match[2]);
-				$speciallisting->setPageTitle($page_title);
-				$speciallisting->setPageURL($page_url);
+				if ($match[0] == 'loop_listing') {
+					$speciallisting=new LoopListing($match[1],$match[2]);
+					$speciallisting->setPageTitle($page_title);
+					$speciallisting->setPageURL($page_url);
 
-				$speciallisting->setStructureTitle($structure_title);
-				$speciallisting->setStructureURL($structure_url);
-				$speciallisting->setStructureSequence($structure_sequence);
-				$speciallisting->setStructureIndex($structure_index);
-				$speciallisting->setStructureIndexOrder($structure_index_order);
-				$speciallisting->setPageTocNumber($page_toc_number);
-				$speciallisting->setPosOnPage($posOnPage);
+					$speciallisting->setStructureTitle($structure_title);
+					$speciallisting->setStructureURL($structure_url);
+					$speciallisting->setStructureSequence($structure_sequence);
+					$speciallisting->setStructureIndex($structure_index);
+					$speciallisting->setStructureIndexOrder($structure_index_order);
+					$speciallisting->setPageTocNumber($page_toc_number);
+					$speciallisting->setPosOnPage($posOnPage);
 
-				// var_dump($speciallisting);
-				$speciallistings[]=$speciallisting;
-				$posOnPage++;
+					// var_dump($speciallisting);
+					$speciallistings[]=$speciallisting;
+					$posOnPage++;
+				}
 			}
 
 		}

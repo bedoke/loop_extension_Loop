@@ -140,21 +140,23 @@ class SpecialLoopFormulas extends SpecialPage {
 			$posOnPage=0;
 			foreach ($matches as $match) {
 				//var_dump($match);
-				$specialformula=new LoopFormula($match[1],$match[2]);
-				$specialformula->setPageTitle($page_title);
-				$specialformula->setPageURL($page_url);
+				if ($match[0] == 'loop_formula') {
+					$specialformula=new LoopFormula($match[1],$match[2]);
+					$specialformula->setPageTitle($page_title);
+					$specialformula->setPageURL($page_url);
 
-				$specialformula->setStructureTitle($structure_title);
-				$specialformula->setStructureURL($structure_url);
-				$specialformula->setStructureSequence($structure_sequence);
-				$specialformula->setStructureIndex($structure_index);
-				$specialformula->setStructureIndexOrder($structure_index_order);
-				$specialformula->setPageTocNumber($page_toc_number);
-				$specialformula->setPosOnPage($posOnPage);
+					$specialformula->setStructureTitle($structure_title);
+					$specialformula->setStructureURL($structure_url);
+					$specialformula->setStructureSequence($structure_sequence);
+					$specialformula->setStructureIndex($structure_index);
+					$specialformula->setStructureIndexOrder($structure_index_order);
+					$specialformula->setPageTocNumber($page_toc_number);
+					$specialformula->setPosOnPage($posOnPage);
 
-				// var_dump($specialformula);
-				$specialformulas[]=$specialformula;
-				$posOnPage++;
+					// var_dump($specialformula);
+					$specialformulas[]=$specialformula;
+					$posOnPage++;
+				}
 			}
 
 		}
