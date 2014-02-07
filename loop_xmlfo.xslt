@@ -87,13 +87,13 @@
 		<xsl:param name="index_exists"><xsl:call-template name="index_exists"></xsl:call-template></xsl:param>			
 		<xsl:param name="glossary_exists"><xsl:call-template name="glossary_exists"></xsl:call-template></xsl:param>
 		<fo:page-sequence master-reference="full-page" id="appendix_sequence">
-			<fo:static-content font-family="'Cambria Math', Cambria" flow-name="xsl-region-before">
+			<fo:static-content font-family="Cambria, 'Cambria Math'" flow-name="xsl-region-before">
 				<xsl:call-template name="default-header"></xsl:call-template>			
 			</fo:static-content>			
-			<fo:static-content font-family="'Cambria Math', Cambria" flow-name="xsl-region-after">
+			<fo:static-content font-family="Cambria, 'Cambria Math'" flow-name="xsl-region-after">
 				<xsl:call-template name="default-footer"></xsl:call-template>
 			</fo:static-content>
-			<fo:flow font-family="'Cambria Math', Cambria" flow-name="xsl-region-body">
+			<fo:flow font-family="Cambria, 'Cambria Math'" flow-name="xsl-region-body">
 				<xsl:call-template name="page-content-appendix"></xsl:call-template>
 				
                 <xsl:if test="$cite_exists='1'">
@@ -119,26 +119,26 @@
 		</fo:page-sequence>	
 		<xsl:if test="$glossary_exists='1'">
 		<fo:page-sequence master-reference="full-page" id="glossary_sequence">
-			<fo:static-content font-family="'Cambria Math', Cambria" flow-name="xsl-region-before">
+			<fo:static-content font-family="Cambria, 'Cambria Math'" flow-name="xsl-region-before">
 				<xsl:call-template name="default-header"></xsl:call-template>			
 			</fo:static-content>			
-			<fo:static-content font-family="'Cambria Math', Cambria" flow-name="xsl-region-after">
+			<fo:static-content font-family="Cambria, 'Cambria Math'" flow-name="xsl-region-after">
 				<xsl:call-template name="default-footer"></xsl:call-template>
 			</fo:static-content>
-			<fo:flow font-family="'Cambria Math', Cambria" flow-name="xsl-region-body">
+			<fo:flow font-family="Cambria, 'Cambria Math'" flow-name="xsl-region-body">
 				<xsl:call-template name="page-content-glossary"></xsl:call-template>
 			</fo:flow>
 		</fo:page-sequence>	            	
         </xsl:if>			
 		<xsl:if test="$index_exists='1'">
 		<fo:page-sequence master-reference="full-page-2column" id="index_sequence">
-			<fo:static-content font-family="'Cambria Math', Cambria" flow-name="xsl-region-before">
+			<fo:static-content font-family="Cambria, 'Cambria Math'" flow-name="xsl-region-before">
 				<xsl:call-template name="default-header"></xsl:call-template>			
 			</fo:static-content>			
-			<fo:static-content font-family="'Cambria Math', Cambria" flow-name="xsl-region-after">
+			<fo:static-content font-family="Cambria, 'Cambria Math'" flow-name="xsl-region-after">
 				<xsl:call-template name="default-footer"></xsl:call-template>
 			</fo:static-content>
-			<fo:flow font-family="'Cambria Math', Cambria" flow-name="xsl-region-body">		
+			<fo:flow font-family="Cambria, 'Cambria Math'" flow-name="xsl-region-body">		
             	<xsl:call-template name="page-content-index"></xsl:call-template>
 			</fo:flow>
 		</fo:page-sequence>	            	
@@ -742,7 +742,7 @@
 	<!-- Page Sequence für Cover-Page -->
 	<xsl:template name="page-sequence-cover">
 		<fo:page-sequence master-reference="cover-page" id="cover_sequence">
-			<fo:flow font-family="'Cambria Math', Cambria" flow-name="xsl-region-body">
+			<fo:flow font-family="Cambria, 'Cambria Math'" flow-name="xsl-region-body">
 				<xsl:call-template name="page-content-cover"></xsl:call-template>
 			</fo:flow>
 		</fo:page-sequence>
@@ -783,15 +783,15 @@
 	<xsl:template name="page-sequence-table-of-content">
 		<fo:page-sequence master-reference="full-page"
 			id="table_of_content_sequence">
-			<fo:static-content font-family="'Cambria Math', Cambria"
+			<fo:static-content font-family="Cambria, 'Cambria Math'"
 				flow-name="xsl-region-before">
 				<xsl:call-template name="default-header"></xsl:call-template>
 			</fo:static-content>
-			<fo:static-content font-family="'Cambria Math', Cambria"
+			<fo:static-content font-family="Cambria, 'Cambria Math'"
 				flow-name="xsl-region-after">
 				<xsl:call-template name="default-footer"></xsl:call-template>
 			</fo:static-content>
-			<fo:flow font-family="'Cambria Math', Cambria" flow-name="xsl-region-body"
+			<fo:flow font-family="Cambria, 'Cambria Math'" flow-name="xsl-region-body"
 				text-align="justify" font-size="11.5pt" line-height="15.5pt"
 				orphans="3">
 				<xsl:call-template name="page-content-table-of-content"></xsl:call-template>
@@ -987,15 +987,15 @@
 	<xsl:template name="page-sequence-contentpages">
 		<fo:page-sequence master-reference="default-page"
 			id="contentpages_sequence">
-			<fo:static-content font-family="'Cambria Math', Cambria"
+			<fo:static-content font-family="Cambria, 'Cambria Math'"
 				flow-name="xsl-region-before">
 				<xsl:call-template name="default-header"></xsl:call-template>
 			</fo:static-content>
-			<fo:static-content font-family="'Cambria Math', Cambria"
+			<fo:static-content font-family="Cambria, 'Cambria Math'"
 				flow-name="xsl-region-after">
 				<xsl:call-template name="default-footer"></xsl:call-template>
 			</fo:static-content>
-			<fo:flow font-family="'Cambria Math', Cambria" flow-name="xsl-region-body"
+			<fo:flow font-family="Cambria, 'Cambria Math'" flow-name="xsl-region-body"
 				text-align="justify" font-size="11.5pt" line-height="15.5pt"
 				orphans="3">
 				<xsl:call-template name="page-content-contentpages"></xsl:call-template>
@@ -2418,7 +2418,7 @@
 
 	<xsl:template match="preline" >
     	<!-- <fo:block font-family="Courier"> -->
-    	<fo:block font-family="'Cambria Math', Cambria">
+    	<fo:block font-family="Cambria, 'Cambria Math'">
 	      <xsl:apply-templates></xsl:apply-templates>
     	</fo:block>
 	</xsl:template>
