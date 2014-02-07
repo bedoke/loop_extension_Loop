@@ -156,10 +156,24 @@ function xslt_transform_graphviz($input) {
 
 
 function xslt_transform_link($input) {
+	
 	$return='';
 	$childs=array();
 	$input_object=$input[0];
-
+	wfDebug( __METHOD__ . ': input : '.print_r($input_object->C14N(),true)."\n");
+	
+	/*
+	wfDebug( __METHOD__ . ': input_obj : '.print_r($input_object,true)."\n");
+	
+    $children = $input_object->childNodes; 
+    foreach ($children as $child) { 
+        wfDebug( __METHOD__ . ': input_child : '.print_r($child->C14N(),true)."\n");
+		if ($child->tagName == 'part') {
+			wfDebug( __METHOD__ . ': input_part : '.print_r($child->nodeValue,true)."\n");
+		}
+    } 	
+	*/
+	
 	//$input_value=print_r($input_object->tagName,true);
 
 	if ($input_object->hasAttribute('type')) {
@@ -177,6 +191,23 @@ function xslt_transform_link($input) {
 		$child_name=$child->tagName;
 		if ($child_name=='') {$child_name='text';}
 		$child_value=$child->textContent;
+		
+		
+		
+		if ($child_name == 'part') {
+			if (substr($child_value, -2) == 'px') {
+				$child_name = 'width';
+				$child_value = substr($child_value,0,-2);
+			} elseif (($child_value == 'right') || ($child_value == 'left') || ($child_value == 'center')) {
+				$child_name = 'align';
+				
+			}
+		}
+		
+		
+		
+		
+		
 		$childs[$child_name]=$child_value;
 	}
 
@@ -184,6 +215,7 @@ function xslt_transform_link($input) {
     $childs['type']='internal';
   }
 
+  wfDebug( __METHOD__ . ': input_childs : '.print_r($childs,true)."\n");
 
 	if ($childs['type']=='external') {
 		$return_xml =  '<php_link_external href="'.$childs['href'].'">'.$childs['text'].'</php_link_external>' ;
@@ -202,6 +234,7 @@ function xslt_transform_link($input) {
 			}
 				
 			$imagewidth='150mm';
+			/*
 			if (array_key_exists('part', $childs)) {
 				$part=$childs['part'];
 				if (stristr('px',$part)) {
@@ -220,6 +253,14 @@ function xslt_transform_link($input) {
 						$imagewidth=round($width,0).'mm';
 					}				
 				}
+				*/
+			if (array_key_exists('width', $childs)) {
+				$width=0.214*intval($childs['width']);
+				if ($width>150) {
+					$imagewidth='150mm';
+				} else {
+					$imagewidth=round($width,0).'mm';
+				}								
 			} else {
 			    $size=getimagesize($imagepath);
 				$width=0.214*intval($size[0]);
@@ -231,7 +272,11 @@ function xslt_transform_link($input) {
 			}
 				
 			//$input_value=print_r($childs,true);
-			$return_xml =  '<php_link_image imagepath="'.$imagepath.'" imagewidth="'.$imagewidth.'"></php_link_image>';
+			$return_xml =  '<php_link_image imagepath="'.$imagepath.'" imagewidth="'.$imagewidth.'" ';
+			if ($childs['align']) {
+				$return_xml .= ' align="'.$childs['align'].'" ';
+			}
+			$return_xml .=  '></php_link_image>';
 				
 		} else if (($target_array[0]=='Kategorie')||($target_array[0]=='Category')) {
 		
@@ -537,7 +582,7 @@ function get_biblio() {
 			$converter = new MediaWikiConverter ;
 			$articlexml=$converter->article2xml ( $bibliopagename, $return_xml  );
 
-wfDebug( __METHOD__ . ': articlexml : '.print_r($articlexml,true)."\n");	
+//wfDebug( __METHOD__ . ': articlexml : '.print_r($articlexml,true)."\n");	
 
 			$return_doc = new DOMDocument;
 			$return_doc->loadXml($articlexml);
@@ -549,7 +594,7 @@ wfDebug( __METHOD__ . ': articlexml : '.print_r($articlexml,true)."\n");
 		$return_doc->loadXml('<i></i>');
 	}
 	
-wfDebug( __METHOD__ . ': return_doc : '.print_r($return_doc->saveXML(),true)."\n");	
+//wfDebug( __METHOD__ . ': return_doc : '.print_r($return_doc->saveXML(),true)."\n");	
 	return $return_doc;
 }
 
