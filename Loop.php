@@ -155,8 +155,13 @@ function loopInit( Parser &$parser ) {
 
 	$parser->setHook( 'loop_paragraph', 'fnRenderLoopParagraph' );
 	$parser->setHook( 'loop_sidenote', 'fnRenderLoopSidenote' );
+	$parser->setHook( 'loop_sidebar', 'fnRenderLoopSidebar' );
 
 	return true;
+}
+
+function fnRenderLoopSidebar($input, array $args, Parser $parser, PPFrame $frame) {
+	return '';
 }
 
 function fnRenderLoopSidenote($input, array $args, Parser $parser, PPFrame $frame) {
