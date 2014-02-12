@@ -225,7 +225,7 @@ function fnRenderLoopNoprint($input, array $args, Parser $parser, PPFrame $frame
 
 function fnRenderLoopToc($input, array $args, Parser $parser, PPFrame $frame) {
 	$loopstructure = new LoopStructure();
-	return $loopstructure->renderToc();
+	return $loopstructure->renderToc($args);
 }
 
 
