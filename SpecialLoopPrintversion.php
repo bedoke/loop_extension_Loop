@@ -160,7 +160,7 @@ function xslt_transform_link($input) {
 	$return='';
 	$childs=array();
 	$input_object=$input[0];
-	wfDebug( __METHOD__ . ': input : '.print_r($input_object->C14N(),true)."\n");
+	//wfDebug( __METHOD__ . ': input : '.print_r($input_object->C14N(),true)."\n");
 	
 	/*
 	wfDebug( __METHOD__ . ': input_obj : '.print_r($input_object,true)."\n");
@@ -1028,8 +1028,18 @@ class SpecialLoopPrintversion extends SpecialPage {
 				array(
 				)
 				);
-				$row=mysql_fetch_assoc($res->result);
-				return $row["TocText"];
+				//$row=mysql_fetch_assoc($res->result);
+				//$row=mysql_fetch_array($res->result, MYSQL_ASSOC);
+				//wfDebug( __METHOD__ . ': res : '.print_r($res,true)."\n");
+				//wfDebug( __METHOD__ . ': result : '.print_r($res->result,true)."\n");
+				//wfDebug( __METHOD__ . ': row : '.print_r($row,true)."\n");
+				
+				foreach ( $res as $row ) {
+					$tt=$row->TocText;
+					}
+				//wfDebug( __METHOD__ . ': tt : '.print_r($tt,true)."\n");
+				
+				return $tt;
 	}
 
 
