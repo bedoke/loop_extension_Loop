@@ -627,6 +627,9 @@ class SpecialLoopPrintversion extends SpecialPage {
 
 
 		$loop_xml=$this->get_loop_xml($tmpname);
+		
+		$loop_xml = str_replace ( '&lt;nowiki&gt;' , '<nowiki>', $loop_xml);
+		$loop_xml = str_replace ( '&lt;/nowiki&gt;' , '</nowiki>', $loop_xml);
 
 		if ($_SERVER["SERVER_NAME"] == 'devloop.oncampus.de') {
 			$xmlwikiFile = $IP."/tmp/".$tmpname."_wiki.xml";
@@ -643,7 +646,8 @@ class SpecialLoopPrintversion extends SpecialPage {
 		} catch (Exception $e) {
 			var_dump($e);
 		}
-
+		
+		
 		try {
 			$xsl = new DOMDocument;
 			$xsl->load($IP.'/extensions/Loop/loop_xmlfo.xslt');
@@ -662,6 +666,8 @@ class SpecialLoopPrintversion extends SpecialPage {
 		
 		#var_dump($xmlfo);
 		#exit;
+		
+		
 		
 		if ($_SERVER["SERVER_NAME"] == 'devloop.oncampus.de') {
 		$xmlFile = $IP."/tmp/".$tmpname.".xml";
