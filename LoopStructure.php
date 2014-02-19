@@ -185,9 +185,16 @@ class LoopStructure {
 	}
 
 
-	function renderToc ($args) {
-
+function renderToc ($args) {
+	
 		global $wgLoopStructureNumbering, $wgLoopStructureUseTopLevel;
+		
+		if ($args['level']){
+			$level=intval($args['level']);
+		} else {
+			$level=1;
+		}		
+		
 		$return='';
 		$article_id=($GLOBALS["wgTitle"]->mArticleID);
 		$item = LoopStructureItem::newFromArticleId($article_id);
@@ -195,7 +202,17 @@ class LoopStructure {
 			$indexID=$item->mIndexArticleId;
 			$parentID=$item->mParentArticleId;
 			$aktTocLevel=$item->mTocLevel;
-
+			$aktTocNumber=$item->mTocNumber;
+			$aktTocNumber= $aktTocNumber.'.';
+			
+			$cond = '(';
+			for ($i=0;$i<$level;$i++) {
+				if($i>0) {$cond .= ' OR ';}
+				$cond.='(TocLevel = '.intval($aktTocLevel+$i+1).')';
+			}			
+			$cond .= ')';			
+			$condition = '(IndexArticleId = '.$indexID.') AND (TocNumber like "'.$aktTocNumber.'%") AND '.$cond;
+			
 			$dbr = wfGetDB( DB_SLAVE );
 			$res = $dbr->select(
 			'loopstructure',
@@ -212,11 +229,8 @@ class LoopStructure {
                 'ParentArticleId',
 				'IndexOrder'
 				),
-				array(
-				'IndexArticleId' => $indexID,
-                'ParentArticleId' => $article_id,
-				'TocLevel' => ($aktTocLevel+1)
-				),
+				$condition
+				,
 				__METHOD__,
 				array(
 				'ORDER BY' => 'Sequence ASC'
