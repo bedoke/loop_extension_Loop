@@ -203,7 +203,9 @@ function renderToc ($args) {
 			$parentID=$item->mParentArticleId;
 			$aktTocLevel=$item->mTocLevel;
 			$aktTocNumber=$item->mTocNumber;
-			$aktTocNumber= $aktTocNumber.'.';
+			if ($aktTocLevel>0) {
+				$aktTocNumber= $aktTocNumber.'.';
+			}
 			
 			$cond = '(';
 			for ($i=0;$i<$level;$i++) {
