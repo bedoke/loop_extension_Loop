@@ -1327,6 +1327,11 @@
 				<!-- <fo:block><xsl:apply-templates></xsl:apply-templates></fo:block> -->
 			</xsl:when>	
 			<xsl:when test="@extension_name='spoiler'">
+				<fo:table width="170mm" table-layout="fixed" border-collapse="separate">
+					<fo:table-body>
+						<fo:table-row>
+							<fo:table-cell width="150mm" border-width="0.3mm" border-style="dashed" border-color="#cecece" padding-start="1mm" padding-end="1mm">
+								<fo:block>			
 				<xsl:choose>
 					<xsl:when test="@text">
 						<fo:block font-weight="bold">
@@ -1340,7 +1345,13 @@
 					</xsl:otherwise>
 				</xsl:choose>
 				<fo:block><xsl:apply-templates></xsl:apply-templates></fo:block>
-			</xsl:when>								
+				
+								</fo:block>
+							</fo:table-cell>
+						</fo:table-row>
+					</fo:table-body>
+				</fo:table>
+			</xsl:when>							
 			<xsl:when test="@extension_name='loop_formula'">
 				<xsl:apply-templates></xsl:apply-templates>
 			</xsl:when>
