@@ -160,7 +160,7 @@ function xslt_transform_link($input) {
 	$return='';
 	$childs=array();
 	$input_object=$input[0];
-	wfDebug( __METHOD__ . ': input : '.print_r($input_object->C14N(),true)."\n");
+	//wfDebug( __METHOD__ . ': input : '.print_r($input_object->C14N(),true)."\n");
 	
 	/*
 	wfDebug( __METHOD__ . ': input_obj : '.print_r($input_object,true)."\n");
@@ -627,6 +627,9 @@ class SpecialLoopPrintversion extends SpecialPage {
 
 
 		$loop_xml=$this->get_loop_xml($tmpname);
+		
+		$loop_xml = str_replace ( '&lt;nowiki&gt;' , '<nowiki>', $loop_xml);
+		$loop_xml = str_replace ( '&lt;/nowiki&gt;' , '</nowiki>', $loop_xml);
 
 		if ($_SERVER["SERVER_NAME"] == 'devloop.oncampus.de') {
 			$xmlwikiFile = $IP."/tmp/".$tmpname."_wiki.xml";
@@ -643,7 +646,8 @@ class SpecialLoopPrintversion extends SpecialPage {
 		} catch (Exception $e) {
 			var_dump($e);
 		}
-
+		
+		
 		try {
 			$xsl = new DOMDocument;
 			$xsl->load($IP.'/extensions/Loop/loop_xmlfo.xslt');
@@ -662,6 +666,8 @@ class SpecialLoopPrintversion extends SpecialPage {
 		
 		#var_dump($xmlfo);
 		#exit;
+		
+		
 		
 		if ($_SERVER["SERVER_NAME"] == 'devloop.oncampus.de') {
 		$xmlFile = $IP."/tmp/".$tmpname.".xml";
@@ -1028,8 +1034,18 @@ class SpecialLoopPrintversion extends SpecialPage {
 				array(
 				)
 				);
-				$row=mysql_fetch_assoc($res->result);
-				return $row["TocText"];
+				//$row=mysql_fetch_assoc($res->result);
+				//$row=mysql_fetch_array($res->result, MYSQL_ASSOC);
+				//wfDebug( __METHOD__ . ': res : '.print_r($res,true)."\n");
+				//wfDebug( __METHOD__ . ': result : '.print_r($res->result,true)."\n");
+				//wfDebug( __METHOD__ . ': row : '.print_r($row,true)."\n");
+				
+				foreach ( $res as $row ) {
+					$tt=$row->TocText;
+					}
+				//wfDebug( __METHOD__ . ': tt : '.print_r($tt,true)."\n");
+				
+				return $tt;
 	}
 
 

@@ -11,91 +11,71 @@ class LoopStructure {
 	function Render($input, $title, $options, $indexorder) {
 		global $wgLoopStructureNumbering, $wgLoopStructureUseTopLevel;
 
-		//wfDebug( __METHOD__ . ': indexorder : '.print_r($indexorder,true));
-		//var_dump($indexorder);
-			
-		// parse text
 		$localParser = new Parser();
 		$output = $localParser->parse($input, $title, $options);
 		$html_text = $output->getText();
 		$offset = 0;
-
-		//var_dump("PPP");
-		//var_dump($html_text);
-
+		
 		// find root page
 		$pattern = '@<p>(<a href=.*?</a>).*?</p>@s';
 		if (!preg_match($pattern, $html_text, $matches, PREG_OFFSET_CAPTURE, $offset)) return $html_text;
-		$root_page_link = $matches[1][0];
-		$offset = $matches[0][1];
+		$root_page_link = $matches[1][0];		
+		
+		$matches=array();
+		
+		$l=mb_split ( '\n' , $html_text);
+		$t='';
+		$ist=false;
+		foreach ($l as $line) {
 
-		//var_dump($root_page_link);
-		//var_dump($offset);
+			if ($ist && (stristr ( $line , '</div>' ))) {
+				$ist=false;
 
-		// find TOC
-		$pattern = '@<table id="toc"(.*?)</table>@s';
-		if (!preg_match($pattern, $html_text, $matches, PREG_OFFSET_CAPTURE, $offset)) return $html_text;
-		$toc = $matches[0][0];
-		$offset = $matches[0][1];
+			}				
+			if ($ist) {
+				$t.=$line;
+				}
+			
+			if (stristr ( $line , '<div id="toc" class="toc">' )) {
+				$ist=true;
 
-		//var_dump($toc);
-		//var_dump($offset);
-
-		// change TOC title
-
-
-		if (($wgLoopStructureNumbering) && ($wgLoopStructureUseTopLevel)) {
-			$pattern = '@(">)(.*?)(</a>)@';
-			$replacement='$1 ' . $indexorder.' $2 $3';
-			$root_page_link = preg_replace ($pattern, $replacement, $root_page_link, 1);
+			}
+			
+			
 		}
-
-		$pattern = '@(<div id="toctitle"><h2>)(.*?)(</h2></div>)@';
-		$replacement = '$1 ' . $root_page_link . '$3';
-
-		$toc = preg_replace ($pattern, $replacement, $toc, 1);
-
+		$toc=$t;
+		
 		// change TOC links
 		$error=false;
 		$pattern = '@<li class="toclevel-(.*?)"><a href="(#.*?)"><span class="tocnumber">(.*?)</span> <span class="toctext">(.*?)</span></a>@';
 		do {
 			$topic_found = preg_match($pattern, $toc, $matches, PREG_OFFSET_CAPTURE);
 			if ($topic_found) {
+
 				$item_text = $matches[4][0];
 				$title = Title::newFromText($item_text);
 				if ($title) {
 					$page_url = $title->escapeLocalURL();
 					$url_position = $matches[2][1];
 					$url_length = strlen($matches[2][0]);
+					
 					$toc = substr_replace($toc, $page_url, $url_position, $url_length);
+					
+					
 				} else {
 					$toc = 'error: '.$matches[2][0];
 					$error=true;
 				}
 			}
-		} while ($topic_found && !$error);
+		} while ($topic_found && !$error);		
 
-
-		if ($wgLoopStructureNumbering) {
-			if ($wgLoopStructureUseTopLevel) {
-				$tocnumber_pattern='@<span class="tocnumber">(.*?)</span>@';
-				$tocnumber_replace='<span class="tocnumber">'.$indexorder.'.${1}</span>';
-				$toc=preg_replace ($tocnumber_pattern,$tocnumber_replace,$toc);
-			}
-		} else {
-			$tocnumber_pattern='@<span class="tocnumber">(.*?)</span>@';
-			$tocnumber_replace='<span class="tocnumber"></span>';
-			$toc=preg_replace ($tocnumber_pattern,$tocnumber_replace,$toc);
-		}
-
-
-		// return HTML output
-		//var_dump($toc);
+		$toc = '<h2>'.$root_page_link.'</h2>'.$toc;
 		return $toc;
+		
+
 	}
 
 	function Save($text, $article, $user, $indexorder=0) {
-		wfDebug( __METHOD__ . ': indexorder : '.print_r($indexorder,true));
 		$article_id = $article->getID();
 		if ($article_id) {  // Verify that the page has been saved at least once
 			$this->EraseInformation($article_id);
@@ -116,19 +96,14 @@ class LoopStructure {
 	}
 
 	function SaveIndex($text, $index_article_id, $indexorder=0) {
-		wfDebug( __METHOD__ . ': index_article_id : '.print_r($index_article_id,true));
-		wfDebug( __METHOD__ . ': indexorder : '.print_r($indexorder,true));
-		wfDebug( __METHOD__ . ': text : '.print_r($text,true));
 		// get hierarchy root
+		
+		wfDebug( __METHOD__ . ': savetext : '.print_r($text,true));
+		
 		$offset = 0;
-		$pattern = '@<table id="toc"(.*?)<a href=(.*?)</a></h2></div>@is';
+		$pattern = '@(<h2><a href=")(.*?)(" title=")(.*?)(">)(.*?)(</a></h2>)@is';
 		if (!preg_match($pattern, $text, $matches, PREG_OFFSET_CAPTURE, $offset)) return;
-		$href = $matches[2][0];
-		$offset = $matches[0][1];
-		$pattern = '@title="(.*?)">@';
-		if (!preg_match($pattern, $href, $matches, PREG_OFFSET_CAPTURE)) return;
-		$root_title = $matches[1][0];
-		wfDebug( __METHOD__ . ': root_title : '.print_r($root_title,true));
+		$root_title = $matches[4][0];
 		$title = Title::newFromText($root_title);
 		$root_article_id = $title->getArticleID();
 		$max_level = 0;
@@ -150,7 +125,6 @@ class LoopStructure {
 
 		$loopstructureItem->deleteArticleId();  // remove article from any other hierarchy
 		
-		wfDebug( __METHOD__ . ': loopstructureItem : '.print_r($loopstructureItem,true));
 		
 		$loopstructureItem->addToDatabase();  // add article to this hierarchy
 		$previousLoopStructureItem = $loopstructureItem;
@@ -200,6 +174,9 @@ class LoopStructure {
 
 			$loopstructureItem->deleteArticleId();  // remove article from any other hierarchy
 			$loopstructureItem->addToDatabase();  // add article to this hierarchy
+			
+			
+			
 			// update previous article
 			$previousLoopStructureItem->mNextArticleId = $current_article_id;
 			$previousLoopStructureItem->updateNextArticleId();
@@ -208,9 +185,16 @@ class LoopStructure {
 	}
 
 
-	function renderToc () {
-
+function renderToc ($args) {
+	
 		global $wgLoopStructureNumbering, $wgLoopStructureUseTopLevel;
+		
+		if ($args['level']){
+			$level=intval($args['level']);
+		} else {
+			$level=1;
+		}		
+		
 		$return='';
 		$article_id=($GLOBALS["wgTitle"]->mArticleID);
 		$item = LoopStructureItem::newFromArticleId($article_id);
@@ -218,7 +202,19 @@ class LoopStructure {
 			$indexID=$item->mIndexArticleId;
 			$parentID=$item->mParentArticleId;
 			$aktTocLevel=$item->mTocLevel;
-
+			$aktTocNumber=$item->mTocNumber;
+			if ($aktTocLevel>0) {
+				$aktTocNumber= $aktTocNumber.'.';
+			}
+			
+			$cond = '(';
+			for ($i=0;$i<$level;$i++) {
+				if($i>0) {$cond .= ' OR ';}
+				$cond.='(TocLevel = '.intval($aktTocLevel+$i+1).')';
+			}			
+			$cond .= ')';			
+			$condition = '(IndexArticleId = '.$indexID.') AND (TocNumber like "'.$aktTocNumber.'%") AND '.$cond;
+			
 			$dbr = wfGetDB( DB_SLAVE );
 			$res = $dbr->select(
 			'loopstructure',
@@ -235,11 +231,8 @@ class LoopStructure {
                 'ParentArticleId',
 				'IndexOrder'
 				),
-				array(
-				'IndexArticleId' => $indexID,
-                'ParentArticleId' => $article_id,
-				'TocLevel' => ($aktTocLevel+1)
-				),
+				$condition
+				,
 				__METHOD__,
 				array(
 				'ORDER BY' => 'Sequence ASC'
@@ -344,6 +337,7 @@ class LoopStructure {
 		return $return;
 
 	}
+	
 
 
 	function renderLoopToc () {
