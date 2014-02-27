@@ -3,10 +3,10 @@
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2004/07/xpath-functions"
 	xmlns:xdt="http://www.w3.org/2004/07/xpath-datatypes" xmlns:fox="http://xml.apache.org/fop/extensions"
-	xmlns:xlink="http://www.w3.org/1999/xlink"
+	xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:exsl="http://exslt.org/common"
 	xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:func="http://exslt.org/functions"
-	xmlns:php="http://php.net/xsl"
-	extension-element-prefixes="func php" xmlns:functx="http://www.functx.com" exclude-result-prefixes="xhtml">
+	xmlns:php="http://php.net/xsl" xmlns:str="http://exslt.org/strings"
+	extension-element-prefixes="func php str" xmlns:functx="http://www.functx.com" exclude-result-prefixes="xhtml exslt">
 
 	<!-- <xsl:namespace-alias stylesheet-prefix="php" result-prefix="xsl" /> -->
 
@@ -2433,5 +2433,120 @@
 	      <xsl:apply-templates></xsl:apply-templates>
     	</fo:block>
 	</xsl:template>
+	
+
+
+	<xsl:template match="xhtml:span|span" >
+		<fo:inline>
+			<xsl:call-template name="css-style-attributes"></xsl:call-template>
+			<xsl:apply-templates></xsl:apply-templates>
+		</fo:inline>
+	</xsl:template>
+	
+
+	<xsl:template name="css-style-attributes">
+		<xsl:variable name="cssentries">
+			<xsl:call-template name="str:tokenize">
+				<xsl:with-param name="string" select="translate(@style,' ','')" />
+				<xsl:with-param name="delimiters" select="';'" />
+			</xsl:call-template>
+		</xsl:variable>		
+		<xsl:for-each select="exsl:node-set($cssentries)/node()">
+			<xsl:call-template name="css-style-attribute">
+				<xsl:with-param name="cssentry" select="." />
+			</xsl:call-template>
+		</xsl:for-each>
+	</xsl:template>
+	
+	
+	<xsl:template name="css-style-attribute">
+		<xsl:param name="cssentry"></xsl:param>
+		
+		<xsl:variable name="cssparts">
+			<xsl:call-template name="str:tokenize">
+				<xsl:with-param name="string" select="$cssentry" />
+				<xsl:with-param name="delimiters" select="':'" />
+			</xsl:call-template>
+		</xsl:variable>			
+		
+		<xsl:variable name="csskey">
+			<xsl:value-of select="exsl:node-set($cssparts)/node()[1]"/>
+		</xsl:variable>
+		<xsl:variable name="cssvalue">
+			<xsl:value-of select="exsl:node-set($cssparts)/node()[2]"/>
+		</xsl:variable>
+		
+		<xsl:choose>
+			<xsl:when test="$csskey='background-color'">
+				<xsl:attribute name="background-color">
+					<xsl:value-of select="$cssvalue"/>
+				</xsl:attribute>
+			</xsl:when>
+			<xsl:when test="$csskey='color'">
+				<xsl:attribute name="color">
+					<xsl:value-of select="$cssvalue"/>
+				</xsl:attribute>
+			</xsl:when>
+		</xsl:choose>
+	</xsl:template>
+	
+	<xsl:template name="str:tokenize">
+	  <xsl:param name="string" select="''" />
+	  <xsl:param name="delimiters" select="' &#x9;&#xA;'" />
+	  <xsl:choose>
+		<xsl:when test="not($string)" />
+		<xsl:when test="not($delimiters)">
+		  <xsl:call-template name="str:_tokenize-characters">
+			<xsl:with-param name="string" select="$string" />
+		  </xsl:call-template>
+		</xsl:when>
+		<xsl:otherwise>
+		  <xsl:call-template name="str:_tokenize-delimiters">
+			<xsl:with-param name="string" select="$string" />
+			<xsl:with-param name="delimiters" select="$delimiters" />
+		  </xsl:call-template>
+		</xsl:otherwise>
+	  </xsl:choose>
+	</xsl:template>
+
+	<xsl:template name="str:_tokenize-characters">
+	  <xsl:param name="string" />
+	  <xsl:if test="$string">
+		<token><xsl:value-of select="substring($string, 1, 1)" /></token>
+		<xsl:call-template name="str:_tokenize-characters">
+		  <xsl:with-param name="string" select="substring($string, 2)" />
+		</xsl:call-template>
+	  </xsl:if>
+	</xsl:template>
+
+	<xsl:template name="str:_tokenize-delimiters">
+	  <xsl:param name="string" />
+	  <xsl:param name="delimiters" />
+	  <xsl:variable name="delimiter" select="substring($delimiters, 1, 1)" />
+	  <xsl:choose>
+		<xsl:when test="not($delimiter)">
+		  <token><xsl:value-of select="$string" /></token>
+		</xsl:when>
+		<xsl:when test="contains($string, $delimiter)">
+		  <xsl:if test="not(starts-with($string, $delimiter))">
+			<xsl:call-template name="str:_tokenize-delimiters">
+			  <xsl:with-param name="string" select="substring-before($string, $delimiter)" />
+			  <xsl:with-param name="delimiters" select="substring($delimiters, 2)" />
+			</xsl:call-template>
+		  </xsl:if>
+		  <xsl:call-template name="str:_tokenize-delimiters">
+			<xsl:with-param name="string" select="substring-after($string, $delimiter)" />
+			<xsl:with-param name="delimiters" select="$delimiters" />
+		  </xsl:call-template>
+		</xsl:when>
+		<xsl:otherwise>
+		  <xsl:call-template name="str:_tokenize-delimiters">
+			<xsl:with-param name="string" select="$string" />
+			<xsl:with-param name="delimiters" select="substring($delimiters, 2)" />
+		  </xsl:call-template>
+		</xsl:otherwise>
+	  </xsl:choose>
+	</xsl:template>	
+	
 	
 </xsl:stylesheet>
