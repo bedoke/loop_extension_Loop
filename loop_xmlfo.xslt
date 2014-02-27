@@ -1730,6 +1730,10 @@
         	<xsl:attribute name="border-width">0.5pt</xsl:attribute>
         	<xsl:attribute name="border-color">black</xsl:attribute>
         	<xsl:attribute name="border-collapse">collapse</xsl:attribute>
+			
+			<xsl:call-template name="css-style-attributes"></xsl:call-template>
+			
+			
         	<xsl:if test="@colspan">
 				<xsl:attribute name="number-columns-spanned"><xsl:value-of select="@colspan"></xsl:value-of></xsl:attribute>
         	</xsl:if>
@@ -1749,6 +1753,9 @@
         	<xsl:attribute name="border-width">0.5pt</xsl:attribute>
         	<xsl:attribute name="border-color">black</xsl:attribute>
         	<xsl:attribute name="border-collapse">collapse</xsl:attribute>
+			
+			<xsl:call-template name="css-style-attributes"></xsl:call-template>
+			
         	<xsl:if test="@colspan">
 				<xsl:attribute name="number-columns-spanned"><xsl:value-of select="@colspan"></xsl:value-of></xsl:attribute>
         	</xsl:if>
@@ -2495,13 +2502,36 @@
 					<xsl:value-of select="$cssvalue"/>
 				</xsl:attribute>
 			</xsl:when>
+			<xsl:when test="$csskey='background'">
+				<xsl:attribute name="background-color">
+					<xsl:value-of select="$cssvalue"/>
+				</xsl:attribute>
+			</xsl:when>			
 			<xsl:when test="$csskey='color'">
 				<xsl:attribute name="color">
 					<xsl:value-of select="$cssvalue"/>
 				</xsl:attribute>
 			</xsl:when>
+			<xsl:when test="$csskey='text-align'">
+				<xsl:attribute name="text-align">
+					<xsl:choose>
+						<xsl:when test="$cssvalue='right'">
+							<xsl:text>end</xsl:text>
+						</xsl:when>
+						<xsl:when test="$cssvalue='center'">
+							<xsl:text>center</xsl:text>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:text>start</xsl:text>
+						</xsl:otherwise>
+					</xsl:choose>
+				</xsl:attribute>
+			</xsl:when>			
 		</xsl:choose>
 	</xsl:template>
+	
+	
+	
 	
 	<xsl:template name="str:tokenize">
 	  <xsl:param name="string" select="''" />
