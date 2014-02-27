@@ -57,6 +57,8 @@
 	<xsl:variable name="word_loopmedia_notice_video"  select="functx:get_term_name('word_loopmedia_notice_video')" />
 	
 	<xsl:variable name="word_quiz_notice"  select="functx:get_term_name('word_quiz_notice')" />
+	<xsl:variable name="word_learningapp_notice"  select="functx:get_term_name('word_learningapp_notice')" />
+	<xsl:variable name="word_embed_learningapp_notice"  select="functx:get_term_name('word_embed_learningapp_notice')" />
 	
 	<xsl:variable name="word_chapter"  select="functx:get_term_name('word_chapter')" />
 	<xsl:variable name="word_loopfigure"  select="functx:get_term_name('word_loopfigure')" />

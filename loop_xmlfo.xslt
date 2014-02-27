@@ -1700,11 +1700,49 @@
 					</fo:block>
 					<!-- <fo:block><fo:leader leader-length="100%" leader-pattern="rule" rule-thickness="0.3mm"/></fo:block> -->
 				</xsl:if>
+			</xsl:when>		
+			<xsl:when test="@extension_name='learningapp'">
+				<fo:block>
+					<xsl:value-of select="$word_learningapp_notice"></xsl:value-of>
+				</fo:block>
+				<fo:block>
+					<xsl:value-of select="$word_embed_learningapp_notice"></xsl:value-of>
+					<xsl:text> : </xsl:text>
+					<xsl:choose>
+						<xsl:when test="@app">
+							<fo:basic-link>
+								<xsl:attribute name="external-destination">
+									<xsl:text>http://LearningApps.org/watch?app=</xsl:text>
+									<xsl:value-of select="@app"></xsl:value-of>
+								</xsl:attribute>
+								<fo:inline text-decoration="underline">
+									<xsl:text>http://LearningApps.org/watch?app=</xsl:text>
+									<xsl:value-of select="@app"></xsl:value-of>
+								</fo:inline>
+								<xsl:text> </xsl:text>
+								<fo:inline ><fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="2mm" src="/opt/www/loop.oncampus.de/mediawiki/skins/loop/images/print/www_link.png"></fo:external-graphic></fo:inline>
+							</fo:basic-link>
+						</xsl:when>
+						<xsl:when test="@privateapp">
+							<fo:basic-link>
+								<xsl:attribute name="external-destination">
+									<xsl:text>http://LearningApps.org/watch?v=</xsl:text>
+									<xsl:value-of select="@privateapp"></xsl:value-of>
+								</xsl:attribute>
+								<fo:inline text-decoration="underline">
+									<xsl:text>http://LearningApps.org/watch?v=</xsl:text>
+									<xsl:value-of select="@privateapp"></xsl:value-of>
+								</fo:inline>
+								<xsl:text> </xsl:text>
+								<fo:inline ><fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="2mm" src="/opt/www/loop.oncampus.de/mediawiki/skins/loop/images/print/www_link.png"></fo:external-graphic></fo:inline>
+							</fo:basic-link>							
+						</xsl:when>
+					</xsl:choose>
+				</fo:block>
 			</xsl:when>				
 		</xsl:choose>
 
 	</xsl:template>	
-
 
 
 

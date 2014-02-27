@@ -91,6 +91,10 @@
 
 	<msg name="word_quiz_notice" lang="en">In the online version an interactive Test is shown here.</msg>
 	<msg name="word_quiz_notice" lang="de">In der Online-Version befindet sich an dieser Stelle ein interaktiver Test.</msg>
+	<msg name="word_learningapp_notice" lang="en">In the online version an learning app is shown here.</msg>
+	<msg name="word_learningapp_notice" lang="de">In der Online-Version befindet sich an dieser Stelle eine LearningApp.</msg>
+	<msg name="word_embed_learningapp_notice" lang="en">Link to learning app</msg>
+	<msg name="word_embed_learningapp_notice" lang="de">Link zur LearningApp</msg>
 	
 	<msg name="word_chapter" lang="en">Chapter</msg>
 	<msg name="word_chapter" lang="de">Kapitel</msg>

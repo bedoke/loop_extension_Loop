@@ -189,7 +189,7 @@ function renderToc ($args) {
 	
 		global $wgLoopStructureNumbering, $wgLoopStructureUseTopLevel;
 		
-		if ($args['level']){
+		if (isset($args['level'])){
 			$level=intval($args['level']);
 		} else {
 			$level=1;
