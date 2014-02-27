@@ -6,7 +6,7 @@
 	xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:exsl="http://exslt.org/common"
 	xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:func="http://exslt.org/functions"
 	xmlns:php="http://php.net/xsl" xmlns:str="http://exslt.org/strings"
-	extension-element-prefixes="func php str" xmlns:functx="http://www.functx.com" exclude-result-prefixes="xhtml exslt">
+	extension-element-prefixes="func php str" xmlns:functx="http://www.functx.com" exclude-result-prefixes="xhtml">
 
 	<!-- <xsl:namespace-alias stylesheet-prefix="php" result-prefix="xsl" /> -->
 

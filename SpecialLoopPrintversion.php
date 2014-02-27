@@ -157,6 +157,8 @@ function xslt_transform_graphviz($input) {
 
 function xslt_transform_link($input) {
 	
+	libxml_use_internal_errors(true);
+	
 	$return='';
 	$childs=array();
 	$input_object=$input[0];
@@ -215,7 +217,7 @@ function xslt_transform_link($input) {
     $childs['type']='internal';
   }
 
-  wfDebug( __METHOD__ . ': input_childs : '.print_r($childs,true)."\n");
+  //wfDebug( __METHOD__ . ': input_childs : '.print_r($childs,true)."\n");
 
 	if ($childs['type']=='external') {
 		$return_xml =  '<php_link_external href="'.$childs['href'].'">'.$childs['text'].'</php_link_external>' ;
@@ -262,18 +264,22 @@ function xslt_transform_link($input) {
 					$imagewidth=round($width,0).'mm';
 				}								
 			} else {
-			    $size=getimagesize($imagepath);
-				$width=0.214*intval($size[0]);
-				if ($width>150) {
-					$imagewidth='150mm';
+				if ($imagepath!='') {
+					$size=getimagesize($imagepath);
+					$width=0.214*intval($size[0]);
+					if ($width>150) {
+						$imagewidth='150mm';
+					} else {
+						$imagewidth=round($width,0).'mm';
+					}				
 				} else {
-					$imagewidth=round($width,0).'mm';
-				}				
+					$imagewidth='150mm';
+				}
 			}
 				
 			//$input_value=print_r($childs,true);
 			$return_xml =  '<php_link_image imagepath="'.$imagepath.'" imagewidth="'.$imagewidth.'" ';
-			if ($childs['align']) {
+			if (isset($childs['align'])) {
 				$return_xml .= ' align="'.$childs['align'].'" ';
 			}
 			$return_xml .=  '></php_link_image>';
@@ -301,7 +307,19 @@ function xslt_transform_link($input) {
 
 	}
 	$return_doc = new DOMDocument;
-	$return_doc->loadXml($return_xml);
+	#$return_doc->loadXml($return_xml);
+	
+	$old_error_handler = set_error_handler("myErrorHandler");
+	
+	libxml_use_internal_errors(true);
+	
+	try {
+		$return_doc->loadXml($return_xml);
+	} catch ( Exception $e ) {
+		
+	}	
+	restore_error_handler();
+	
 	$return=$return_doc;
 
 	return $return;
@@ -356,7 +374,10 @@ function xslt_figure_width($input) {
 			$childs[$child_name]=$child_value;
 		}
 	
-	
+		if (!isset($childs['type'])) {
+			$childs['type']='';
+		}
+		
 		if ($childs['type']=='external') {
 			$return =  '150' ;
 		} else {
@@ -379,13 +400,17 @@ function xslt_figure_width($input) {
 						$imagewidth=$mm;
 					}
 				} else {
-				    $size=getimagesize($imagepath);
-					$width=0.214*intval($size[0]);
-					if ($width>150) {
-						$imagewidth='150';
+					if ($imagepath!='') {
+						$size=getimagesize($imagepath);
+						$width=0.214*intval($size[0]);
+						if ($width>150) {
+							$imagewidth='150';
+						} else {
+							$imagewidth=round($width,0);
+						}		
 					} else {
-						$imagewidth=round($width,0);
-					}				
+						$imagewidth='150';
+					}
 				}				
 				//$input_value=print_r($childs,true);
 				$return =  $imagewidth;
@@ -598,6 +623,12 @@ function get_biblio() {
 	return $return_doc;
 }
 
+function myErrorHandler($errno, $errstr, $errfile, $errline)
+{
+	return true;
+}
+
+
 class SpecialLoopPrintversion extends SpecialPage {
 	function __construct() {
 		parent::__construct( 'LoopPrintversion' );
@@ -606,7 +637,9 @@ class SpecialLoopPrintversion extends SpecialPage {
 	function execute( $par ) {
 		global $Biblio, $xmlg, $content_provider, $wgOut, $wgParser, $wgUser, $wgParserConf, $wgLoopStructureNumbering, $wgLoopStructureUseTopLevel, $xml, $wgSitename, $wgServer, $IP, $wgeLoopFopConfig;
 
+		ob_start();
 		
+		libxml_use_internal_errors(true);
 		/*
 		$test=xslt_get_index();
 		var_dump($test);
@@ -697,24 +730,28 @@ class SpecialLoopPrintversion extends SpecialPage {
 		$content = fread($fh, filesize($pdfFile));
 		fclose($fh);
 
+		
+		ob_end_clean();
+		
 		header("Content-Type: application/pdf");
+		header('Content-Description: File Transfer');
 		header("Content-Disposition: attachment; filename=\"".$pdfFileName."\"");
+		#header("Content-Disposition: inline; filename=\"".$pdfFileName."\"");
+		
+		if (!isset($_SERVER['HTTP_ACCEPT_ENCODING']) OR empty($_SERVER['HTTP_ACCEPT_ENCODING'])) {
+			// the content length may vary if the server is using compression
+			header('Content-Length: '.strlen($content));
+		}		
 		echo $content;
-
+		ob_start();
+		
     if ($_SERVER["SERVER_NAME"] != 'devloop.oncampus.de') {
 		unlink($xmlFile);
 		unlink($pdfFile);
 		unlink($qrFile);
     }
 
-
-
-
-		//header('Content-type: text/xml; charset=utf-8');
-		//print_r ($loop_xml);
-		//print_r ($xmlfo);
-
-		//exit;
+		exit;
 
 	}
 
@@ -798,6 +835,7 @@ class SpecialLoopPrintversion extends SpecialPage {
 
 		$xmlresult="<?xml version='1.0' encoding='UTF-8' ?>\n";
 		$xmlresult.="<articles ";
+		$xmlresult.='xmlns:xhtml="http://www.w3.org/1999/xhtml" ';
 		$xmlresult.='title="'.$this->get_structure_title().'" ';
 		$xmlresult.='url="'.$wgServer.'" ';
 		$xmlresult.='date="'.date('d.m.Y H:i').'" ';

@@ -278,23 +278,27 @@ function fnRenderLoopStructure ( &$parser, &$text, &$strip_state) {
 		}
 	$loopTocAlreadyCalled = true;	
 	
-	if (($wgTitle->mNamespace==8) && (($wgTitle->mTextform=='Loop toc')||($wgTitle->mTextform=='Loop_toc')||($wgTitle->mTextform=='loop toc')||($wgTitle->mTextform=='loop_toc')))  {
+	if ($wgTitle) {
 	
-		if (stripos($text,'=')!=false) {
-			$loopstructure = new LoopStructure();
-			$return = $loopstructure->Render($text, $parser->mTitle, $parser->mOptions, 0);
-			$return='<div id="LoopIndex"><h1>'.wfMsg('looptoc').'</h1>'.$return.'<br/><br/></div>';
-			$text=$return;
-			return false;
+		if (($wgTitle->mNamespace==8) && (($wgTitle->mTextform=='Loop toc')||($wgTitle->mTextform=='Loop_toc')||($wgTitle->mTextform=='loop toc')||($wgTitle->mTextform=='loop_toc')))  {
 		
+			if (stripos($text,'=')!=false) {
+				$loopstructure = new LoopStructure();
+				$return = $loopstructure->Render($text, $parser->mTitle, $parser->mOptions, 0);
+				$return='<div id="LoopIndex"><h1>'.wfMsg('looptoc').'</h1>'.$return.'<br/><br/></div>';
+				$text=$return;
+				return false;
+			
+			} else {
+				return true;
+			}
+			
 		} else {
 			return true;
 		}
-		
 	} else {
 		return true;
 	}
-
 }
 
 
