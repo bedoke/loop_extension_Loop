@@ -1687,7 +1687,20 @@
 			</xsl:when>
 			<xsl:when test="@extension_name='hr'">
 				<fo:block><fo:leader leader-length="100%" leader-pattern="rule"/></fo:block>
-			</xsl:when>			
+			</xsl:when>		
+			<xsl:when test="@extension_name='loop_sidebar'">
+				<xsl:if test="@print='true'">
+					<!-- <fo:block><fo:leader leader-length="100%" leader-pattern="rule" rule-thickness="0.3mm"/></fo:block> -->
+					<fo:block>
+						<xsl:call-template name="font_subsubhead"></xsl:call-template>
+						<xsl:value-of select="@title"></xsl:value-of>
+					</fo:block>
+					<fo:block>
+						<xsl:apply-templates select="php:function('xslt_get_page_xml', @page)"></xsl:apply-templates>	
+					</fo:block>
+					<!-- <fo:block><fo:leader leader-length="100%" leader-pattern="rule" rule-thickness="0.3mm"/></fo:block> -->
+				</xsl:if>
+			</xsl:when>				
 		</xsl:choose>
 
 	</xsl:template>	
