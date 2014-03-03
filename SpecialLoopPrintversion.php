@@ -409,30 +409,36 @@ function xslt_figure_width($input) {
 				$target_uri=$target_array[1];
 				$filetitle=Title::newFromText( $target_uri, NS_FILE );
 				$file = wfLocalFile($filetitle);
-				$imagepath=$file->getLocalRefPath();
-					
-				$imagewidth='150';
-				if (array_key_exists('part', $childs)) {
-					$part=$childs['part'];
-					$part_array=explode('px',$part);
-					if (count($part_array)==2) {
-						$px=trim($part_array[0]);
-						$mm=round(0.214*intval($px),0);
-						$imagewidth=$mm;
-					}
-				} else {
-					if ($imagepath!='') {
-						$size=getimagesize($imagepath);
-						$width=0.214*intval($size[0]);
-						if ($width>150) {
-							$imagewidth='150';
-						} else {
-							$imagewidth=round($width,0);
-						}		
+				
+				if (is_object($file)) {
+				
+					$imagepath=$file->getLocalRefPath();
+						
+					$imagewidth='150';
+					if (array_key_exists('part', $childs)) {
+						$part=$childs['part'];
+						$part_array=explode('px',$part);
+						if (count($part_array)==2) {
+							$px=trim($part_array[0]);
+							$mm=round(0.214*intval($px),0);
+							$imagewidth=$mm;
+						}
 					} else {
-						$imagewidth='150';
-					}
-				}				
+						if ($imagepath!='') {
+							$size=getimagesize($imagepath);
+							$width=0.214*intval($size[0]);
+							if ($width>150) {
+								$imagewidth='150';
+							} else {
+								$imagewidth=round($width,0);
+							}		
+						} else {
+							$imagewidth='150';
+						}
+					}				
+				} else {
+					$imagewidth='150';
+				}
 				//$input_value=print_r($childs,true);
 				$return =  $imagewidth;
 					
