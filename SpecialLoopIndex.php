@@ -85,7 +85,12 @@ class SpecialLoopIndex extends SpecialPage {
 				if (($wgLoopStructureNumbering) && ($row->TocNumber)) {
 					$link_title.=$row->TocNumber.' ';
 				}
-				$link_title.=$row->page_title;
+				
+				if (strlen($row->page_title)>35) {
+					$link_title.= mb_substr($row->page_title,0,32).'...';
+				} else {
+					$link_title.=$row->page_title;
+				}
 				$link = Linker::link(Title::newFromText($row->page_title),$link_title);
 				$return.= $link;
 
@@ -95,7 +100,11 @@ class SpecialLoopIndex extends SpecialPage {
 				if (($wgLoopStructureNumbering) && ($row->TocNumber)) {
 					$link_title.=$row->TocNumber.' ';
 				}
-				$link_title.=$row->page_title;
+				if (strlen($row->page_title)>35) {
+					$link_title.= mb_substr($row->page_title,0,32).'...';
+				} else {
+					$link_title.=$row->page_title;
+				}
 				$link = Linker::link(Title::newFromText($row->page_title),$link_title);
 				$return.= $link;
 				
