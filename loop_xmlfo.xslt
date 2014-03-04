@@ -1869,6 +1869,9 @@
 
 
 	<xsl:template match="listitem">
+		<xsl:variable name="listlevel">
+			<xsl:value-of select="count(ancestor::list)"></xsl:value-of>
+		</xsl:variable>
 		<fo:list-item>
 			<fo:list-item-label end-indent="label-end()">
 				<xsl:choose>
@@ -1879,7 +1882,14 @@
 						<fo:block padding-before="2pt"></fo:block>
 					</xsl:when>						
 					<xsl:otherwise>
-						<fo:block padding-before="2pt">&#x2022;</fo:block>
+						<fo:block padding-before="2pt">
+							<xsl:choose>
+								<xsl:when test="$listlevel=1">&#x2022;</xsl:when>
+								<xsl:when test="$listlevel=2">&#x20D8;</xsl:when>
+								<xsl:when test="$listlevel=3">&#x220E;</xsl:when>
+								<xsl:otherwise>&#x220E;</xsl:otherwise>
+							</xsl:choose>
+						</fo:block>
 					</xsl:otherwise>
 				</xsl:choose>
 			</fo:list-item-label>
