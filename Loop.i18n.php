@@ -134,7 +134,8 @@ $messages['de'] = array(
 	'loop-show-right-sidebar' => 'rechte Randleiste anzeigen',
 	'loop-hide-right-sidebar' => 'rechte Randleiste verbergen',
 	'loopnotoc' => 'Seiten nicht im Inhaltsverzeichnis',
-	'loop-search-loop' => 'Modul durchsuchen'
+	'loop-search-loop' => 'Modul durchsuchen',
+	'loop-readpage-tooltip' => 'Seite vorlesen'
 );
 
 $messages['en'] = array(
@@ -222,7 +223,8 @@ $messages['en'] = array(
 	'loop-show-right-sidebar' => 'show right sidebar',
 	'loop-hide-right-sidebar' => 'hide right sidebar',
 	'loopnotoc' => 'Pages not in table of contents',
-	'loop-search-loop' => 'Search module'
+	'loop-search-loop' => 'Search module',
+	'loop-readpage-tooltip' => 'Read page'
 );
 
 $messages['fr'] = array(
