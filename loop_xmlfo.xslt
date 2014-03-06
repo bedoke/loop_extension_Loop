@@ -1354,6 +1354,14 @@
 			</xsl:when>							
 			<xsl:when test="@extension_name='loop_formula'">
 				<xsl:apply-templates></xsl:apply-templates>
+				<fo:block vertical-align="top">
+					<fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="8mm" src="/opt/www/loop.oncampus.de/mediawiki/skins/loop/images/media/type_formula.png"></fo:external-graphic>
+					<xsl:if test="@title">
+						<fo:inline padding-left="2mm" line-height="12.5pt" font-weight="bold" font-size="9.5pt" vertical-align="top">
+							<xsl:value-of select="@title"></xsl:value-of>
+						</fo:inline>
+					</xsl:if>
+				</fo:block>
 			</xsl:when>
 			<xsl:when test="@extension_name='loop_figure'">
 				<xsl:apply-templates></xsl:apply-templates>
