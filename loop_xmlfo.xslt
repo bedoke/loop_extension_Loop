@@ -214,9 +214,9 @@
 		</xsl:if>
 		<xsl:text> </xsl:text>
 		<fo:basic-link ><!-- text-decoration="underline" -->
-			<xsl:attribute name="internal-destination"><xsl:value-of select="@pagetitle"></xsl:value-of></xsl:attribute>
+			<xsl:attribute name="internal-destination"><xsl:value-of select="translate(@pagetitle,' ','_')"></xsl:value-of></xsl:attribute>
 			<fo:page-number-citation>
-				<xsl:attribute name="ref-id" ><xsl:value-of select="@pagetitle"></xsl:value-of></xsl:attribute>
+				<xsl:attribute name="ref-id" ><xsl:value-of select="translate(@pagetitle,' ','_')"></xsl:value-of></xsl:attribute>
 			</fo:page-number-citation>	
 		</fo:basic-link>
 	</xsl:template>
@@ -1017,7 +1017,10 @@
 				<xsl:apply-templates></xsl:apply-templates>
 			</xsl:when>
 			<xsl:otherwise>
-		<fo:block id="{@title}">
+		<fo:block>
+			<xsl:attribute name="id">
+				<xsl:value-of select="translate(@title,' ','_')"></xsl:value-of>
+			</xsl:attribute>
 			<xsl:choose>
 				<xsl:when test="$toclevel &lt; 2"> 
 					<xsl:attribute name="break-before">page</xsl:attribute>
@@ -1824,7 +1827,7 @@
 			<xsl:value-of select="@tocnumber"></xsl:value-of>
 			<xsl:text> </xsl:text>
 			<fo:basic-link text-decoration="underline">
-				<xsl:attribute name="internal-destination"><xsl:value-of select="@title"></xsl:value-of></xsl:attribute>
+				<xsl:attribute name="internal-destination"><xsl:value-of select="translate(@title,' ','_')"></xsl:value-of></xsl:attribute>
 				<xsl:value-of select="@title"></xsl:value-of>
 			</fo:basic-link>		
 		</fo:block>
@@ -2251,7 +2254,7 @@
 			<xsl:if test="@toclevel &gt; 0"> 
 				<xsl:attribute name="starting-state"><xsl:text>hide</xsl:text></xsl:attribute>
 			</xsl:if>
-			<xsl:attribute name="internal-destination"><xsl:value-of select="@title"></xsl:value-of></xsl:attribute>
+			<xsl:attribute name="internal-destination"><xsl:value-of select="translate(@title,' ','_')"></xsl:value-of></xsl:attribute>
 			<fo:bookmark-title>
 				<xsl:value-of select="@tocnumber"></xsl:value-of>
 				<xsl:text> </xsl:text>
@@ -2285,7 +2288,7 @@
 			
 
 			<fo:basic-link color="black">
-				<xsl:attribute name="internal-destination" ><xsl:value-of select="@title"></xsl:value-of></xsl:attribute>
+				<xsl:attribute name="internal-destination" ><xsl:value-of select="translate(@title,' ','_')"></xsl:value-of></xsl:attribute>
 				<xsl:value-of select="@tocnumber"></xsl:value-of>
 				<xsl:text> </xsl:text>
 				<xsl:value-of select="@title"></xsl:value-of>
@@ -2293,7 +2296,7 @@
 			<fo:inline keep-together.within-line="always">
 				<fo:leader leader-pattern="dots"></fo:leader>
 				<fo:page-number-citation>
-					<xsl:attribute name="ref-id" ><xsl:value-of select="@title"></xsl:value-of></xsl:attribute>
+					<xsl:attribute name="ref-id" ><xsl:value-of select="translate(@title,' ','_')"></xsl:value-of></xsl:attribute>
 				</fo:page-number-citation>
 			</fo:inline>				
 		</fo:block>

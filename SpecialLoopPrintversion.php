@@ -132,7 +132,7 @@ function xslt_transform_math($input) {
 	if (file_exists ( $imagepath)) {
 		$return=$imagepath;
 	} else {
-		$return= '';
+		$return= '/opt/www/loop.oncampus.de/mediawiki/skins/lubeca/pix/space.png';
 	}
 
 
@@ -253,8 +253,12 @@ function xslt_transform_link($input) {
 			if (is_object($file)) {
 			$imagepath=$file->getLocalRefPath();
 			} else {
-			$imagepath='';
+			$imagepath='/opt/www/loop.oncampus.de/mediawiki/skins/lubeca/pix/space.png';
 			}
+			if ($imagepath=='') {
+				$imagepath='/opt/www/loop.oncampus.de/mediawiki/skins/lubeca/pix/space.png';
+				}
+				
 				
 			$imagewidth='150mm';
 			/*
@@ -528,7 +532,7 @@ function xslt_imagepath($input) {
 			if (is_object($file)) {
 			$imagepath=$file->getLocalRefPath();
 			} else {
-			$imagepath='';
+			$imagepath='/opt/www/loop.oncampus.de/mediawiki/skins/lubeca/pix/space.png';
 			}
 			
 			#wfDebug( __METHOD__ . ': imagepath : '.print_r($imagepath,true)."\n");	
@@ -560,7 +564,9 @@ function targetPath($input) {
 
 				//$return_xml='<fo:block><fo:external-graphic scaling="uniform" content-width="140mm" content-height="scale-to-fit" src="'.$fullpath.'"></fo:external-graphic></fo:block>';
 
-
+				if ($fullpath=='') {
+					$fullpath='/opt/www/loop.oncampus.de/mediawiki/skins/lubeca/pix/space.png';
+					}
 				//$return_xml =  "<fo:block>".$input_value."</fo:block>" ;
 				$return_xml =  '<php_image>'.$fullpath.'</php_image>' ;
 				$return_doc = new DOMDocument;
@@ -691,7 +697,7 @@ class SpecialLoopPrintversion extends SpecialPage {
 		$loop_xml = str_replace ( '&lt;nowiki&gt;' , '<nowiki>', $loop_xml);
 		$loop_xml = str_replace ( '&lt;/nowiki&gt;' , '</nowiki>', $loop_xml);
 
-		if ($_SERVER["SERVER_NAME"] == 'devloop.oncampus.de') {
+		if (($_SERVER["SERVER_NAME"] == 'devloop.oncampus.de')||($_SERVER["SERVER_NAME"] == 'devloop2.oncampus.de')) {
 			$xmlwikiFile = $IP."/tmp/".$tmpname."_wiki.xml";
 			$fh = fopen($xmlwikiFile, 'w') or die("can't open xml file");
 			fwrite($fh, $loop_xml);
@@ -729,7 +735,7 @@ class SpecialLoopPrintversion extends SpecialPage {
 		
 		
 		
-		if ($_SERVER["SERVER_NAME"] == 'devloop.oncampus.de') {
+		if (($_SERVER["SERVER_NAME"] == 'devloop.oncampus.de')||($_SERVER["SERVER_NAME"] == 'devloop2.oncampus.de')) {
 		$xmlFile = $IP."/tmp/".$tmpname.".xml";
 		$pdfFile = $IP."/tmp/".$tmpname.".pdf";
 		$qrFile = $IP."/tmp/".$tmpname."_qr.png";
@@ -745,11 +751,9 @@ class SpecialLoopPrintversion extends SpecialPage {
 		
 		#exit;
 		
-		//$cmd = `fop -c /opt/www/loop.oncampus.de/mediawiki-1.18.1/extensions/Loop/fop/fop.xml -fo $xmlFile -pdf $pdfFile 2>&1`;
-		$cmd = `fop -c /opt/www/loop.oncampus.de/mediawiki/extensions/Loop/loop_fop.xml -fo $xmlFile -pdf $pdfFile 2>&1`;
+		#$cmd = `fop -c /opt/www/loop.oncampus.de/mediawiki/extensions/Loop/loop_fop.xml -fo $xmlFile -pdf $pdfFile 2>&1`;
 		
-		//$cmd = 'fop -c '.$wgeLoopFopConfig.' -fo '.$xmlFile.' -pdf '.$pdfFile;
-		//shell_exec ($cmd);
+		$cmd = `/opt/AHFormatter/run.sh -d $xmlFile -o $pdfFile -p @PDF 2>&1`;
 
 		$pdfFileName = $wgSitename.".pdf";
 
@@ -772,7 +776,7 @@ class SpecialLoopPrintversion extends SpecialPage {
 		echo $content;
 		ob_start();
 		
-    if ($_SERVER["SERVER_NAME"] != 'devloop.oncampus.de') {
+    if (($_SERVER["SERVER_NAME"] != 'devloop.oncampus.de')&&($_SERVER["SERVER_NAME"] != 'devloop2.oncampus.de')) {
 		unlink($xmlFile);
 		unlink($pdfFile);
 		unlink($qrFile);
