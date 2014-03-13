@@ -1581,6 +1581,15 @@
 				 </fo:external-graphic>
 				</fo:inline>
 			</xsl:when>
+			<xsl:when test="@extension_name='mathimage'">
+				<fo:inline>
+					<fo:external-graphic scaling="uniform" content-width="60%">
+						<xsl:attribute name="src">
+							<xsl:value-of select="@path"></xsl:value-of>
+						</xsl:attribute> 
+					</fo:external-graphic>
+				</fo:inline>
+			</xsl:when>			
 			<xsl:when test="@extension_name='loop_print'">
 				<fo:block>
 					<xsl:value-of select="$word_printversion_begin"></xsl:value-of>
