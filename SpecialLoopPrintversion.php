@@ -211,9 +211,14 @@ function xslt_transform_link($input) {
 
 	for ($i = 0; $i < $num_childs; $i++) {
 		$child=$link_childs->item($i);
-		$child_name=$child->tagName;
-		if ($child_name=='') {$child_name='text';}
-		$child_value=$child->textContent;
+		if (isset($child->tagName)) {
+			$child_name=$child->tagName;
+			if ($child_name=='') {$child_name='text';}
+			$child_value=$child->textContent;
+		} else {
+			$child_name='text';
+			$child_value='';
+		}
 		
 		
 		
