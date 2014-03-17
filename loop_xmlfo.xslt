@@ -1574,7 +1574,7 @@
 				
 				<!-- <fo:external-graphic scaling="uniform" content-height="50mm" content-width="100mm" src="/opt/www/loop.oncampus.de/mediawiki/images/devloop/math/3/3/1/3311e580c1210b14ba019015d8c69429.png"></fo:external-graphic> -->
 				<!-- /opt/www/loop.oncampus.de/mediawiki/extensions/Loop/tmp/mathetest.png  -->
-				<fo:external-graphic scaling="uniform" content-width="60%">
+				<fo:external-graphic scaling="uniform" content-width="15%">
 					<xsl:attribute name="src">
 					<xsl:value-of select="php:function('xslt_transform_math', .)"></xsl:value-of>
 					</xsl:attribute> 
@@ -1583,7 +1583,7 @@
 			</xsl:when>
 			<xsl:when test="@extension_name='mathimage'">
 				<fo:inline>
-					<fo:external-graphic scaling="uniform" content-width="20%">
+					<fo:external-graphic scaling="uniform" content-width="15%">
 						<xsl:attribute name="src">
 							<xsl:value-of select="@path"></xsl:value-of>
 						</xsl:attribute> 
