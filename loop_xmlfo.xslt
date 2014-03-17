@@ -1583,7 +1583,7 @@
 			</xsl:when>
 			<xsl:when test="@extension_name='mathimage'">
 				<fo:inline>
-					<fo:external-graphic scaling="uniform" content-width="60%">
+					<fo:external-graphic scaling="uniform" content-width="20%">
 						<xsl:attribute name="src">
 							<xsl:value-of select="@path"></xsl:value-of>
 						</xsl:attribute> 
