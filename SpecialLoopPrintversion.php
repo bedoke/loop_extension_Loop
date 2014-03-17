@@ -4,7 +4,8 @@ if ( !defined( 'MEDIAWIKI' ) ) die();
 global $IP;
 
 require_once ($IP."/extensions/wiki2xml/mediawiki_converter.php");
-require_once ($IP."/extensions/Math/Math.body.php");
+require_once ($IP."/extensions/Math/MathRenderer.php");
+require_once ($IP."/extensions/Math/MathTexvc.php");
 require_once ($IP."/extensions/Loop/phpqrcode/phpqrcode.php");
 require_once ($IP."/extensions/BiblioPlus/BiblioPlus.php");
 
@@ -120,13 +121,9 @@ function xslt_transform_math($input) {
 	global $IP;
 	$input_object=$input[0];
 	$mathcontent=$input_object->textContent;
-	//$return=print_r($mathcontent,true);
-
-	//$renderedMath = MathRenderer::renderMath($mathcontent);
-
-	$math = new MathRenderer('\pagecolor{White}'.$mathcontent);
+	$math = new MathTexvc('\pagecolor{White}'.$mathcontent);
 	$math->render('rgb 1.0 1.0 1.0');
-	$mathpath=$math->_mathImageUrl();
+	$mathpath=$math->getMathImageUrl();
 	$imagepath=$IP.str_replace('mediawiki/','',$mathpath);
 
 	if (file_exists ( $imagepath)) {
