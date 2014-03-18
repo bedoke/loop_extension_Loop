@@ -6,7 +6,8 @@ global $IP;
 require_once ($IP."/extensions/Loop/SpecialLoopPrintversion.php");
 
 require_once ($IP."/extensions/wiki2xml/mediawiki_converter.php");
-require_once ($IP."/extensions/Math/Math.body.php");
+require_once ($IP."/extensions/Math/MathRenderer.php");
+require_once ($IP."/extensions/Math/MathTexvc.php");
 require_once ($IP."/extensions/Loop/phpqrcode/phpqrcode.php");
 require_once ($IP."/extensions/Biblio.php");
 
