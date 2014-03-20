@@ -187,7 +187,7 @@ class LoopStructure {
 
 function renderToc ($args) {
 	
-		global $wgLoopStructureNumbering, $wgLoopStructureUseTopLevel;
+		global $wgLoopStructureNumbering, $wgLoopStructureUseTopLevel, $wgTitle;
 		
 		if (isset($args['level'])){
 			$level=intval($args['level']);
@@ -196,7 +196,8 @@ function renderToc ($args) {
 		}		
 		
 		$return='';
-		$article_id=($GLOBALS["wgTitle"]->mArticleID);
+		//$article_id=($GLOBALS["wgTitle"]->mArticleID);
+		$article_id=($wgTitle->mArticleID);
 		$item = LoopStructureItem::newFromArticleId($article_id);
 		if (!empty($item)) {
 			$indexID=$item->mIndexArticleId;
