@@ -823,7 +823,7 @@ class SpecialLoopPrintversion extends SpecialPage {
 			if ( count ( $a ) == 1 ) $a[] = $a[0] ;
 			$title_page = trim ( array_shift ( $a ) ) ;
 			$title_name = trim ( array_pop ( $a ) ) ;
-				
+			set_time_limit(120);	
 			$wikitext = $content_provider->get_wiki_text ( $title_page ) ;
 			
 			// deal with special characters
