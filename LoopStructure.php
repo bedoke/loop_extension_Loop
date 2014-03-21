@@ -196,9 +196,9 @@ function renderToc ($args) {
 		}		
 		
 		$return='';
-		if (!isset($wgtitle)) {return $return;}
-		//$article_id=($GLOBALS["wgTitle"]->mArticleID);
-		$article_id=($wgTitle->mArticleID);
+		//if (!isset($wgtitle)) {return $return;}
+		$article_id=($GLOBALS["wgTitle"]->mArticleID);
+		//$article_id=($wgTitle->mArticleID);
 		$item = LoopStructureItem::newFromArticleId($article_id);
 		if (!empty($item)) {
 			$indexID=$item->mIndexArticleId;
