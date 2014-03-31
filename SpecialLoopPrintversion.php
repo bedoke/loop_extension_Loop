@@ -214,7 +214,8 @@ function xslt_transform_link($input) {
 			$child_value=$child->textContent;
 		} else {
 			$child_name='text';
-			$child_value='';
+			#$child_value='';
+			$child_value=$child->textContent;
 		}
 		
 		
