@@ -2002,7 +2002,7 @@
 	
 	<xsl:template name="cite_exists">
 		<xsl:choose>
-			<xsl:when test="//*/cite">
+			<xsl:when test="//*/xhtml:cite">
 				<xsl:text>1</xsl:text>
 			</xsl:when>
 			<xsl:otherwise>
@@ -2377,6 +2377,18 @@
 			<fo:inline><fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="3mm" src="/opt/www/loop.oncampus.de/mediawiki/skins/loop/images/print/literature.png"></fo:external-graphic></fo:inline>
 		</fo:basic-link>
 	</xsl:template>	
+	
+	<xsl:template match="xhtml:cite">
+		<xsl:variable name="citetext">
+			<xsl:value-of select="."></xsl:value-of>
+		</xsl:variable>
+		<fo:basic-link >
+			<xsl:attribute name="internal-destination">bibliography</xsl:attribute>
+			<fo:inline text-decoration="underline" font-style="italic"><xsl:value-of select="translate($citetext,'+',' ')"></xsl:value-of></fo:inline>
+			<xsl:text> </xsl:text>		
+			<fo:inline><fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="3mm" src="/opt/www/loop.oncampus.de/mediawiki/skins/loop/images/print/literature.png"></fo:external-graphic></fo:inline>
+		</fo:basic-link>
+	</xsl:template>		
 	
 	<xsl:template match="ol">
 		<fo:list-block
