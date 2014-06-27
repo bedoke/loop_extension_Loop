@@ -75,6 +75,12 @@ class LoopFigure {
 		$this->input=$input;
 		$this->args=$args;
 
+		if ($this->description == '') {
+			if (array_key_exists('description', $args)) {
+				$this->description=$args["description"];
+			}
+		}		
+		
 
 		$parseroutput = $parser->parse( $input, $title, $parserOptions);
 		$output=$parseroutput->mText;
@@ -127,7 +133,9 @@ class LoopFigure {
 
 				foreach ($meta["visible"] as $meta_item) {
 					if ($meta_item["id"]=="exif-imagedescription") {
-						$this->description=$meta_item["value"];
+						if ($this->description == '') {
+							$this->description=$meta_item["value"];
+						}
 					}
 					if ($meta_item["id"]=="exif-copyright") {
 						$this->copyright.=$meta_item["value"].' ';
@@ -163,11 +171,7 @@ class LoopFigure {
 				}
 			}
 		}
-		if ($this->description == '') {
-			if (array_key_exists('description', $args)) {
-				$this->description=$args["description"];
-			}
-		}
+
 		if (array_key_exists('copyright', $args)) {
 			$this->copyright=$args["copyright"];
 		}

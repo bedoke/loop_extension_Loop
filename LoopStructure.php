@@ -150,6 +150,21 @@ class LoopStructure {
 			// article title
 			$title = Title::newFromText($TOC_text);
 			$current_article_id = $title->getArticleID();
+			
+			if($current_article_id == 0) {
+				$newpage = WikiPage::factory( Title::newFromText($TOC_text) );
+				$content = new WikitextContent('='.$TOC_text.'=');
+
+				$newpage->doEditContent( $content,
+					'',
+					EDIT_NEW,
+					false,
+					User::newFromName( 'MediaWiki default' )
+				);			
+				$newtitle = $newpage->getTitle();
+				$current_article_id = $newtitle->getArticleId();
+			}			
+			
 			// parent article
 			$parent_id[$toclevel] = $current_article_id;
 			if ($toclevel > $max_level) $max_level = $toclevel;
