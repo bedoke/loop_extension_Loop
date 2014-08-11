@@ -186,7 +186,11 @@ class SpecialLoopFormulas extends SpecialPage {
 					$return.='<div class="mediabox_typeicon_formula"></div>';
 				$return.='</td>';
 				$return.='<td>';
-				$return.='<div class="loop_formula_index_title">'.$formula->title.'</div>';
+				$parserOptions = ParserOptions::newFromUser( $wgUser );
+				$parsertitle = Title::newFromText('formula');
+				$parseroutput = $parser->parse($formula->title,$parsertitle,$parserOptions);
+				$output_title=$parseroutput->mText;					
+				$return.='<div class="loop_formula_index_title">'.$output_title.'</div>';
 				//$return.='<div class="loop_formula_index_description">'.$formula->description.'</div>';
 				$return.='<div class="loop_formula_index_link"><a href="'.$formula->pageURL;
 				if ($formula->title) {

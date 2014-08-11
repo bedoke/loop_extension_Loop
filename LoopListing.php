@@ -34,9 +34,68 @@ class LoopListing {
 		$this->input=$input;
 		$this->args=$args;
 
+		
 		$parser = new Parser( $wgParserConf );
 		$parserOptions = ParserOptions::newFromUser( $wgUser );
 		$parser->Options($parserOptions);
+		
+		$matches=array();
+		$pattern = '@(?<=<loop_title>)(.*?)(?=<\/loop_title>)@isu';
+		if (preg_match($pattern, $input, $matches)==1) {
+				$this->title = $matches[1];
+		}
+		$matches=array();
+		$pattern = '@(?<=<loop_description>)(.*?)(?=<\/loop_description>)@isu';
+		if (preg_match($pattern, $input, $matches)==1) {
+				$this->description = $matches[1];
+		}
+		$matches=array();
+		$pattern = '@(?<=<loop_copyright>)(.*?)(?=<\/loop_copyright>)@isu';
+		if (preg_match($pattern, $input, $matches)==1) {
+				$this->description = $matches[1];
+		}		
+		$pattern = '@(<loop_title>)(.*?)(<\/loop_title>)@isu';
+		$replace = '';
+		$input = preg_replace($pattern, $replace, $input);
+		$pattern = '@(<loop_description>)(.*?)(<\/loop_description>)@isu';
+		$replace = '';
+		$input = preg_replace($pattern, $replace, $input);		
+		$pattern = '@(<loop_copyright>)(.*?)(<\/loop_copyright>)@isu';
+		$replace = '';
+		$input = preg_replace($pattern, $replace, $input);	
+
+
+		if ($this->title == '') {
+			if (array_key_exists('title', $args)) {
+				if ($args["title"]!='') {
+					$this->title=trim($args["title"]);
+				} else {
+					$this->title='';
+				}
+			}
+		}		
+		if ($this->description == '') {
+			if (array_key_exists('description', $args)) {
+				if ($args["description"]!='') {
+					$this->description=trim($args["description"]);
+				} else {
+					$this->description='';
+				}
+			}
+		}	
+		if ($this->copyright == '') {
+			if (array_key_exists('copyright', $args)) {
+				if ($args["copyright"]!='') {
+					$this->copyright=trim($args["copyright"]);
+				} else {
+					$this->copyright='';
+				}
+			}
+		}	
+		
+		
+		
+
 
 		$parseroutput = $parser->parse( $input, $wgTitle, $parserOptions);
 		$output=$parseroutput->mText;
@@ -69,20 +128,7 @@ class LoopListing {
 		} else {
 			$this->file=false;
 		}
-		if (array_key_exists('title', $args)) {
-			if ($args["title"]!='') {
-				$this->title=$args["title"];
-			} else {
-				$this->title='';
-			}
-		}
 
-		if (array_key_exists('description', $args)) {
-			$this->description=$args["description"];
-		}
-		if (array_key_exists('copyright', $args)) {
-			$this->copyright=$args["copyright"];
-		}
 		if (array_key_exists('index', $args)) {
 			if ($args["index"]=='false') {
 				$this->index=false;
@@ -131,18 +177,30 @@ class LoopListing {
 		switch ($this->render) {
 			case 'marked':
 			case 'icon':
+			
+				$input = $this->input;
+				$pattern = '@(<loop_title>)(.*?)(<\/loop_title>)@isu';
+				$replace = '';
+				$input = preg_replace($pattern, $replace, $input);
+				$pattern = '@(<loop_description>)(.*?)(<\/loop_description>)@isu';
+				$replace = '';
+				$input = preg_replace($pattern, $replace, $input);		
+				$pattern = '@(<loop_copyright>)(.*?)(<\/loop_copyright>)@isu';
+				$replace = '';
+				$input = preg_replace($pattern, $replace, $input);					
+			
 				$return.='<div class="mediabox_'.$this->render.'">';
 				$return.='<div class="mediabox_content">';
-				$output = $wgParser->recursiveTagParse($this->input);
+				$output = $wgParser->recursiveTagParse($input);
 				$return.= $output;
 				$return.='</div>';
 				$return.='<div class="mediabox_footer">';
 				//$return.='<div class="mediabox_typeicon"><img src="'.$wgStylePath .'/loop/images/media/type_listing.png"></div>';
 				$return.='<div class="mediabox_typeicon"><div class="mediabox_typeicon_listing"></div></div>';
 				$return.='<div class="mediabox_footertext">';
-				if ($this->title!='') {$return.='<span class="mediabox_title">'.$this->title.'</span><br/>';}
-				if ($this->description!='') {$return.='<span class="mediabox_description">'.$this->description.'</span><br/>';}
-				if (($this->show_copyright==true)&&($this->copyright!='')){$return.='<span class="mediabox_copyright">'.$this->copyright.'</span>';}
+				if ($this->title!='') {$return.='<span class="mediabox_title">'.$wgParser->recursiveTagParse($this->title).'</span><br/>';}
+				if ($this->description!='') {$return.='<span class="mediabox_description">'.$wgParser->recursiveTagParse($this->description).'</span><br/>';}
+				if (($this->show_copyright==true)&&($this->copyright!='')){$return.='<span class="mediabox_copyright">'.$wgParser->recursiveTagParse($this->copyright).'</span>';}
 				$return.='</div>';
 				$return.='<div class="clearer"></div>';
 				$return.='</div>';

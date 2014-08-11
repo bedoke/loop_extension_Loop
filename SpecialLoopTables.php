@@ -9,16 +9,9 @@ class SpecialLoopTables extends SpecialPage {
 	function execute( $par ) {
 		global $wgOut, $wgParser, $wgUser, $wgParserConf, $wgLoopStructureNumbering, $wgLoopStructureUseTopLevel, $wgStylePath;
 
-		//var_dump($wgParserConf);
-
 		$parser = new Parser( $wgParserConf );
-		//$parser->disableCache();
-
 		$parserOptions = ParserOptions::newFromUser( $wgUser );
-
 		$parser->Options($parserOptions);
-
-		//var_dump($parser);
 
 		$wgOut->addModules( 'ext.LoopTables' );
 		$this->setHeaders();
@@ -26,23 +19,7 @@ class SpecialLoopTables extends SpecialPage {
 		$specialtables=array();
 		$return = '<h1>'.wfMsg('looptables').'</h1>';
 
-
 		$dbr = wfGetDB( DB_SLAVE );
-		/*
-		$dbResult = $dbr->select(
-		array( 'page', 'text' ),
-		array( 'page_id', 'page_namespace', 'page_title', 'old_id', 'old_text' ),
-		array(
-		0 => "old_text LIKE '%loop_table%'"
-		),
-		__METHOD__,
-		array(),
-		array( 'text' =>
-		array( 'LEFT JOIN', 'page_latest=old_id' )
-		)
-		);
-		*/
-		
 		$dbResult = $dbr->select(
 		array( 'page', 'revision', 'text' ),
 		array( 'page.page_id', 'page.page_namespace', 'page.page_title', 'text.old_text' ),
@@ -56,16 +33,10 @@ class SpecialLoopTables extends SpecialPage {
 		array()
 		);		
 		
-		
-		//	var_dump($dbResult);
-
-
 		foreach ( $dbResult as $row ) {
-			//var_dump($row);
 			$r_page_id=$row->page_id;
 			$r_page_namespace=$row->page_namespace;
 			$r_page_title=$row->page_title;
-			//$r_old_id=$row->old_id;
 			$r_old_text=$row->old_text;
 
 			$tempArticle= Article::newFromID($r_page_id);
@@ -80,8 +51,6 @@ class SpecialLoopTables extends SpecialPage {
 			$structure_index_order=0;
 			$page_toc_number=0;
 
-			//var_dump($r_page_id);
-			
 			$item = LoopStructureItem::newFromArticleId($r_page_id);
 			if (!empty($item)) {
 				$indexID=$item->mIndexArticleId;
@@ -114,7 +83,6 @@ class SpecialLoopTables extends SpecialPage {
 				'ORDER BY' => 'Sequence ASC'
 				)
 				);
-				//var_dump($res);
 
 				$row = $dbr->fetchRow( $res );
 				if ($row) {
@@ -126,20 +94,20 @@ class SpecialLoopTables extends SpecialPage {
 				}
 
 			}
-	// nowiki-Abschnitte entfernen
-  $pattern = "/(\r\n|\r|\n)/";
-  $replacement = PHP_EOL;
-  $string = preg_replace($pattern, $replacement, $r_old_text);
-  $pattern = '@(<nowiki>)(.*?)(<\/nowiki>)@isu'; 
-  $replace = ''; 
-  $result = preg_replace($pattern, $replace, $string);
-  $r_old_text =$result;				
+			
+			// nowiki-Abschnitte entfernen
+			$pattern = "/(\r\n|\r|\n)/";
+			$replacement = PHP_EOL;
+			$string = preg_replace($pattern, $replacement, $r_old_text);
+			$pattern = '@(<nowiki>)(.*?)(<\/nowiki>)@isu'; 
+			$replace = ''; 
+			$result = preg_replace($pattern, $replace, $string);
+			$r_old_text =$result;				
+
 			$matches=array();
 			$parser->extractTagsAndParams( array('loop_table') , $r_old_text, $matches);
-			//var_dump($matches);
 			$posOnPage=0;
 			foreach ($matches as $match) {
-				//var_dump($match);
 				if ($match[0] == 'loop_table') {
 					$specialtable=new LoopTable($match[1],$match[2]);
 					$specialtable->setPageTitle($page_title);
@@ -153,15 +121,12 @@ class SpecialLoopTables extends SpecialPage {
 					$specialtable->setPageTocNumber($page_toc_number);
 					$specialtable->setPosOnPage($posOnPage);
 
-					// var_dump($specialtable);
 					$specialtables[]=$specialtable;
 					$posOnPage++;
 				}
 			}
 
 		}
-
-
 
 		usort($specialtables, array('SpecialLoopTables','loop_table_index_sort'));
 
@@ -171,7 +136,7 @@ class SpecialLoopTables extends SpecialPage {
 		foreach ($specialtables as $table) {
 				
 			if ($table->index) {
-					
+				
 				if ($table->structureTitle!=$akt_structure_title) {
 					$return.='<tr><th colspan="2"><a href="'.$table->structureURL.'">';
 					if (($wgLoopStructureNumbering) && ($wgLoopStructureUseTopLevel)){
@@ -182,11 +147,14 @@ class SpecialLoopTables extends SpecialPage {
 				}
 				$return.='<tr>';
 				$return.='<td class="loop_table_index_thumb">';
-					//$return.='<img src="'.$wgStylePath .'/loop/images/media/type_table.png">';
 					$return.='<div class="mediabox_typeicon_table"></div>';
 				$return.='</td>';
 				$return.='<td>';
-				$return.='<div class="loop_table_index_title">'.$table->title.'</div>';
+				$parserOptions = ParserOptions::newFromUser( $wgUser );
+				$parsertitle = Title::newFromText('table');
+				$parseroutput = $parser->parse($table->title,$parsertitle,$parserOptions);
+				$output_title=$parseroutput->mText;				
+				$return.='<div class="loop_table_index_title">'.$output_title.'</div>';
 				//$return.='<div class="loop_table_index_description">'.$table->description.'</div>';
 				$return.='<div class="loop_table_index_link"><a href="'.$table->pageURL;
 				if ($table->title) {
@@ -203,7 +171,6 @@ class SpecialLoopTables extends SpecialPage {
 			}
 		}
 		$return.='</table></div>';
-
 
 		$wgOut->addHTML($return);
 
@@ -246,9 +213,6 @@ class SpecialLoopTables extends SpecialPage {
 				}
 			}
 		}
-
-
-
 
 		return $return;
 

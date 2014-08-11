@@ -47,20 +47,60 @@ class LoopTask {
 		$output=$parseroutput->mText;
 		*/
 
-		if (array_key_exists('title', $args)) {
-			if ($args["title"]!='') {
-				$this->title=$args["title"];
-			} else {
-				$this->title='';
-			}
+		$matches=array();
+		$pattern = '@(?<=<loop_title>)(.*?)(?=<\/loop_title>)@isu';
+		if (preg_match($pattern, $input, $matches)==1) {
+				$this->title = $matches[1];
 		}
+		$matches=array();
+		$pattern = '@(?<=<loop_description>)(.*?)(?=<\/loop_description>)@isu';
+		if (preg_match($pattern, $input, $matches)==1) {
+				$this->description = $matches[1];
+		}
+		$matches=array();
+		$pattern = '@(?<=<loop_copyright>)(.*?)(?=<\/loop_copyright>)@isu';
+		if (preg_match($pattern, $input, $matches)==1) {
+				$this->description = $matches[1];
+		}		
+		$pattern = '@(<loop_title>)(.*?)(<\/loop_title>)@isu';
+		$replace = '';
+		$input = preg_replace($pattern, $replace, $input);
+		$pattern = '@(<loop_description>)(.*?)(<\/loop_description>)@isu';
+		$replace = '';
+		$input = preg_replace($pattern, $replace, $input);		
+		$pattern = '@(<loop_copyright>)(.*?)(<\/loop_copyright>)@isu';
+		$replace = '';
+		$input = preg_replace($pattern, $replace, $input);	
 
-		if (array_key_exists('description', $args)) {
-			$this->description=$args["description"];
-		}
-		if (array_key_exists('copyright', $args)) {
-			$this->copyright=$args["copyright"];
-		}
+
+		if ($this->title == '') {
+			if (array_key_exists('title', $args)) {
+				if ($args["title"]!='') {
+					$this->title=trim($args["title"]);
+				} else {
+					$this->title='';
+				}
+			}
+		}		
+		if ($this->description == '') {
+			if (array_key_exists('description', $args)) {
+				if ($args["description"]!='') {
+					$this->description=trim($args["description"]);
+				} else {
+					$this->description='';
+				}
+			}
+		}	
+		if ($this->copyright == '') {
+			if (array_key_exists('copyright', $args)) {
+				if ($args["copyright"]!='') {
+					$this->copyright=trim($args["copyright"]);
+				} else {
+					$this->copyright='';
+				}
+			}
+		}	
+		
 		if (array_key_exists('index', $args)) {
 			if ($args["index"]=='false') {
 				$this->index=false;
@@ -107,6 +147,17 @@ class LoopTask {
 			$return.='<span id="'.htmlentities(str_replace( ' ', '_', trim($this->title) ),ENT_QUOTES, "UTF-8").'"></span>';
 		}
 
+		$input = $this->input;
+		$pattern = '@(<loop_title>)(.*?)(<\/loop_title>)@isu';
+		$replace = '';
+		$input = preg_replace($pattern, $replace, $input);
+		$pattern = '@(<loop_description>)(.*?)(<\/loop_description>)@isu';
+		$replace = '';
+		$input = preg_replace($pattern, $replace, $input);		
+		$pattern = '@(<loop_copyright>)(.*?)(<\/loop_copyright>)@isu';
+		$replace = '';
+		$input = preg_replace($pattern, $replace, $input);			
+		
 		switch ($this->render) {
 			case 'marked':
 			case 'icon':
@@ -115,9 +166,12 @@ class LoopTask {
 				$return.='<div class="mediabox_task_content">';
 				$return.='<div><img class="mediabox_taskicon" src="'.$wgStylePath .'/loop/images/media/type_task.png" width="32">';
 				//$return.='<div class="mediabox_typeicon"><div class="mediabox_typeicon_task"></div></div>';
-				if ($this->title!='') {$return.='<span class="mediabox_title">'.$this->title.'</span>';}
+				
+					
+				
+				if ($this->title!='') {$return.='<span class="mediabox_title">'.$wgParser->recursiveTagParse($this->title).'</span>';}
 				$return.='</div>';
-				$output = $wgParser->recursiveTagParse($this->input);
+				$output = $wgParser->recursiveTagParse($input);
 				$return.= $output;
 				$return.='</div>';
 				$return.='</div>';
@@ -128,9 +182,9 @@ class LoopTask {
 				
 				$return.='<div class="mediabox_task_content">';
 				$return.='<div>';
-				if ($this->title!='') {$return.='<span class="mediabox_title">'.$this->title.'</span>';}
+				if ($this->title!='') {$return.='<span class="mediabox_title">'.$wgParser->recursiveTagParse($this->title).'</span>';}
 				$return.='</div>';
-				$output = $wgParser->recursiveTagParse($this->input);
+				$output = $wgParser->recursiveTagParse($input);
 				$return.= $output;
 				$return.='</div>';
 				$return.='</div>';
@@ -138,7 +192,7 @@ class LoopTask {
 				break;				
 			case 'none':
 			default:
-				$return.= $wgParser->recursiveTagParse($this->input);
+				$return.= $wgParser->recursiveTagParse($input);
 		}
 		return $return;
 	}

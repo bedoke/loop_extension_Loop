@@ -199,7 +199,11 @@ class SpecialLoopTasks extends SpecialPage {
 					$return.='<div class="mediabox_typeicon_task"></div>';
 				$return.='</td>';
 				$return.='<td>';
-				$return.='<div class="loop_task_index_title">'.$task->title.'</div>';
+				$parserOptions = ParserOptions::newFromUser( $wgUser );
+				$parsertitle = Title::newFromText('task');
+				$parseroutput = $parser->parse($task->title,$parsertitle,$parserOptions);
+				$output_title=$parseroutput->mText;						
+				$return.='<div class="loop_task_index_title">'.$output_title.'</div>';
 				//$return.='<div class="loop_task_index_description">'.$task->description.'</div>';
 				$return.='<div class="loop_task_index_link"><a href="'.$task->pageURL;
 				if ($task->title) {

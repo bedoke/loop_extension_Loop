@@ -41,24 +41,19 @@ class LoopFigure {
 		//var_dump($title);
 		//exit;
 
+		
 		$matches=array();
 		$pattern = '@(?<=<loop_figure_title>)(.*?)(?=<\/loop_figure_title>)@isu';
 		if (preg_match($pattern, $input, $matches)==1) {
 				# $this->title = $wgParser->recursiveTagParse($matches[1]);
 				$this->title = $matches[1];
 		}
-
 		$matches=array();
 		$pattern = '@(?<=<loop_figure_description>)(.*?)(?=<\/loop_figure_description>)@isu';
 		if (preg_match($pattern, $input, $matches)==1) {
 				# $this->description = $wgParser->recursiveTagParse($matches[1]);
 				$this->description = $matches[1];
 		}
-		
-
-
-
-
 
 		$pattern = "/(\r\n|\r|\n)/";
 		$replacement = PHP_EOL;
@@ -72,6 +67,35 @@ class LoopFigure {
 		$replace = '';
 		$input = preg_replace($pattern, $replace, $input);
 
+		
+		
+		
+		$matches=array();
+		$pattern = '@(?<=<loop_title>)(.*?)(?=<\/loop_title>)@isu';
+		if (preg_match($pattern, $input, $matches)==1) {
+				$this->title = $matches[1];
+		}
+		$matches=array();
+		$pattern = '@(?<=<loop_description>)(.*?)(?=<\/loop_description>)@isu';
+		if (preg_match($pattern, $input, $matches)==1) {
+				$this->description = $matches[1];
+		}
+		$matches=array();
+		$pattern = '@(?<=<loop_copyright>)(.*?)(?=<\/loop_copyright>)@isu';
+		if (preg_match($pattern, $input, $matches)==1) {
+				$this->copyright = $matches[1];
+		}		
+		$pattern = '@(<loop_title>)(.*?)(<\/loop_title>)@isu';
+		$replace = '';
+		$input = preg_replace($pattern, $replace, $input);
+		$pattern = '@(<loop_description>)(.*?)(<\/loop_description>)@isu';
+		$replace = '';
+		$input = preg_replace($pattern, $replace, $input);		
+		$pattern = '@(<loop_copyright>)(.*?)(<\/loop_copyright>)@isu';
+		$replace = '';
+		$input = preg_replace($pattern, $replace, $input);				
+		
+		
 		$this->input=$input;
 		$this->args=$args;
 
@@ -172,9 +196,16 @@ class LoopFigure {
 			}
 		}
 
-		if (array_key_exists('copyright', $args)) {
-			$this->copyright=$args["copyright"];
-		}
+		if ($this->copyright == '') {
+			if (array_key_exists('copyright', $args)) {
+				if ($args["copyright"]!='') {
+					$this->copyright=$args["copyright"];
+				} else {
+					$this->copyright='';
+				}
+			}
+		}		
+		
 		if (array_key_exists('index', $args)) {
 			if ($args["index"]=='false') {
 				$this->index=false;
@@ -246,7 +277,7 @@ class LoopFigure {
 				$return.='<div class="mediabox_footertext">';
 				if ($this->title!='') {$return.='<span class="mediabox_title">'.$wgParser->recursiveTagParse($this->title).'</span><br/>';}
 				if ($this->description!='') {$return.='<span class="mediabox_description">'.$wgParser->recursiveTagParse($this->description).'</span><br/>';}
-				if (($this->show_copyright==true)&&($this->copyright!='')){$return.='<span class="mediabox_copyright">'.$this->copyright.'</span>';}
+				if (($this->show_copyright==true)&&($this->copyright!='')){$return.='<span class="mediabox_copyright">'.$wgParser->recursiveTagParse($this->copyright).'</span>';}
 				$return.='</div>';
 				$return.='<div class="clearer"></div>';
 				$return.='</div>';

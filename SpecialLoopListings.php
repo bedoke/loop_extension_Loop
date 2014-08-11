@@ -186,7 +186,11 @@ class SpecialLoopListings extends SpecialPage {
 					$return.='<div class="mediabox_typeicon_listing"></div>';
 				$return.='</td>';
 				$return.='<td>';
-				$return.='<div class="loop_listing_index_title">'.$listing->title.'</div>';
+				$parserOptions = ParserOptions::newFromUser( $wgUser );
+				$parsertitle = Title::newFromText('listing');
+				$parseroutput = $parser->parse($listing->title,$parsertitle,$parserOptions);
+				$output_title=$parseroutput->mText;					
+				$return.='<div class="loop_listing_index_title">'.$output_title.'</div>';
 				//$return.='<div class="loop_listing_index_description">'.$listing->description.'</div>';
 				$return.='<div class="loop_listing_index_link"><a href="'.$listing->pageURL;
 				if ($listing->title) {
