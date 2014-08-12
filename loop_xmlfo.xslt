@@ -306,52 +306,32 @@
 				
 				</fo:block>
 			</fo:table-cell>
-			<!--
-			<xsl:variable name="linktext">
-				<xsl:choose>
-					<xsl:when test="@title">
-						<xsl:value-of select="@title"></xsl:value-of>
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:value-of select="@description"></xsl:value-of>
-					</xsl:otherwise>
-				</xsl:choose>
-			</xsl:variable>
-			-->
 
-			<xsl:variable name="linktext">
-				<xsl:choose>
-					<xsl:when test="extension[@extension_name='loop_figure_title']">
-						<xsl:apply-templates select="extension[@extension_name='loop_figure_title']" mode="infigure"></xsl:apply-templates>
-					</xsl:when>
-					<xsl:when test="@title">
-						<xsl:value-of select="@title"></xsl:value-of>
-					</xsl:when>
-					<xsl:when test="extension[@extension_name='loop_figure_description']">
-						<xsl:apply-templates select="extension[@extension_name='loop_figure_description']" mode="infigure"></xsl:apply-templates>
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:if test="@description">
-							<xsl:value-of select="@description"></xsl:value-of>
-						</xsl:if>
-					</xsl:otherwise>
-				</xsl:choose>
-			</xsl:variable>
 			
 			<fo:table-cell width="140mm">
 				<fo:block text-align-last="justify" text-align="justify">
 						<fo:basic-link color="black">
 							<xsl:attribute name="internal-destination"><xsl:value-of select="generate-id()"></xsl:value-of></xsl:attribute>
 							
-							
-							<xsl:value-of select="$linktext"></xsl:value-of>
-						
-						<fo:inline keep-together.within-line="always">
-							<fo:leader leader-pattern="dots"></fo:leader>
-							<fo:page-number-citation>
-								<xsl:attribute name="ref-id"><xsl:value-of select="generate-id()"></xsl:value-of></xsl:attribute>
-							</fo:page-number-citation>
-						</fo:inline>
+							<fo:inline keep-together.within-line="always">	
+								<xsl:choose>
+									<xsl:when test="descendant::extension[@extension_name='loop_figure_title']">
+										<xsl:apply-templates select="descendant::extension[@extension_name='loop_figure_title']" mode="infigure"></xsl:apply-templates>
+									</xsl:when>
+									<xsl:when test="descendant::extension[@extension_name='loop_title']">
+										<xsl:apply-templates select="descendant::extension[@extension_name='loop_title']" mode="infigure"></xsl:apply-templates>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:if test="@title">
+											<xsl:value-of select="@title"></xsl:value-of>
+										</xsl:if>
+									</xsl:otherwise>
+								</xsl:choose>	
+								<fo:leader leader-pattern="dots"></fo:leader>
+								<fo:page-number-citation>
+									<xsl:attribute name="ref-id"><xsl:value-of select="generate-id()"></xsl:value-of></xsl:attribute>
+								</fo:page-number-citation>
+							</fo:inline>
 						</fo:basic-link>					
 				</fo:block>
 			</fo:table-cell>			
@@ -407,25 +387,26 @@
 				</fo:basic-link>
 				</fo:block>
 			</fo:table-cell>
-			<xsl:variable name="linktext">
-				<xsl:choose>
-					<xsl:when test="@title">
-						<xsl:value-of select="@title"></xsl:value-of>
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:value-of select="@description"></xsl:value-of>
-					</xsl:otherwise>
-				</xsl:choose>
-			</xsl:variable>
+
 			<fo:table-cell width="155mm">
 				<fo:block text-align-last="justify" text-align="justify">
 						<fo:basic-link color="black">
 							<xsl:attribute name="internal-destination"><xsl:value-of select="generate-id()"></xsl:value-of></xsl:attribute>
 							
-							
-							<xsl:value-of select="$linktext"></xsl:value-of>
-						
-						<fo:inline keep-together.within-line="always">
+							<fo:inline keep-together.within-line="always">	
+								<xsl:choose>
+									<xsl:when test="descendant::extension[@extension_name='loop_figure_title']">
+										<xsl:apply-templates select="descendant::extension[@extension_name='loop_figure_title']" mode="infigure"></xsl:apply-templates>
+									</xsl:when>
+									<xsl:when test="descendant::extension[@extension_name='loop_title']">
+										<xsl:apply-templates select="descendant::extension[@extension_name='loop_title']" mode="infigure"></xsl:apply-templates>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:if test="@title">
+											<xsl:value-of select="@title"></xsl:value-of>
+										</xsl:if>
+									</xsl:otherwise>
+								</xsl:choose>
 							<fo:leader leader-pattern="dots"></fo:leader>
 							<fo:page-number-citation>
 								<xsl:attribute name="ref-id"><xsl:value-of select="generate-id()"></xsl:value-of></xsl:attribute>
@@ -514,22 +495,26 @@
 				</fo:basic-link>
 				</fo:block>
 			</fo:table-cell>
-			<xsl:variable name="linktext">
-				<xsl:choose>
-					<xsl:when test="@title">
-						<xsl:value-of select="@title"></xsl:value-of>
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:value-of select="@description"></xsl:value-of>
-					</xsl:otherwise>
-				</xsl:choose>
-			</xsl:variable>
+
 			<fo:table-cell width="155mm">
 				<fo:block text-align-last="justify" text-align="justify">
 						<fo:basic-link color="black">
 							<xsl:attribute name="internal-destination"><xsl:value-of select="generate-id()"></xsl:value-of></xsl:attribute>
-							<xsl:value-of select="$linktext"></xsl:value-of>
-						<fo:inline keep-together.within-line="always">
+							
+							<fo:inline keep-together.within-line="always">	
+								<xsl:choose>
+									<xsl:when test="descendant::extension[@extension_name='loop_figure_title']">
+										<xsl:apply-templates select="descendant::extension[@extension_name='loop_figure_title']" mode="infigure"></xsl:apply-templates>
+									</xsl:when>
+									<xsl:when test="descendant::extension[@extension_name='loop_title']">
+										<xsl:apply-templates select="descendant::extension[@extension_name='loop_title']" mode="infigure"></xsl:apply-templates>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:if test="@title">
+											<xsl:value-of select="@title"></xsl:value-of>
+										</xsl:if>
+									</xsl:otherwise>
+								</xsl:choose>
 							<fo:leader leader-pattern="dots"></fo:leader>
 							<fo:page-number-citation>
 								<xsl:attribute name="ref-id"><xsl:value-of select="generate-id()"></xsl:value-of></xsl:attribute>
@@ -591,25 +576,26 @@
 				</fo:basic-link>
 				</fo:block>
 			</fo:table-cell>
-			<xsl:variable name="linktext">
-				<xsl:choose>
-					<xsl:when test="@title">
-						<xsl:value-of select="@title"></xsl:value-of>
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:value-of select="@description"></xsl:value-of>
-					</xsl:otherwise>
-				</xsl:choose>
-			</xsl:variable>
+
 			<fo:table-cell width="155mm">
 				<fo:block text-align-last="justify" text-align="justify">
 						<fo:basic-link color="black">
 							<xsl:attribute name="internal-destination"><xsl:value-of select="generate-id()"></xsl:value-of></xsl:attribute>
 							
-							
-							<xsl:value-of select="$linktext"></xsl:value-of>
-						
-						<fo:inline keep-together.within-line="always">
+							<fo:inline keep-together.within-line="always">	
+								<xsl:choose>
+									<xsl:when test="descendant::extension[@extension_name='loop_figure_title']">
+										<xsl:apply-templates select="descendant::extension[@extension_name='loop_figure_title']" mode="infigure"></xsl:apply-templates>
+									</xsl:when>
+									<xsl:when test="descendant::extension[@extension_name='loop_title']">
+										<xsl:apply-templates select="descendant::extension[@extension_name='loop_title']" mode="infigure"></xsl:apply-templates>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:if test="@title">
+											<xsl:value-of select="@title"></xsl:value-of>
+										</xsl:if>
+									</xsl:otherwise>
+								</xsl:choose>
 							<fo:leader leader-pattern="dots"></fo:leader>
 							<fo:page-number-citation>
 								<xsl:attribute name="ref-id"><xsl:value-of select="generate-id()"></xsl:value-of></xsl:attribute>
@@ -672,22 +658,26 @@
 				</fo:basic-link>
 				</fo:block>
 			</fo:table-cell>
-			<xsl:variable name="linktext">
-				<xsl:choose>
-					<xsl:when test="@title">
-						<xsl:value-of select="@title"></xsl:value-of>
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:value-of select="@description"></xsl:value-of>
-					</xsl:otherwise>
-				</xsl:choose>
-			</xsl:variable>
+
 			<fo:table-cell width="155mm">
 				<fo:block text-align-last="justify" text-align="justify">
 						<fo:basic-link color="black">
 							<xsl:attribute name="internal-destination"><xsl:value-of select="generate-id()"></xsl:value-of></xsl:attribute>
-							<xsl:value-of select="$linktext"></xsl:value-of>
-						<fo:inline keep-together.within-line="always">
+							
+							<fo:inline keep-together.within-line="always">	
+								<xsl:choose>
+									<xsl:when test="descendant::extension[@extension_name='loop_figure_title']">
+										<xsl:apply-templates select="descendant::extension[@extension_name='loop_figure_title']" mode="infigure"></xsl:apply-templates>
+									</xsl:when>
+									<xsl:when test="descendant::extension[@extension_name='loop_title']">
+										<xsl:apply-templates select="descendant::extension[@extension_name='loop_title']" mode="infigure"></xsl:apply-templates>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:if test="@title">
+											<xsl:value-of select="@title"></xsl:value-of>
+										</xsl:if>
+									</xsl:otherwise>
+								</xsl:choose>
 							<fo:leader leader-pattern="dots"></fo:leader>
 							<fo:page-number-citation>
 								<xsl:attribute name="ref-id"><xsl:value-of select="generate-id()"></xsl:value-of></xsl:attribute>
@@ -1245,13 +1235,24 @@
 	<xsl:template match="extension" mode="infigure">
 		<xsl:choose>
 			<xsl:when test="@extension_name='loop_figure_title'">
-				<fo:block><xsl:apply-templates></xsl:apply-templates></fo:block>
+				<xsl:apply-templates></xsl:apply-templates>
 			</xsl:when>
 			<xsl:when test="@extension_name='loop_figure_description'">
-				<fo:block><xsl:apply-templates></xsl:apply-templates></fo:block>
+				<xsl:apply-templates></xsl:apply-templates>
 			</xsl:when>	
+			<xsl:when test="@extension_name='loop_title'">
+				<xsl:apply-templates></xsl:apply-templates>
+			</xsl:when>	
+			<xsl:when test="@extension_name='loop_description'">
+				<xsl:apply-templates></xsl:apply-templates>
+			</xsl:when>	
+			<xsl:when test="@extension_name='loop_copyright'">
+				<xsl:apply-templates></xsl:apply-templates>
+			</xsl:when>				
 		</xsl:choose>
 	</xsl:template>
+	
+	
 
 	
 	<xsl:template match="extension">
@@ -1326,6 +1327,15 @@
 			<xsl:when test="@extension_name='loop_figure_description'">
 				<!-- <fo:block><xsl:apply-templates></xsl:apply-templates></fo:block> -->
 			</xsl:when>	
+			<xsl:when test="@extension_name='loop_title'">
+				
+			</xsl:when>
+			<xsl:when test="@extension_name='loop_description'">
+				
+			</xsl:when>				
+			<xsl:when test="@extension_name='loop_copyright'">
+				
+			</xsl:when>			
 			<xsl:when test="@extension_name='spoiler'">
 				<fo:table width="170mm" table-layout="fixed" border-collapse="separate">
 					<fo:table-body>
@@ -1389,11 +1399,16 @@
 								</xsl:attribute>
 								<fo:block>
 									<xsl:choose>
-										<xsl:when test="extension[@extension_name='loop_figure_title']">
+										<xsl:when test="descendant::extension[@extension_name='loop_figure_title']">
 											<fo:block line-height="12.5pt" font-weight="bold" font-size="9.5pt">
-												<xsl:apply-templates select="extension[@extension_name='loop_figure_title']" mode="infigure"></xsl:apply-templates>
+												<xsl:apply-templates select="descendant::extension[@extension_name='loop_figure_title']" mode="infigure"></xsl:apply-templates>
 											</fo:block>
 										</xsl:when>
+										<xsl:when test="descendant::extension[@extension_name='loop_title']">
+											<fo:block line-height="12.5pt" font-weight="bold" font-size="9.5pt">
+												<xsl:apply-templates select="descendant::extension[@extension_name='loop_title']" mode="infigure"></xsl:apply-templates>
+											</fo:block>
+										</xsl:when>										
 										<xsl:otherwise>
 											<xsl:if test="@title">
 												<fo:block line-height="12.5pt" font-weight="bold" font-size="9.5pt"><xsl:value-of select="@title"></xsl:value-of></fo:block>
@@ -1401,11 +1416,16 @@
 										</xsl:otherwise>
 									</xsl:choose>	
 									<xsl:choose>
-										<xsl:when test="extension[@extension_name='loop_figure_description']">
+										<xsl:when test="descendant::extension[@extension_name='loop_figure_description']">
 											<fo:block line-height="12.5pt" font-weight="bold" font-size="9.5pt">
-												<xsl:apply-templates select="extension[@extension_name='loop_figure_description']" mode="infigure"></xsl:apply-templates>
+												<xsl:apply-templates select="descendant::extension[@extension_name='loop_figure_description']" mode="infigure"></xsl:apply-templates>
 											</fo:block>
 										</xsl:when>
+										<xsl:when test="descendant::extension[@extension_name='loop_description']">
+											<fo:block line-height="12.5pt" font-weight="bold" font-size="9.5pt">
+												<xsl:apply-templates select="descendant::extension[@extension_name='loop_description']" mode="infigure"></xsl:apply-templates>
+											</fo:block>
+										</xsl:when>										
 										<xsl:otherwise>
 											<xsl:if test="@description">
 												<fo:block line-height="12.5pt" font-weight="bold" font-size="9.5pt"><xsl:value-of select="@description"></xsl:value-of></fo:block>
@@ -1413,9 +1433,18 @@
 										</xsl:otherwise>
 									</xsl:choose>
 									<xsl:if test="@show_copyright='true'">
-										<xsl:if test="@copyright">
-											<fo:block line-height="12.5pt" font-weight="bold" font-size="9.5pt"><xsl:value-of select="@copyright"></xsl:value-of></fo:block>
-										</xsl:if>										
+										<xsl:choose>
+											<xsl:when test="descendant::extension[@extension_name='loop_copyright']">
+												<fo:block line-height="12.5pt" font-weight="bold" font-size="9.5pt">
+													<xsl:apply-templates select="descendant::extension[@extension_name='loop_copyright']" mode="infigure"></xsl:apply-templates>
+												</fo:block>
+											</xsl:when>
+											<xsl:otherwise>
+												<xsl:if test="@copyright">
+													<fo:block line-height="12.5pt" font-weight="bold" font-size="9.5pt"><xsl:value-of select="@copyright"></xsl:value-of></fo:block>
+												</xsl:if>	
+											</xsl:otherwise>
+										</xsl:choose>									
 									</xsl:if>
 								</fo:block>
 							</fo:table-cell>
@@ -1442,11 +1471,43 @@
 							<fo:table-cell  number-columns-spanned="1">
 								<xsl:attribute name="width">140mm</xsl:attribute>
 								<fo:block>
-									<xsl:if test="@title">
-										<fo:block line-height="12.5pt" font-weight="bold" font-size="9.5pt"><xsl:value-of select="@title"></xsl:value-of></fo:block>
-									</xsl:if>
-									<xsl:if test="@description">
-										<fo:block line-height="12.5pt" font-size="9.5pt"><xsl:value-of select="@description"></xsl:value-of></fo:block>
+									<xsl:choose>
+										<xsl:when test="descendant::extension[@extension_name='loop_title']">
+											<fo:block line-height="12.5pt" font-weight="bold" font-size="9.5pt">
+												<xsl:apply-templates select="descendant::extension[@extension_name='loop_title']" mode="infigure"></xsl:apply-templates>
+											</fo:block>
+										</xsl:when>										
+										<xsl:otherwise>
+											<xsl:if test="@title">
+												<fo:block line-height="12.5pt" font-weight="bold" font-size="9.5pt"><xsl:value-of select="@title"></xsl:value-of></fo:block>
+											</xsl:if>
+										</xsl:otherwise>
+									</xsl:choose>	
+									<xsl:choose>
+										<xsl:when test="descendant::extension[@extension_name='loop_description']">
+											<fo:block line-height="12.5pt" font-weight="bold" font-size="9.5pt">
+												<xsl:apply-templates select="descendant::extension[@extension_name='loop_description']" mode="infigure"></xsl:apply-templates>
+											</fo:block>
+										</xsl:when>										
+										<xsl:otherwise>
+											<xsl:if test="@description">
+												<fo:block line-height="12.5pt" font-weight="bold" font-size="9.5pt"><xsl:value-of select="@description"></xsl:value-of></fo:block>
+											</xsl:if>
+										</xsl:otherwise>
+									</xsl:choose>
+									<xsl:if test="@show_copyright='true'">
+										<xsl:choose>
+											<xsl:when test="descendant::extension[@extension_name='loop_copyright']">
+												<fo:block line-height="12.5pt" font-weight="bold" font-size="9.5pt">
+													<xsl:apply-templates select="descendant::extension[@extension_name='loop_copyright']" mode="infigure"></xsl:apply-templates>
+												</fo:block>
+											</xsl:when>
+											<xsl:otherwise>
+												<xsl:if test="@copyright">
+													<fo:block line-height="12.5pt" font-weight="bold" font-size="9.5pt"><xsl:value-of select="@copyright"></xsl:value-of></fo:block>
+												</xsl:if>	
+											</xsl:otherwise>
+										</xsl:choose>									
 									</xsl:if>
 								</fo:block>
 							</fo:table-cell>
@@ -1524,11 +1585,43 @@
 										
 									</fo:block>
 									<xsl:apply-templates></xsl:apply-templates>								
-									<xsl:if test="@title">
-										<fo:block line-height="12.5pt" font-weight="bold" font-size="9.5pt"><xsl:value-of select="@title"></xsl:value-of></fo:block>
-									</xsl:if>
-									<xsl:if test="@description">
-										<fo:block line-height="12.5pt" font-size="9.5pt"><xsl:value-of select="@description"></xsl:value-of></fo:block>
+									<xsl:choose>
+										<xsl:when test="descendant::extension[@extension_name='loop_title']">
+											<fo:block line-height="12.5pt" font-weight="bold" font-size="9.5pt">
+												<xsl:apply-templates select="descendant::extension[@extension_name='loop_title']" mode="infigure"></xsl:apply-templates>
+											</fo:block>
+										</xsl:when>										
+										<xsl:otherwise>
+											<xsl:if test="@title">
+												<fo:block line-height="12.5pt" font-weight="bold" font-size="9.5pt"><xsl:value-of select="@title"></xsl:value-of></fo:block>
+											</xsl:if>
+										</xsl:otherwise>
+									</xsl:choose>	
+									<xsl:choose>
+										<xsl:when test="descendant::extension[@extension_name='loop_description']">
+											<fo:block line-height="12.5pt" font-weight="bold" font-size="9.5pt">
+												<xsl:apply-templates select="descendant::extension[@extension_name='loop_description']" mode="infigure"></xsl:apply-templates>
+											</fo:block>
+										</xsl:when>										
+										<xsl:otherwise>
+											<xsl:if test="@description">
+												<fo:block line-height="12.5pt" font-weight="bold" font-size="9.5pt"><xsl:value-of select="@description"></xsl:value-of></fo:block>
+											</xsl:if>
+										</xsl:otherwise>
+									</xsl:choose>
+									<xsl:if test="@show_copyright='true'">
+										<xsl:choose>
+											<xsl:when test="descendant::extension[@extension_name='loop_copyright']">
+												<fo:block line-height="12.5pt" font-weight="bold" font-size="9.5pt">
+													<xsl:apply-templates select="descendant::extension[@extension_name='loop_copyright']" mode="infigure"></xsl:apply-templates>
+												</fo:block>
+											</xsl:when>
+											<xsl:otherwise>
+												<xsl:if test="@copyright">
+													<fo:block line-height="12.5pt" font-weight="bold" font-size="9.5pt"><xsl:value-of select="@copyright"></xsl:value-of></fo:block>
+												</xsl:if>	
+											</xsl:otherwise>
+										</xsl:choose>									
 									</xsl:if>
 								</fo:block>
 							</fo:table-cell>
@@ -1550,11 +1643,43 @@
 								<xsl:attribute name="width">140mm</xsl:attribute>
 								<fo:block>
 									<xsl:apply-templates></xsl:apply-templates>								
-									<xsl:if test="@title">
-										<fo:block line-height="12.5pt" font-weight="bold" font-size="9.5pt"><xsl:value-of select="@title"></xsl:value-of></fo:block>
-									</xsl:if>
-									<xsl:if test="@description">
-										<fo:block line-height="12.5pt" font-size="9.5pt"><xsl:value-of select="@description"></xsl:value-of></fo:block>
+									<xsl:choose>
+										<xsl:when test="descendant::extension[@extension_name='loop_title']">
+											<fo:block line-height="12.5pt" font-weight="bold" font-size="9.5pt">
+												<xsl:apply-templates select="descendant::extension[@extension_name='loop_title']" mode="infigure"></xsl:apply-templates>
+											</fo:block>
+										</xsl:when>										
+										<xsl:otherwise>
+											<xsl:if test="@title">
+												<fo:block line-height="12.5pt" font-weight="bold" font-size="9.5pt"><xsl:value-of select="@title"></xsl:value-of></fo:block>
+											</xsl:if>
+										</xsl:otherwise>
+									</xsl:choose>	
+									<xsl:choose>
+										<xsl:when test="descendant::extension[@extension_name='loop_description']">
+											<fo:block line-height="12.5pt" font-weight="bold" font-size="9.5pt">
+												<xsl:apply-templates select="descendant::extension[@extension_name='loop_description']" mode="infigure"></xsl:apply-templates>
+											</fo:block>
+										</xsl:when>										
+										<xsl:otherwise>
+											<xsl:if test="@description">
+												<fo:block line-height="12.5pt" font-weight="bold" font-size="9.5pt"><xsl:value-of select="@description"></xsl:value-of></fo:block>
+											</xsl:if>
+										</xsl:otherwise>
+									</xsl:choose>
+									<xsl:if test="@show_copyright='true'">
+										<xsl:choose>
+											<xsl:when test="descendant::extension[@extension_name='loop_copyright']">
+												<fo:block line-height="12.5pt" font-weight="bold" font-size="9.5pt">
+													<xsl:apply-templates select="descendant::extension[@extension_name='loop_copyright']" mode="infigure"></xsl:apply-templates>
+												</fo:block>
+											</xsl:when>
+											<xsl:otherwise>
+												<xsl:if test="@copyright">
+													<fo:block line-height="12.5pt" font-weight="bold" font-size="9.5pt"><xsl:value-of select="@copyright"></xsl:value-of></fo:block>
+												</xsl:if>	
+											</xsl:otherwise>
+										</xsl:choose>									
 									</xsl:if>
 								</fo:block>
 							</fo:table-cell>
