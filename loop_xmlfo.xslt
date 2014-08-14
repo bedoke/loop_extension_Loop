@@ -2644,7 +2644,14 @@
 		<xsl:apply-templates mode="biblio_entry"></xsl:apply-templates>
 	</xsl:template>	
 
-
+	<xsl:template match="xhtml:div|div" >
+		<fo:block>
+			<xsl:call-template name="css-style-attributes"></xsl:call-template>
+			<xsl:apply-templates></xsl:apply-templates>
+		</fo:block>
+	</xsl:template>	
+	
+	
 	<xsl:template match="preblock" >
 		<xsl:apply-templates></xsl:apply-templates>
 	</xsl:template>
