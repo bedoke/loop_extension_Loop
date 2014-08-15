@@ -2557,6 +2557,56 @@
 		</fo:basic-link>	
 		</xsl:if>
 	</xsl:template>	
+	
+	<xsl:template match="extension" mode="biblio_entry">
+		<xsl:if test="@href">
+					<fo:basic-link>
+			<xsl:attribute name="external-destination"><xsl:value-of select="@href"></xsl:value-of></xsl:attribute>
+			<fo:inline text-decoration="underline">
+				<!-- <xsl:value-of select="."></xsl:value-of>  -->
+				<xsl:call-template name="zero_width_space_1">
+					<xsl:with-param name="data" select="."/>
+				</xsl:call-template>				
+			</fo:inline>
+			<xsl:text> </xsl:text>
+			<fo:inline ><fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="2mm" src="/opt/www/loop.oncampus.de/mediawiki/skins/loop/images/print/www_link.png"></fo:external-graphic></fo:inline>
+			<xsl:if test="not(@href = .)"> 
+				<xsl:text> (</xsl:text>
+				<!-- <xsl:value-of select="@href"></xsl:value-of> -->
+				<xsl:call-template name="zero_width_space_1">
+					<xsl:with-param name="data" select="@href"/>
+				</xsl:call-template>
+				<xsl:text>)</xsl:text>
+			</xsl:if>
+		</fo:basic-link>	
+		</xsl:if>
+	</xsl:template>	
+
+	<xsl:template name="zero_width_space_1">
+	<xsl:param name="data"/>
+	<xsl:param name="counter" select="0"/>
+	<xsl:choose>
+		<xsl:when test="$counter &lt; string-length($data)">
+		  <xsl:value-of select='concat(substring($data,$counter,1),"&#8203;")'/>
+		   <xsl:call-template name="zero_width_space_2">
+			  <xsl:with-param name="data" select="$data"/>
+			  <xsl:with-param name="counter" select="$counter+1"/>
+	   </xsl:call-template>
+		</xsl:when>
+		<xsl:otherwise>
+		</xsl:otherwise>
+	  </xsl:choose>
+	</xsl:template>
+
+	<xsl:template name="zero_width_space_2">
+	<xsl:param name="data"/>
+	<xsl:param name="counter"/>
+	   <xsl:value-of select='concat(substring($data,$counter,1),"&#8203;")'/>
+	   <xsl:call-template name="zero_width_space_1">
+		<xsl:with-param name="data" select="$data"/>
+		<xsl:with-param name="counter" select="$counter+1"/>
+	  </xsl:call-template>
+	</xsl:template>	
 
 
 	<xsl:template match="span" mode="biblio_key">
