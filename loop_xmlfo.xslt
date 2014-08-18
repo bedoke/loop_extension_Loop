@@ -1063,14 +1063,13 @@
 			<xsl:value-of select="php:function('xslt_get_config', 'wgLoopShowPagetitle')"></xsl:value-of>
 		</xsl:variable>
 		
-		<xsl:if test="$wgLoopShowPagetitle='true'">
-			<fo:block keep-with-next.within-page="always">
-				<xsl:call-template name="font_subhead"></xsl:call-template>
-				<xsl:value-of select="@title"></xsl:value-of>
-			</fo:block>
-		</xsl:if>
-		
-		<fo:block keep-with-next.within-page="always" id="{@title}">
+		<fo:block keep-together.within-page="10" id="{@title}" margin-left="20mm">
+			<xsl:if test="$wgLoopShowPagetitle='true'">
+				<fo:block keep-with-next.within-page="always">
+					<xsl:call-template name="font_subhead"></xsl:call-template>
+					<xsl:value-of select="@title"></xsl:value-of>
+				</fo:block>
+			</xsl:if>		
 			<xsl:apply-templates></xsl:apply-templates>
 		</fo:block>
 	</xsl:template>
