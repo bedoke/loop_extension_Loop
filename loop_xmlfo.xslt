@@ -1070,7 +1070,7 @@
 			</fo:block>
 		</xsl:if>
 		
-		<fo:block keep-with-next.within-page="always">
+		<fo:block keep-with-next.within-page="always" id="{@title}">
 			<xsl:apply-templates></xsl:apply-templates>
 		</fo:block>
 	</xsl:template>
