@@ -13,7 +13,7 @@
 	<xsl:import href="loop_params.xsl"></xsl:import>
 	<xsl:import href="loop_terms.xsl"></xsl:import>
 
-	<xsl:preserve-space elements="extension source" />
+	<xsl:preserve-space elements="extension source code xhtml:code" />
 
 	<xsl:output method="xml" version="1.0" encoding="UTF-8"
 		indent="yes"></xsl:output>
@@ -2796,7 +2796,11 @@
 	</xsl:template>
 	
 	
-	
+	<xsl:template match="xhtml:code">
+		<fo:block linefeed-treatment="preserve" white-space-treatment='preserve' white-space-collapse='false'>
+			<xsl:value-of select="."/>
+		</fo:block>
+	</xsl:template>			
 	
 	<xsl:template name="str:tokenize">
 	  <xsl:param name="string" select="''" />
