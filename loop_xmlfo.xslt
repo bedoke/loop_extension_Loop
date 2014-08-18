@@ -1256,9 +1256,11 @@
 
 	
 	<xsl:template match="extension">
-		<fo:inline>
-			<xsl:attribute name="id"><xsl:value-of select="generate-id()"></xsl:value-of></xsl:attribute>
-		</fo:inline>
+		<xsl:if test="not(@extension_name='mathimage')">
+			<fo:inline>
+				<xsl:attribute name="id"><xsl:value-of select="generate-id()"></xsl:value-of></xsl:attribute>
+			</fo:inline>			
+		</xsl:if>
 		<xsl:choose>
 			<xsl:when test="@extension_name='loop_area'">
 				<fo:block margin-left="-16mm">
