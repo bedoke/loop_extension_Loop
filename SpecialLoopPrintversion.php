@@ -44,76 +44,60 @@ function xslt_get_page_xml($input) {
 function xslt_get_index() {
 	global $IP,	$wgOut, $wgParser, $wgLoopStructureNumbering;
 	
-	$return_xml='';
-	$return_xml.='<loop_index>';
-	
-	
-	# -------------------------------------
-	
-	
 	$sql="select indexes.in_title, page.page_id, page.page_title, loopstructure.TocNumber from (indexes left join page on indexes.in_from=page.page_id) left join loopstructure on page.page_id= loopstructure.ArticleId  order by indexes.in_title, loopstructure.TocNumber";
 	$dbr = wfGetDB( DB_SLAVE );
 	$res = $dbr->query( $sql, __METHOD__, true );
 
-	$act_index_title='';
-	$act_index_letter='';
-	$first=true;
-	$closed=false;
+	$groups=array();
 	foreach ( $res as $row ) {
-		
-		// Neuer Buchstabe
-		if (substr($row->in_title,0,1)!=$act_index_letter) {
-			$act_index_letter=substr($row->in_title,0,1);
-			if($first==false) {
-				$return_xml.='</loop_index_pages></loop_index_item></loop_index_group>';
-			}
-			$first=false;
-			$return_xml.= '<loop_index_group letter="'.$act_index_letter.'">';
-			$closed=true;
-		}
-		
-		
-		if ($row->in_title!=$act_index_title) {
-			if (!$closed) {
-				$return_xml.= '</loop_index_pages></loop_index_item>';
-			}			
-			$act_index_title=$row->in_title;
-			$return_xml.='<loop_index_item>';
-			$return_xml.='<loop_index_title>'.str_replace( '_', ' ', $act_index_title ).'</loop_index_title>';
-			$return_xml.='<loop_index_pages>';
-			$link_title='';
-			if (($wgLoopStructureNumbering) && ($row->TocNumber)) {
-				$link_title.=$row->TocNumber.' ';
-			}
-			$link_title.=$row->page_title;
-			$return_xml.= '<loop_index_page pagetitle="'.Title::newFromText($row->page_title).'" title="'.$link_title.'" further="0"></loop_index_page>';
-			$closed=false;			
-		} else {
-			$link_title='';
-			if (($wgLoopStructureNumbering) && ($row->TocNumber)) {
-				$link_title.=$row->TocNumber.' ';
-			}
-			$link_title.=$row->page_title;
-			$return_xml.= '<loop_index_page pagetitle="'.Title::newFromText($row->page_title).'" title="'.$link_title.'" further="1"></loop_index_page>';
-			$closed=false;			
-		}
-		
-	
-
-	}	
-	if (!$first) {
-		$return_xml.='</loop_index_pages></loop_index_item></loop_index_group>';
+		$letter = substr($row->in_title,0,1);
+		$indextitle = str_replace( '_', ' ', $row->in_title);
+		$groups[$letter][$indextitle][]=$row->page_title;
 	}
 	
-	# -------------------------------------
+	$doc = new DOMDocument('1.0');
+	$doc->formatOutput = true;	
 	
-	$return_xml.='</loop_index>';
+	$root = $doc->createElement('loop_index');
+	$root = $doc->appendChild($root);
 	
-	$return_doc = new DOMDocument;
-	$return_doc->loadXml($return_xml);
-		
-	return $return_doc;
-	//return $return_xml;
+	foreach ($groups as $letter=>$group) {
+		$loop_index_group = $doc->createElement('loop_index_group');
+		$letterAttribute = $doc->createAttribute('letter');
+		$letterAttribute->value = $letter;
+		$loop_index_group->appendChild($letterAttribute);
+		$loop_index_group = $root->appendChild($loop_index_group);
+	
+		foreach ($group as $item=>$pages) {
+			$loop_index_item = $doc->createElement('loop_index_item');
+			$loop_index_item = $loop_index_group->appendChild($loop_index_item);	
+			
+			$loop_index_title_value = str_replace( '_', ' ', $item );
+			$loop_index_title = $doc->createElement('loop_index_title', $loop_index_title_value);
+			$loop_index_title = $loop_index_item->appendChild($loop_index_title);	
+			
+			$loop_index_pages = $doc->createElement('loop_index_pages');
+			$loop_index_pages = $loop_index_item->appendChild($loop_index_pages);	
+			
+			$furthervalue='0';
+			foreach ($pages as $page) {
+				$loop_index_page = $doc->createElement('loop_index_page');
+				
+				$furtherAttribute = $doc->createAttribute('further');
+				$furtherAttribute->value = $furthervalue;
+				$loop_index_page->appendChild($furtherAttribute);
+								
+				$pagetitleAttribute = $doc->createAttribute('pagetitle');
+				$pagetitleAttribute->value = Title::newFromText($page);
+				$loop_index_page->appendChild($pagetitleAttribute);
+				
+				$loop_index_pages->appendChild($loop_index_page);
+				
+				$furthervalue = '1';
+			}
+		}
+	}
+	return $doc;
 }
 
 

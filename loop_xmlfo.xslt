@@ -184,7 +184,7 @@
 	</xsl:template>
 
 	<xsl:template match="loop_index_group">
-		<fo:block keep-together.within-column="always">
+		<fo:block>
 		<fo:block margin-top="5mm" font-weight="bold">
 			<xsl:value-of select="@letter"></xsl:value-of>
 		</fo:block>
