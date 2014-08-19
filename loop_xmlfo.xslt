@@ -1038,7 +1038,14 @@
 				<fo:marker marker-class-name="page-title-right">
 					<xsl:value-of select="@tocnumber"></xsl:value-of>
 					<xsl:text> </xsl:text>
-					<xsl:value-of select="@title"></xsl:value-of>
+					<xsl:choose>
+						<xsl:when test="string-length(@title) &gt; 63">
+							<xsl:value-of select="concat(substring(@title,0,60),'...')"></xsl:value-of>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:value-of select="@title"></xsl:value-of>
+						</xsl:otherwise>
+					</xsl:choose>
 				</fo:marker>
 			</fo:block>
 			<fo:block keep-with-next.within-page="always">
@@ -2199,14 +2206,14 @@
 
 	<xsl:template name="index_exists">
 		<xsl:choose>
-			<xsl:when test="//*/paragraph[starts-with(.,'#index')]">
+			<xsl:when test="(//*/paragraph[starts-with(.,'#index')]) or (//*/extension[@extension_name='loop_index'])">
 				<xsl:text>1</xsl:text>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:text>0</xsl:text>
 			</xsl:otherwise>
 		</xsl:choose>
-	</xsl:template>			
+	</xsl:template>		
 
 	<xsl:template name="appendix_number">
 		<xsl:param name="content"></xsl:param>
