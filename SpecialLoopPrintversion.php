@@ -50,7 +50,11 @@ function xslt_get_index() {
 
 	$groups=array();
 	foreach ( $res as $row ) {
-		$letter = substr($row->in_title,0,1);
+		$letter = mb_substr($row->in_title,0,1);
+		$letter = iconv('UTF-8', 'US-ASCII//TRANSLIT', $letter);
+		if ((ord($letter)>=48) && (ord($letter)<=57)) {
+			$letter = '#';
+		}
 		$indextitle = str_replace( '_', ' ', $row->in_title);
 		$groups[$letter][$indextitle][]=$row->page_title;
 	}
