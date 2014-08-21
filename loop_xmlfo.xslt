@@ -313,7 +313,7 @@
 						<fo:basic-link color="black">
 							<xsl:attribute name="internal-destination"><xsl:value-of select="generate-id()"></xsl:value-of></xsl:attribute>
 							
-							<fo:inline keep-together.within-line="always">	
+							<fo:inline>	
 								<xsl:choose>
 									<xsl:when test="descendant::extension[@extension_name='loop_figure_title']">
 										<xsl:apply-templates select="descendant::extension[@extension_name='loop_figure_title']" mode="infigure"></xsl:apply-templates>
@@ -393,7 +393,7 @@
 						<fo:basic-link color="black">
 							<xsl:attribute name="internal-destination"><xsl:value-of select="generate-id()"></xsl:value-of></xsl:attribute>
 							
-							<fo:inline keep-together.within-line="always">	
+							<fo:inline>	
 								<xsl:choose>
 									<xsl:when test="descendant::extension[@extension_name='loop_figure_title']">
 										<xsl:apply-templates select="descendant::extension[@extension_name='loop_figure_title']" mode="infigure"></xsl:apply-templates>
@@ -501,7 +501,7 @@
 						<fo:basic-link color="black">
 							<xsl:attribute name="internal-destination"><xsl:value-of select="generate-id()"></xsl:value-of></xsl:attribute>
 							
-							<fo:inline keep-together.within-line="always">	
+							<fo:inline>	
 								<xsl:choose>
 									<xsl:when test="descendant::extension[@extension_name='loop_figure_title']">
 										<xsl:apply-templates select="descendant::extension[@extension_name='loop_figure_title']" mode="infigure"></xsl:apply-templates>
@@ -582,7 +582,7 @@
 						<fo:basic-link color="black">
 							<xsl:attribute name="internal-destination"><xsl:value-of select="generate-id()"></xsl:value-of></xsl:attribute>
 							
-							<fo:inline keep-together.within-line="always">	
+							<fo:inline>	
 								<xsl:choose>
 									<xsl:when test="descendant::extension[@extension_name='loop_figure_title']">
 										<xsl:apply-templates select="descendant::extension[@extension_name='loop_figure_title']" mode="infigure"></xsl:apply-templates>
@@ -664,7 +664,7 @@
 						<fo:basic-link color="black">
 							<xsl:attribute name="internal-destination"><xsl:value-of select="generate-id()"></xsl:value-of></xsl:attribute>
 							
-							<fo:inline keep-together.within-line="always">	
+							<fo:inline>	
 								<xsl:choose>
 									<xsl:when test="descendant::extension[@extension_name='loop_figure_title']">
 										<xsl:apply-templates select="descendant::extension[@extension_name='loop_figure_title']" mode="infigure"></xsl:apply-templates>
