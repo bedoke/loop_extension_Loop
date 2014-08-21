@@ -36,6 +36,7 @@ class LoopArea {
 
 		$areatypes=array('task','timerequirement','learningobjectives','arrangement','example','reflection','notice','sourcecode','summary','important','markedsentence','annotation','definition','formula','indentation','area','norm','law','question','practice','exercise','websource','experiment');
 
+		#$this->input=trim($input);
 		$this->input=trim($input);
 		$this->args=$args;
 
