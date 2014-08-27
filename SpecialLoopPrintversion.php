@@ -49,6 +49,7 @@ function xslt_get_index() {
 	$res = $dbr->query( $sql, __METHOD__, true );
 
 	$groups=array();
+	setlocale(LC_CTYPE, 'de_DE');
 	foreach ( $res as $row ) {
 		$letter = mb_substr($row->in_title,0,1);
 		$letter = iconv('UTF-8', 'US-ASCII//TRANSLIT', $letter);
