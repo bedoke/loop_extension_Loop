@@ -51,8 +51,9 @@ function xslt_get_index() {
 	$groups=array();
 	setlocale(LC_CTYPE, 'de_DE');
 	foreach ( $res as $row ) {
-		$letter = mb_substr($row->in_title,0,1);
+		$letter = $row->in_title;
 		$letter = iconv('UTF-8', 'US-ASCII//TRANSLIT', $letter);
+		$letter = mb_substr($letter,0,1);
 		if ((ord($letter)>=48) && (ord($letter)<=57)) {
 			$letter = '#';
 		}
