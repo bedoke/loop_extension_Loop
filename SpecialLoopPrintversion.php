@@ -620,7 +620,7 @@ function get_biblio() {
 		if (count($matches)>0) {
 			$b=array_pop($matches);
 			$bibtext=$b[1];
-			$test=$lbib->render_biblio($bibtext,$parser_data ,true,true);
+			$test=$lbib->render_biblio($bibtext,$parser_data ,true,true,true);
 			$return_xml =  trim($test);
 			$converter = new MediaWikiConverter ;
 			$articlexml=$converter->article2xml ( $bibliopagename, $return_xml  );
