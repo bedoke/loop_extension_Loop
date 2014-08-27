@@ -12,7 +12,7 @@ class SpecialLoopIndex extends SpecialPage {
 		$wgOut->addModules( 'ext.LoopIndex' );
 		$this->setHeaders();
 
-		setlocale(LC_CTYPE, 'cs_CZ');
+		setlocale(LC_CTYPE, 'de_DE');
 		
 		$indexitems=array();
 		$return = '<h1>'.wfMsg('loopindex').'</h1>';
@@ -52,9 +52,20 @@ class SpecialLoopIndex extends SpecialPage {
 		$return.='<div id="loopindex"><table>';
 		$first=true;
 		$closed=false;
+		
+		#var_dump ($res);
+		$indexarray=array();
 		foreach ( $res as $row ) {
-			$act_letter = mb_substr($row->in_title,0,1);
-			$act_letter = iconv('UTF-8', 'US-ASCII//TRANSLIT', $act_letter);		
+			$indexarray[]=$row;
+		}
+		usort($indexarray, "cmp_indexterms");
+		#var_dump ($indexarray);
+		
+		foreach ( $indexarray as $row ) {
+			$act_letter = $row->in_title;
+			$act_letter = iconv('UTF-8', 'US-ASCII//TRANSLIT', $act_letter);
+			$act_letter = mb_substr($act_letter,0,1);
+					
 			if ((ord($act_letter)>=48) && (ord($act_letter)<=57)) {
 				$act_letter = '#';
 			}
@@ -120,5 +131,20 @@ class SpecialLoopIndex extends SpecialPage {
 	}
 }
 //  $s = $skin->makeLinkObj(Title::newFromText(wfMsgForContent('pagecategorieslink')), $msg)
-               
+
+function cmp_indexterms($a, $b)
+{
+	setlocale(LC_CTYPE, 'de_DE');
+	$a=$a->in_title;
+	$a = mb_strtolower ($a, 'UTF-8');
+	$a = iconv('UTF-8', 'US-ASCII//TRANSLIT', $a);
+	$b=$b->in_title;
+	$b = mb_strtolower ($b, 'UTF-8');
+	$b = iconv('UTF-8', 'US-ASCII//TRANSLIT', $b);
+
+	if ($a == $b) {
+		return 0;
+	}
+	return ($a < $b) ? -1 : 1;
+}               
 ?>
