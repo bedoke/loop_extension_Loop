@@ -230,7 +230,9 @@ function xslt_transform_link($input) {
   if (!array_key_exists('type', $childs)) {
     $childs['type']='internal';
   }
-
+	if (array_key_exists('text', $childs)) {
+	  $childs['text']=escapexml($childs['text']);
+	}
   //wfDebug( __METHOD__ . ': input_childs : '.print_r($childs,true)."\n");
 
 	if ($childs['type']=='external') {
