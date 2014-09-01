@@ -298,7 +298,7 @@ function xslt_transform_link($input) {
 			}
 			$return_xml .=  '></php_link_image>';
 				
-		} else if (($target_array[0]=='Kategorie')||($target_array[0]=='Category')) {
+		} else if (($target_array[0]=='Kategorie')||($target_array[0]=='Category')||($target_array[0]=='kategorie')||($target_array[0]=='category')) {
 		
 			$return_xml = '';
 		
