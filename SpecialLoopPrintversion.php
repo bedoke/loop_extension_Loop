@@ -165,6 +165,9 @@ function xslt_transform_graphviz($input) {
 
 function xslt_transform_link($input) {
 	
+	if(isset($_GET['textonly']))
+		$textonly = $_GET['textonly'];
+	
 	libxml_use_internal_errors(true);
 	
 	$return='';
@@ -227,11 +230,11 @@ function xslt_transform_link($input) {
 		$childs[$child_name]=$child_value;
 	}
 
-  if (!array_key_exists('type', $childs)) {
-    $childs['type']='internal';
-  }
+	if (!array_key_exists('type', $childs)) {
+		$childs['type']='internal';
+	}
 	if (array_key_exists('text', $childs)) {
-	  $childs['text']=escapexml($childs['text']);
+		$childs['text']=escapexml($childs['text']);
 	}
   //wfDebug( __METHOD__ . ': input_childs : '.print_r($childs,true)."\n");
 
@@ -241,64 +244,72 @@ function xslt_transform_link($input) {
 		$target=$childs['target'];
 		$target_array=explode(':',$target);
 		if (($target_array[0]=='Datei')||($target_array[0]=='File')||($target_array[0]=='Bild')||($target_array[0]=='Image')||($target_array[0]=='file')) {
-				
-			$target_uri=$target_array[1];
-			$filetitle=Title::newFromText( $target_uri, NS_FILE );
-			$file = wfLocalFile($filetitle);
-			if (is_object($file)) {
-			$imagepath=$file->getLocalRefPath();
-			} else {
-			$imagepath='';
-			}
-				
-			$imagewidth='150mm';
-			/*
-			if (array_key_exists('part', $childs)) {
-				$part=$childs['part'];
-				if (stristr('px',$part)) {
-					$part_array=explode('px',$part);
-					if (count($part_array)==2) {
-						$px=trim($part_array[0]);
-						$mm=round(0.214*intval($px),0);
-						$imagewidth=$mm.'mm';
+			
+			if($textonly){
+				$imagepath = 'http://loop.oncampus.de/mediawiki/extensions/Loop/placeholder.png';
+				$imagewidth = '10mm';
+				$return_xml =  '<php_link_image imagepath="'.$imagepath.'" imagewidth="'.$imagewidth.'"></php_link_image>';
+			}else{
+			
+				$target_uri=$target_array[1];
+				$filetitle=Title::newFromText( $target_uri, NS_FILE );
+				$file = wfLocalFile($filetitle);
+				if (is_object($file)) {
+				$imagepath=$file->getLocalRefPath();
+				} else {
+				$imagepath='';
+				}
+					
+				$imagewidth='150mm';
+				/*
+				if (array_key_exists('part', $childs)) {
+					$part=$childs['part'];
+					if (stristr('px',$part)) {
+						$part_array=explode('px',$part);
+						if (count($part_array)==2) {
+							$px=trim($part_array[0]);
+							$mm=round(0.214*intval($px),0);
+							$imagewidth=$mm.'mm';
+						}
+					} else {
+					    $size=getimagesize($imagepath);
+						$width=0.214*intval($size[0]);
+						if ($width>150) {
+							$imagewidth='150mm';
+						} else {
+							$imagewidth=round($width,0).'mm';
+						}				
 					}
-				} else {
-				    $size=getimagesize($imagepath);
-					$width=0.214*intval($size[0]);
+					*/
+				if (array_key_exists('width', $childs)) {
+					$width=0.214*intval($childs['width']);
 					if ($width>150) {
 						$imagewidth='150mm';
 					} else {
 						$imagewidth=round($width,0).'mm';
-					}				
-				}
-				*/
-			if (array_key_exists('width', $childs)) {
-				$width=0.214*intval($childs['width']);
-				if ($width>150) {
-					$imagewidth='150mm';
+					}								
 				} else {
-					$imagewidth=round($width,0).'mm';
-				}								
-			} else {
-				if ($imagepath!='') {
-					$size=getimagesize($imagepath);
-					$width=0.214*intval($size[0]);
-					if ($width>150) {
-						$imagewidth='150mm';
+					if ($imagepath!='') {
+						$size=getimagesize($imagepath);
+						$width=0.214*intval($size[0]);
+						if ($width>150) {
+							$imagewidth='150mm';
+						} else {
+							$imagewidth=round($width,0).'mm';
+						}				
 					} else {
-						$imagewidth=round($width,0).'mm';
-					}				
-				} else {
-					$imagewidth='150mm';
+						$imagewidth='150mm';
+					}
 				}
+					
+				//$input_value=print_r($childs,true);
+				$return_xml =  '<php_link_image imagepath="'.$imagepath.'" imagewidth="'.$imagewidth.'" ';
+				if (isset($childs['align'])) {
+					$return_xml .= ' align="'.$childs['align'].'" ';
+				}
+				$return_xml .=  '></php_link_image>';
+			
 			}
-				
-			//$input_value=print_r($childs,true);
-			$return_xml =  '<php_link_image imagepath="'.$imagepath.'" imagewidth="'.$imagewidth.'" ';
-			if (isset($childs['align'])) {
-				$return_xml .= ' align="'.$childs['align'].'" ';
-			}
-			$return_xml .=  '></php_link_image>';
 				
 		} else if (($target_array[0]=='Kategorie')||($target_array[0]=='Category')||($target_array[0]=='kategorie')||($target_array[0]=='category')) {
 		
