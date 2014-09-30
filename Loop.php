@@ -133,6 +133,10 @@ $wgAutoloadClasses['SpecialLoopNoToc'] = $dir . 'SpecialLoopNoToc.php';
 $wgSpecialPages['LoopNoToc'] = 'SpecialLoopNoToc'; 
 $wgSpecialPageGroups['LoopNoToc'] = 'maintenance'; 
 
+$wgAutoloadClasses['SpecialLoopReviewAllPages'] = $dir . 'SpecialLoopReviewAllPages.php';
+$wgSpecialPages['SpecialLoopReviewAllPages'] = 'SpecialLoopReviewAllPages'; 
+$wgSpecialPageGroups['SpecialLoopReviewAllPages'] = 'other'; 
+
 
 function loopInit( Parser &$parser ) {
 

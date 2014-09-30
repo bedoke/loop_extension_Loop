@@ -15,7 +15,8 @@ $specialPageAliases['de'] = array(
 	'LoopImprint' => array( 'LoopImprint', 'Impressum' ),
 	'LoopAudio' => array( 'LoopAudio', 'Audio' ),
 	'LoopChapteraudio' => array( 'LoopChapteraudio', 'Kapitelaudio' ),
-	'LoopNoToc' => array( 'LoopNoToc', 'Seiten nicht im Inhaltsverzeichnis' )
+	'LoopNoToc' => array( 'LoopNoToc', 'Seiten nicht im Inhaltsverzeichnis' ),
+	'SpecialLoopReviewAllPages' => array( 'SpecialLoopReviewAllPages', 'Alle Seiten autorisieren' )
 );
 
 $specialPageAliases['en'] = array(
@@ -31,7 +32,8 @@ $specialPageAliases['en'] = array(
 	'LoopImprint' => array( 'LoopImprint', 'Imprint' ),
 	'LoopAudio' => array( 'LoopAudio', 'Audio' ),
 	'LoopChapteraudio' => array( 'LoopChapteraudio', 'Chapteraudio' ),
-	'LoopNoToc' => array( 'LoopNoToc', 'Pages not in table of contents' )
+	'LoopNoToc' => array( 'LoopNoToc', 'Pages not in table of contents' ),
+	'SpecialLoopReviewAllPages' => array( 'SpecialLoopReviewAllPages', 'Review all pages' )
 );
 
 $specialPageAliases['fr'] = array(
@@ -135,7 +137,9 @@ $messages['de'] = array(
 	'loop-hide-right-sidebar' => 'rechte Randleiste verbergen',
 	'loopnotoc' => 'Seiten nicht im Inhaltsverzeichnis',
 	'loop-search-loop' => 'Modul durchsuchen',
-	'loop-readpage-tooltip' => 'Seite vorlesen'
+	'loop-readpage-tooltip' => 'Seite vorlesen',
+	'loop-review-all-pages-button' => 'Alle Seiten autorisieren',
+	'specialloopreviewallpages' => 'Alle Seiten autorisieren'
 );
 
 $messages['en'] = array(
@@ -224,7 +228,9 @@ $messages['en'] = array(
 	'loop-hide-right-sidebar' => 'hide right sidebar',
 	'loopnotoc' => 'Pages not in table of contents',
 	'loop-search-loop' => 'Search module',
-	'loop-readpage-tooltip' => 'Read page'
+	'loop-readpage-tooltip' => 'Read page',
+	'loop-review-all-pages-button' => 'Review all pages',
+	'specialloopreviewallpages' => 'Review all pages'
 );
 
 $messages['fr'] = array(
