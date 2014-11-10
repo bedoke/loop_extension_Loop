@@ -11,11 +11,10 @@ class SpecialLoopImprint extends SpecialPage {
 
 		$this->setHeaders();
 
-		$parts=explode('.', substr($wgServer,7));
-		$hashtag=$parts[0];
-		
+	
 		$return = '';		
-		$url=$wgeLoopImprintUrl.'?hashtag='.$hashtag;
+		$loop = mb_substr($wgServer,7);
+		$url=$wgeLoopImprintUrl.'?loop='.$loop;
 		
 		
 		$cha = curl_init();
@@ -26,7 +25,7 @@ class SpecialLoopImprint extends SpecialPage {
 		 
 		$return .= curl_exec($cha);
 		
-		echo "<!-- RETURN:".$return." -->";
+		#echo "<!-- RETURN:".$return." -->";
 		curl_close($cha);
 
 		$wgOut->addHTML($return);

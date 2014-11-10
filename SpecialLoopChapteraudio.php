@@ -38,9 +38,10 @@ class SpecialLoopChapteraudio extends SpecialPage {
 
 
 
-		preg_match('/(?<=http:\/\/)(.+)(?=\.oncampus.de)/',$wgServer,$matches);
-		$tmpname=$matches[0].'_'.time();
-
+		#preg_match('/(?<=http:\/\/)(.+)(?=\.oncampus.de)/',$wgServer,$matches);
+		#$tmpname=$matches[0].'_'.time();
+		$tmpname=$wgServer.'_'.time();
+		
 		$id3tag_album = $this->get_structure_title(); //$matches[0];
 		$num_chapters= $this->get_num_chapters();
 		$id3tag_track = str_pad($chapter, 2, "0", STR_PAD_LEFT).'/'.str_pad($num_chapters, 2, "0", STR_PAD_LEFT);

@@ -687,9 +687,10 @@ class SpecialLoopPrintversion extends SpecialPage {
 		//var_dump($abbreviationpageMsg);
 		//exit;
 
-		preg_match('/(?<=http:\/\/)(.+)(?=\.oncampus.de)/',$wgServer,$matches);
-		$tmpname=$matches[0].'_'.time();
-		//$tmpname=$matches[0];
+		#preg_match('/(?<=http:\/\/)(.+)(?=\.oncampus.de)/',$wgServer,$matches);
+		#$tmpname=$matches[0].'_'.time();
+		$tmpname=substr($wgServer,7).'_'.time();
+		
 
 
 		$loop_xml=$this->get_loop_xml($tmpname);
@@ -697,7 +698,7 @@ class SpecialLoopPrintversion extends SpecialPage {
 		$loop_xml = str_replace ( '&lt;nowiki&gt;' , '<nowiki>', $loop_xml);
 		$loop_xml = str_replace ( '&lt;/nowiki&gt;' , '</nowiki>', $loop_xml);
 
-		if ($_SERVER["SERVER_NAME"] == 'devloop.oncampus.de') {
+		if (($_SERVER["SERVER_NAME"] == 'devloop.oncampus.de')||($_SERVER["SERVER_NAME"] == 'devloop2.oncampus.de')) {
 			$xmlwikiFile = $IP."/tmp/".$tmpname."_wiki.xml";
 			$fh = fopen($xmlwikiFile, 'w') or die("can't open xml file");
 			fwrite($fh, $loop_xml);
@@ -735,7 +736,7 @@ class SpecialLoopPrintversion extends SpecialPage {
 		
 		
 		
-		if ($_SERVER["SERVER_NAME"] == 'devloop.oncampus.de') {
+		if (($_SERVER["SERVER_NAME"] == 'devloop.oncampus.de')||($_SERVER["SERVER_NAME"] == 'devloop2.oncampus.de')) {
 		$xmlFile = $IP."/tmp/".$tmpname.".xml";
 		$pdfFile = $IP."/tmp/".$tmpname.".pdf";
 		$qrFile = $IP."/tmp/".$tmpname."_qr.png";
@@ -778,7 +779,7 @@ class SpecialLoopPrintversion extends SpecialPage {
 		echo $content;
 		ob_start();
 		
-    if ($_SERVER["SERVER_NAME"] != 'devloop.oncampus.de') {
+    if (($_SERVER["SERVER_NAME"] != 'devloop.oncampus.de')&&($_SERVER["SERVER_NAME"] != 'devloop2.oncampus.de')) {
 		unlink($xmlFile);
 		unlink($pdfFile);
 		unlink($qrFile);
