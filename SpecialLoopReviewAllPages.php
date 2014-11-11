@@ -11,12 +11,10 @@ class SpecialLoopReviewAllPages extends SpecialPage {
 		$this->outputHeader();
 
 		set_time_limit(0);
-		
 		$user = $this->getUser();
 		if ( !$user->isAllowedAny( 'review' ) ) {
 			throw new PermissionsError( 'review' );
 		}
-
 
 		$request = $this->getRequest();
 		if ( $request->wasPosted() && $request->getVal( 'action' ) == 'submit' ) {
