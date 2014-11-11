@@ -23,20 +23,14 @@ function escapexml($text) {
 function xslt_get_page_xml($input) {
 	$input_object=$input[0];
 	$pagename=$input_object->textContent;
-	
 	$content_provider = new ContentProviderMySQL ;
 	$converter = new MediaWikiConverter ;
-	
 	$wikitext = $content_provider->get_wiki_text ($pagename) ;
 	$wikitext = html_entity_decode($wikitext,ENT_NOQUOTES,'UTF-8');
-			
 	$articlexml="";
 	$articlexml=$converter->article2xml($pagename,$wikitext);
-	
-	
 	$return_doc = new DOMDocument;
 	$return_doc->loadXml($articlexml);
-		
 	return $return_doc;	
 }
 
