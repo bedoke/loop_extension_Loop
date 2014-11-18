@@ -141,7 +141,8 @@ $messages['de'] = array(
 	'loop-search-loop' => 'Modul durchsuchen',
 	'loop-readpage-tooltip' => 'Seite vorlesen',
 	'loop-review-all-pages-button' => 'Alle Seiten autorisieren',
-	'specialloopreviewallpages' => 'Alle Seiten autorisieren'
+	'specialloopreviewallpages' => 'Alle Seiten autorisieren',
+	'specialloopsingleprintversion' => 'PDFs seitenweise testen'
 );
 
 $messages['en'] = array(
@@ -232,7 +233,8 @@ $messages['en'] = array(
 	'loop-search-loop' => 'Search module',
 	'loop-readpage-tooltip' => 'Read page',
 	'loop-review-all-pages-button' => 'Review all pages',
-	'specialloopreviewallpages' => 'Review all pages'
+	'specialloopreviewallpages' => 'Review all pages',
+	'specialloopsingleprintversion' => 'test PDFs of single page'
 );
 
 $messages['fr'] = array(
