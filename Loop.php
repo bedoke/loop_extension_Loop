@@ -137,6 +137,9 @@ $wgAutoloadClasses['SpecialLoopReviewAllPages'] = $dir . 'SpecialLoopReviewAllPa
 $wgSpecialPages['SpecialLoopReviewAllPages'] = 'SpecialLoopReviewAllPages'; 
 $wgSpecialPageGroups['SpecialLoopReviewAllPages'] = 'other'; 
 
+$wgAutoloadClasses['SpecialLoopSinglePrintVersion'] = $dir . 'SpecialLoopSinglePrintVersion.php';
+$wgSpecialPages['SpecialLoopSinglePrintVersion'] = 'SpecialLoopSinglePrintVersion';
+$wgSpecialPageGroups['SpecialLoopSinglePrintVersion'] = 'other';
 
 function loopInit( Parser &$parser ) {
 

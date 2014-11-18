@@ -16,7 +16,8 @@ $specialPageAliases['de'] = array(
 	'LoopAudio' => array( 'LoopAudio', 'Audio' ),
 	'LoopChapteraudio' => array( 'LoopChapteraudio', 'Kapitelaudio' ),
 	'LoopNoToc' => array( 'LoopNoToc', 'Seiten nicht im Inhaltsverzeichnis' ),
-	'SpecialLoopReviewAllPages' => array( 'SpecialLoopReviewAllPages', 'Alle Seiten autorisieren' )
+	'SpecialLoopReviewAllPages' => array( 'SpecialLoopReviewAllPages', 'Alle Seiten autorisieren' ),
+	'SpecialLoopSinglePrintVersion' => array( 'SpecialLoopSinglePrintVersion', 'PDFs seitenweise testen' )
 );
 
 $specialPageAliases['en'] = array(
@@ -33,7 +34,8 @@ $specialPageAliases['en'] = array(
 	'LoopAudio' => array( 'LoopAudio', 'Audio' ),
 	'LoopChapteraudio' => array( 'LoopChapteraudio', 'Chapteraudio' ),
 	'LoopNoToc' => array( 'LoopNoToc', 'Pages not in table of contents' ),
-	'SpecialLoopReviewAllPages' => array( 'SpecialLoopReviewAllPages', 'Review all pages' )
+	'SpecialLoopReviewAllPages' => array( 'SpecialLoopReviewAllPages', 'Review all pages' ),
+	'SpecialLoopSinglePrintVersion' => array( 'SpecialLoopSinglePrintVersion', 'test PDFs of single pages' )
 );
 
 $specialPageAliases['fr'] = array(
