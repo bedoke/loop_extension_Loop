@@ -2003,7 +2003,8 @@
 			<xsl:when test="$areaname='practice'"><xsl:value-of select="$word_looparea_practice"></xsl:value-of></xsl:when>
 			<xsl:when test="$areaname='exercise'"><xsl:value-of select="$word_looparea_exercise"></xsl:value-of></xsl:when>
 			<xsl:when test="$areaname='websource'"><xsl:value-of select="$word_looparea_websource"></xsl:value-of></xsl:when>
-						
+			<xsl:when test="$areaname='citation'"><xsl:value-of select="$word_looparea_citation"></xsl:value-of></xsl:when>			
+			<xsl:when test="$areaname='experiment'"><xsl:value-of select="$word_looparea_experiment"></xsl:value-of></xsl:when>
 		</xsl:choose>
 		
 	</xsl:template>

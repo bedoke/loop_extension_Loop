@@ -47,6 +47,8 @@
 	<xsl:variable name="word_looparea_practice"  select="functx:get_term_name('word_looparea_practice')" />
 	<xsl:variable name="word_looparea_exercise"  select="functx:get_term_name('word_looparea_exercise')" />
 	<xsl:variable name="word_looparea_websource"  select="functx:get_term_name('word_looparea_websource')" />
+	<xsl:variable name="word_looparea_experiment"  select="functx:get_term_name('word_looparea_experiment')" />
+	<xsl:variable name="word_looparea_citation"  select="functx:get_term_name('word_looparea_citation')" />
 
 	<xsl:variable name="word_loopmedia_notice_animation"  select="functx:get_term_name('word_loopmedia_notice_animation')" />
 	<xsl:variable name="word_loopmedia_notice_audio"  select="functx:get_term_name('word_loopmedia_notice_audio')" />

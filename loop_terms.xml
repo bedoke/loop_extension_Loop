@@ -69,7 +69,11 @@
 	<msg name="word_looparea_exercise" lang="en">exercise</msg>
 	<msg name="word_looparea_exercise" lang="de">Übung</msg>
 	<msg name="word_looparea_websource" lang="en">websource</msg>
-	<msg name="word_looparea_websource" lang="de">Quelle im Web</msg>		
+	<msg name="word_looparea_websource" lang="de">Quelle im Web</msg>
+	<msg name="word_looparea_experiment" lang="en">experiment</msg>
+	<msg name="word_looparea_experiment" lang="de">Experiment</msg>
+	<msg name="word_looparea_citation" lang="en">citation</msg>
+	<msg name="word_looparea_citation" lang="de">Zitat</msg>		
 
 	<msg name="word_loopmedia_notice" lang="en">In the online version an multimedia element is shown here.</msg>
 	<msg name="word_loopmedia_notice" lang="de">In der Online-Version befindet sich an dieser Stelle ein Multimedia-Element.</msg>
