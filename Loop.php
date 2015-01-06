@@ -66,6 +66,8 @@ function LoopLoadModules() {
 	$wgOut->addModules( 'ext.Loop' );
 	return true;
 }
+$wgAutoloadClasses['ApiLoopStatistic'] = $dir . 'api/ApiLoopStatistic.php';
+$wgAPIModules['loop-statistic']	= 'ApiLoopStatistic';
 
 $wgAutoloadClasses['LoopFigure'] = $dir . 'LoopFigure.php';
 $wgAutoloadClasses['SpecialLoopFigures'] = $dir . 'SpecialLoopFigures.php';
