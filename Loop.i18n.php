@@ -144,7 +144,8 @@ $messages['de'] = array(
 	'loop-readpage-tooltip' => 'Seite vorlesen',
 	'loop-review-all-pages-button' => 'Alle Seiten autorisieren',
 	'specialloopreviewallpages' => 'Alle Seiten autorisieren',
-	'specialloopsingleprintversion' => 'PDFs seitenweise testen'
+	'specialloopsingleprintversion' => 'PDFs seitenweise testen',
+	'loopprivacy' => 'Datenschutz'
 );
 
 $messages['en'] = array(
@@ -238,7 +239,8 @@ $messages['en'] = array(
 	'loop-readpage-tooltip' => 'Read page',
 	'loop-review-all-pages-button' => 'Review all pages',
 	'specialloopreviewallpages' => 'Review all pages',
-	'specialloopsingleprintversion' => 'test PDFs of single page'
+	'specialloopsingleprintversion' => 'test PDFs of single page',
+	'loopprivacy' => 'Privacy'
 );
 
 $messages['fr'] = array(

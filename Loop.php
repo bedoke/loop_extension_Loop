@@ -122,6 +122,10 @@ $wgAutoloadClasses['SpecialLoopImprint'] = $dir . 'SpecialLoopImprint.php';
 $wgSpecialPages['LoopImprint'] = 'SpecialLoopImprint'; 
 $wgSpecialPageGroups['LoopImprint'] = 'pages'; 
 
+$wgAutoloadClasses['SpecialLoopPrivacy'] = $dir . 'SpecialLoopPrivacy.php';
+$wgSpecialPages['LoopPrivacy'] = 'SpecialLoopPrivacy';
+$wgSpecialPageGroups['LoopPrivacy'] = 'pages';
+
 $wgAutoloadClasses['SpecialLoopChapteraudio'] = $dir . 'SpecialLoopChapteraudio.php';
 $wgSpecialPages['LoopChapteraudio'] = 'SpecialLoopChapteraudio'; 
 $wgSpecialPageGroups['LoopChapteraudio'] = 'pages'; 
