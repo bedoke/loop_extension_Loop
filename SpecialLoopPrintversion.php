@@ -721,6 +721,7 @@ class SpecialLoopPrintversion extends SpecialPage {
 			$proc->registerPHPFunctions();
 			$proc->importStyleSheet($xsl);
 			$xmlfo = $proc->transformToXML($xml);
+			$xmlfo = str_replace(' ',' ',$xmlfo);
 		} catch (Exception $e) {
 			var_dump($e);
 		}
