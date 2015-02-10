@@ -1371,14 +1371,36 @@
 				</fo:table>
 			</xsl:when>							
 			<xsl:when test="@extension_name='loop_formula'">
+
 				<xsl:apply-templates></xsl:apply-templates>
 				<fo:block vertical-align="top">
-					<fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="8mm" src="/opt/www/loop.oncampus.de/mediawiki/skins/loop/images/media/type_formula.png"></fo:external-graphic>
-					<xsl:if test="@title">
-						<fo:inline padding-left="2mm" line-height="12.5pt" font-weight="bold" font-size="9.5pt" vertical-align="top">
-							<xsl:value-of select="@title"></xsl:value-of>
+				<xsl:choose>
+					<xsl:when test="@render='title'">
+						<fo:inline line-height="12.5pt" font-weight="bold" font-size="9.5pt" vertical-align="top">
+							<xsl:choose>
+								<xsl:when test="descendant::extension[@extension_name='loop_title']">
+									<xsl:value-of select="descendant::extension[@extension_name='loop_title']"></xsl:value-of>
+								</xsl:when>
+								<xsl:otherwise>
+									<xsl:value-of select="@title"></xsl:value-of>
+								</xsl:otherwise>
+							</xsl:choose>
 						</fo:inline>
-					</xsl:if>
+					</xsl:when>
+					<xsl:otherwise>
+						<fo:external-graphic scaling="uniform" content-height="scale-to-fit" content-width="8mm" src="/opt/www/loop.oncampus.de/mediawiki/skins/loop/images/media/type_formula.png"></fo:external-graphic>
+						<fo:inline padding-left="2mm" line-height="12.5pt" font-weight="bold" font-size="9.5pt" vertical-align="top">
+							<xsl:choose>
+								<xsl:when test="descendant::extension[@extension_name='loop_title']">
+									<xsl:value-of select="descendant::extension[@extension_name='loop_title']"></xsl:value-of>
+								</xsl:when>
+								<xsl:otherwise>
+									<xsl:value-of select="@title"></xsl:value-of>
+								</xsl:otherwise>
+							</xsl:choose>
+						</fo:inline>
+					</xsl:otherwise>
+				</xsl:choose>					
 				</fo:block>
 			</xsl:when>
 			<xsl:when test="@extension_name='loop_figure'">

@@ -24,7 +24,7 @@ class LoopFormula {
 	var $pageTocNumber=0;
 	var $posOnPage=0;
 
-	var $render_options=array('none','icon','marked','default');
+	var $render_options=array('none','icon','marked','default','title');
 	
 	function LoopFormula($input,$args) {
 		global $wgLoopFormulaDefaultRenderOption;
@@ -166,9 +166,32 @@ class LoopFormula {
 				$return.='</div><div class="clearer"></div>';
 
 				break;
+			case 'title':
+				$input = $this->input;
+				$pattern = '@(<loop_title>)(.*?)(<\/loop_title>)@isu';
+				$replace = '';
+				$input = preg_replace($pattern, $replace, $input);
+				$pattern = '@(<loop_description>)(.*?)(<\/loop_description>)@isu';
+				$replace = '';
+				$input = preg_replace($pattern, $replace, $input);
+				$pattern = '@(<loop_copyright>)(.*?)(<\/loop_copyright>)@isu';
+				$replace = '';
+				$input = preg_replace($pattern, $replace, $input);		
+				$return.= '<div>'.$wgParser->recursiveTagParse(trim($input)).'<br/><span class="mediabox_title">'.$wgParser->recursiveTagParse($this->title).'</span></div>';						
+				break;
 			case 'none':
 			default:
-				$return.= $wgParser->recursiveTagParse($this->input);
+				$input = $this->input;
+				$pattern = '@(<loop_title>)(.*?)(<\/loop_title>)@isu';
+				$replace = '';
+				$input = preg_replace($pattern, $replace, $input);
+				$pattern = '@(<loop_description>)(.*?)(<\/loop_description>)@isu';
+				$replace = '';
+				$input = preg_replace($pattern, $replace, $input);
+				$pattern = '@(<loop_copyright>)(.*?)(<\/loop_copyright>)@isu';
+				$replace = '';
+				$input = preg_replace($pattern, $replace, $input);				
+				$return.= $wgParser->recursiveTagParse($input);
 		}
 		return $return;
 	}
