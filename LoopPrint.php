@@ -7,6 +7,7 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 class LoopPrint {
 	var $input='';
 	var $args=array();	
+	var $button = true;
 	
 	
 	function LoopPrint($input,$args) {
@@ -14,6 +15,18 @@ class LoopPrint {
 		
 		$this->input=$input;
 		$this->args=$args;		
+
+		if (array_key_exists('button', $args)) {
+			$buttonvalue=$args["button"];
+			if ($buttonvalue == "false") {
+				$this->button = false;
+			} else {
+				$this->button = true;
+			}
+		} else {
+			$this->button = true;
+		}
+		
 		
 		return true;
 	}
@@ -23,15 +36,14 @@ class LoopPrint {
 		global $wgStylePath, $wgParser;
 		
 		$return='';
-		$print_id=uniqid();
-		$return.="<a href='#' alt='printversion' title='".wfMsg('loopPrintVersion')."'onClick='$(\"#$print_id\").toggle();return false;'><span class='printarea_icon'></span></a><br/>";
-		$return.='<div class="printarea" id="'.$print_id.'">';
-		$output = $wgParser->recursiveTagParse( $this->input);
-		$return.= $output;
-		$return.= '</div>';
-				
-		
-		
+		if ($this->button == true) {
+			$print_id=uniqid();
+			$return.="<a href='#' alt='printversion' title='".wfMsg('loopPrintVersion')."'onClick='$(\"#$print_id\").toggle();return false;'><span class='printarea_icon'></span></a><br/>";
+			$return.='<div class="printarea" id="'.$print_id.'">';
+			$output = $wgParser->recursiveTagParse( $this->input);
+			$return.= $output;
+			$return.= '</div>';
+		}			
 		return $return;
 	}	
 
